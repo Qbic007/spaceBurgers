@@ -7,9 +7,9 @@ function BurgerIngredients() {
         <section className={style.ingredientsSection}>
             <h2 className={style.title + " text text_type_main-large"}>соберите бургер</h2>
             {tabs()}
-            <Section/>
-            <Section/>
-            <Section/>
+            <Section title={'Булки'}/>
+            <Section title={'Соусы'}/>
+            <Section title={'Начинки'}/>
         </section>
     );
 }
