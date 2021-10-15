@@ -12,6 +12,7 @@
 .itemText {
     margin-left: 8px;
 }
+
 .itemText::first-letter {
     text-transform: uppercase;
 }

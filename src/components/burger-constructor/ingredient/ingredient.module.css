@@ -1,0 +1,12 @@
+.ingredient {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.drugIcon {
+    position: absolute;
+    left: -32px;
+}

@@ -1,0 +1,23 @@
+.constructorSection {
+    width: 100%;
+    max-height: 1px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+}
+
+.title {
+    margin-top: 40px;
+}
+
+.title::first-letter {
+    text-transform: uppercase;
+}
+
+.tabs {
+    margin-top: 20px;
+}
+
+.ingredientsBlock {
+    margin-top: 40px;
+}
