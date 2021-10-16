@@ -28,7 +28,7 @@
 }
 
 .container::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
     background: #2F2F37;
 }
 
