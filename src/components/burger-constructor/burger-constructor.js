@@ -1,13 +1,15 @@
 import style from './burger-constructor.module.css';
 import Ingredient from "./ingredient/ingredient";
 import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import Data from '../../utils/data';
 
-function BurgerConstructor() {
-    const bun = Data[0];
+function BurgerConstructor(props) {
+    let result = <></>;
 
-    return (
-        <section className={style.constructorSection + " mt-25"}>
+    if (props.data.success) {
+        const Data = props.data.data;
+        const bun = Data[0];
+
+        result = <section className={style.constructorSection + " mt-25"}>
             <div className={style.ingredientsContainer}>
                 <Ingredient type="top"
                             isLocked={true}
@@ -44,8 +46,10 @@ function BurgerConstructor() {
                     Оформить заказ
                 </Button>
             </div>
-        </section>
-    );
+        </section>;
+    }
+
+    return (result);
 }
 
 export default BurgerConstructor;
