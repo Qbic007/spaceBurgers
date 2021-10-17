@@ -7,13 +7,15 @@ function Section(props) {
             <h3 className={style.title + " text text_type_main-medium"}>{props.title}</h3>
             <div className={style.container}>
                 {props.items.map((object, index) => {
-                    return <Item name={object.name}
-                                 quantity={Math.floor(Math.random() * 2)}
-                                 image={object.image}
-                                 alt={object.name}
-                                 price={object.price}
-                                 key={index}
-                    />
+                    return (
+                        <Item name={object.name}
+                              quantity={Math.floor(Math.random() * 2)}
+                              image={object.image}
+                              alt={object.name}
+                              price={object.price}
+                              key={object._id}
+                        />
+                    );
                 })}
             </div>
         </section>
