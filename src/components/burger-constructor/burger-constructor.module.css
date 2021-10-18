@@ -1,0 +1,27 @@
+.constructorSection {
+    width: 100%;
+    max-height: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+}
+
+.ingredientsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.order {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.price {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
