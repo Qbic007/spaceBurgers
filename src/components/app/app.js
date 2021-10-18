@@ -3,9 +3,10 @@ import AppHeader from "../app-header/app-header";
 import style from './app.module.css';
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import ModalOverlay from "../modalOverlay/modalOverlay";
+import ModalOverlay from "../modal-overlay/modalOverlay";
 import Modal from "../modal/modal";
 import image from "../../images/souce-red.png";
+import OrderDetails from "../order-details/order-details";
 
 function App() {
     const [data, setData] = React.useState([]);
@@ -32,7 +33,7 @@ function App() {
         <>
             <AppHeader/>
             <ModalOverlay>
-                <Modal title={'Детали ингредиента'}
+                <OrderDetails title={'Детали ингредиента'}
                        image={image}
                        name={'Биокотлета из марсианской Магнолии'}
                        calories={'244,4'}
