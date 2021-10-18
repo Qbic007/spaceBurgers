@@ -4,6 +4,8 @@ import style from './app.module.css';
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import ModalOverlay from "../modalOverlay/modalOverlay";
+import Modal from "../modal/modal";
+import image from "../../images/souce-red.png";
 
 function App() {
     const [data, setData] = React.useState([]);
@@ -29,7 +31,15 @@ function App() {
     return (
         <>
             <AppHeader/>
-            <ModalOverlay/>
+            <ModalOverlay>
+                <Modal title={'Детали ингредиента'}
+                       image={image}
+                       name={'Биокотлета из марсианской Магнолии'}
+                       calories={'244,4'}
+                       proteins={'12,2'}
+                       fat={'17,2'}
+                       carbohydrates={'10,2'}/>
+            </ModalOverlay>
             <main>
                 <div className={style.wrapper}>
                     <BurgerIngredients data={data}/>
