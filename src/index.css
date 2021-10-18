@@ -21,3 +21,7 @@ code {
 li {
   list-style-type: none;
 }
+
+.dark-text {
+  color: #8585AD;
+}

@@ -33,8 +33,8 @@ function App() {
         <>
             <AppHeader/>
             <ModalOverlay>
-                <OrderDetails title={'Детали ингредиента'}
-                       image={image}
+                <OrderDetails order_id={'034536'} 
+                    image={image}
                        name={'Биокотлета из марсианской Магнолии'}
                        calories={'244,4'}
                        proteins={'12,2'}
