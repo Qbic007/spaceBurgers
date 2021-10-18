@@ -18,6 +18,14 @@ code {
   width: 100%;
 }
 
+#modal {
+  height: 0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 li {
   list-style-type: none;
 }

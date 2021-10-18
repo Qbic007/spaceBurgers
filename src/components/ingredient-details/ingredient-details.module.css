@@ -18,7 +18,6 @@
 .imageContainer {
     display: flex;
     justify-content: center;
-    min-height: 240px;
 }
 
 .propertiesContainer {

@@ -1,8 +1,16 @@
 import style from './burger-constructor.module.css';
 import Ingredient from "./ingredient/ingredient";
 import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import React from "react";
+import OrderDetails from "../order-details/order-details";
 
 function BurgerConstructor(props) {
+    const [showInfo, setShowInfo] = React.useState(false);
+    
+    const orderClick = () => {
+        setShowInfo(true);
+    }
+    
     let result = <></>;
 
     if (props.data.success) {
@@ -10,6 +18,7 @@ function BurgerConstructor(props) {
         const bun = Data[0];
 
         result = <section className={style.constructorSection + " mt-25"}>
+            {showInfo && <OrderDetails order_id = '034536'/>}
             <div className={style.ingredientsContainer}>
                 <Ingredient type="top"
                             isLocked={true}
@@ -42,7 +51,7 @@ function BurgerConstructor(props) {
                     610
                     <CurrencyIcon type={"primary"}/>
                 </span>
-                <Button type="primary" size="large">
+                <Button type="primary" size="large" onClick={orderClick}>
                     Оформить заказ
                 </Button>
             </div>

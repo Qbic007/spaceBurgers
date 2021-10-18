@@ -14,6 +14,10 @@ function Section(props) {
                               alt={object.name}
                               price={object.price}
                               key={object._id}
+                              calories={object.calories}
+                              proteins={object.proteins}
+                              fat={object.fat}
+                              carbohydrates={object.carbohydrates}
                         />
                     );
                 })}
