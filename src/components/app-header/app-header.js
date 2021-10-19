@@ -14,13 +14,13 @@ function AppHeader() {
                         <li>
                             <MenuItem text={'лента заказов'} icon='list'/>
                         </li>
-                    </ul>              
+                    </ul>
                 </div>
                 <div className={style.menuBlockLogo}>
-                    <Logo/>                  
+                    <Logo/>
                 </div>
                 <div className={style.menuBlockProfile}>
-                    <MenuItem text={'лента заказов'} icon='profile'/>             
+                    <MenuItem text={'личный кабинет'} icon='profile'/>
                 </div>
             </div>
         </header>

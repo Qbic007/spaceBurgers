@@ -11,7 +11,7 @@ function Item(props) {
     }
 
     const quantity = props.quantity
-        ? <span className={style.quantity + " text text_type_digits-default"}>{props.quantity}</span> : "";
+        ? <span className={`${style.quantity} text text_type_digits-default`}>{props.quantity}</span> : "";
 
     return (
         <section className={style.itemContainer} onClick={ingredientClick}>
@@ -30,7 +30,7 @@ function Item(props) {
                         </span>
                 <CurrencyIcon type={'primary'}/>
             </div>
-            <span className={style.title + " text text_type_main-default mt-1"}>{props.name}</span>
+            <span className={`${style.title} text text_type_main-default mt-1`}>{props.name}</span>
         </section>
     );
 }

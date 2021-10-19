@@ -5,7 +5,7 @@ function MenuItem(props) {
     return (
         <div className={style.menuItem}>
             {icon(props.icon)}
-            <p className={style.itemText + " text text_type_main-default"}>
+            <p className={`${style.itemText} text text_type_main-default`}>
                 {props.text}
             </p>
         </div>
@@ -20,7 +20,7 @@ const icon = (icon) => {
     };
     return (
         <>
-        {data[icon]}
+            {data[icon]}
         </>
     );
 };

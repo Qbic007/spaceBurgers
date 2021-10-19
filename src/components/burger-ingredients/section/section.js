@@ -4,7 +4,7 @@ import Item from "./item/item";
 function Section(props) {
     return (
         <section className={style.ingredientsBlock}>
-            <h3 className={style.title + " text text_type_main-medium"}>{props.title}</h3>
+            <h3 className={`${style.title} text text_type_main-medium`}>{props.title}</h3>
             <div className={style.container}>
                 {props.items.map((object, index) => {
                     return (
