@@ -33,3 +33,7 @@ li {
 .dark-text {
   color: #8585AD;
 }
+
+.pointer {
+  cursor: pointer;
+}
