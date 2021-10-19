@@ -7,13 +7,17 @@ import OrderDetails from "../order-details/order-details";
 function BurgerConstructor(props) {
     const [showInfo, setShowInfo] = React.useState(false);
 
-    const orderClick = () => {
+    const showOrderModal = () => {
         setShowInfo(true);
+    }
+
+    const closeOrderModal = () => {
+        setShowInfo(false);
     }
 
     return (
         props.data.success ? <section className={`${style.constructorSection} mt-25`}>
-            {showInfo && <OrderDetails order_id='034536'/>}
+            {showInfo && <OrderDetails order_id='034536' closeCallback={closeOrderModal}/>}
             <div className={style.ingredientsContainer}>
                 <div className={style.ingredientsInsideContainer}>
                     <Ingredient type="top"
@@ -58,7 +62,7 @@ function BurgerConstructor(props) {
                     610
                     <CurrencyIcon type={"primary"}/>
                 </span>
-                <Button type="primary" size="large" onClick={orderClick}>
+                <Button type="primary" size="large" onClick={showOrderModal}>
                     Оформить заказ
                 </Button>
             </div>

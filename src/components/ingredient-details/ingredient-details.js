@@ -5,7 +5,7 @@ import Modal from "../modal/modal";
 
 function IngredientDetails(props) {
     return (
-        <Modal title={props.title}>
+        <Modal title={props.title} closeCallback={props.closeCallback}>
             <div className={style.imageContainer}>
                 <img src={props.image} alt={props.name}/>
             </div>

@@ -5,7 +5,7 @@ import image from '../../images/accepted.png';
 
 function OrderDetails(props) {
     return (
-        <Modal title={props.title}>
+        <Modal title={props.title} closeCallback={props.closeCallback}>
             <div className={style.orderDetailsContainer}>
                 <h3 className={'text text_type_digits-large mt-5'}>{props.order_id}</h3>
                 <span className={'text text_type_main-medium mt-8'}>идентификатор заказа</span>

@@ -6,16 +6,21 @@ import IngredientDetails from "../../../ingredient-details/ingredient-details";
 function Item(props) {
     const [showInfo, setShowInfo] = React.useState(false);
 
-    const ingredientClick = () => {
+    const showIngredientModal = () => {
         setShowInfo(true);
+    }
+
+    const closeIngredientModal = () => {
+        setShowInfo(false);
     }
 
     const quantity = props.quantity
         ? <span className={`${style.quantity} text text_type_digits-default`}>{props.quantity}</span> : "";
 
     return (
-        <section className={style.itemContainer} onClick={ingredientClick}>
-            {showInfo && <IngredientDetails title={'Детали ингредиента'}
+        <section className={style.itemContainer} onClick={showIngredientModal}>
+            {showInfo && <IngredientDetails closeCallback={closeIngredientModal}
+                                            title={'Детали ингредиента'}
                                             image={props.image}
                                             name={props.name}
                                             calories={props.calories}

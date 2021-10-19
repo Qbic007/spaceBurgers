@@ -2,16 +2,13 @@ import React from "react";
 import style from './modalOverlay.module.css';
 
 function ModalOverlay(props) {
-
-    const [isVisible, setIsVisible] = React.useState(true);
-
-    const toggleOverlay = () => {
-        setIsVisible(!isVisible);
+    const closeOverlay = () => {
+        return props.closeCallback;
     };
 
     return (
-        <section className={isVisible ? style.modalOverlay : style.modalOverlayHidden}
-                 onClick={toggleOverlay}>
+        <section className={style.modalOverlay}
+                 onClick={closeOverlay}>
             {props.children}
         </section>
     );
