@@ -3,6 +3,7 @@ import React from "react";
 import style from './modal.module.css';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from "../modal-overlay/modalOverlay";
+import PropTypes from "prop-types";
 
 const modalRoot = document.getElementById("modal");
 
@@ -15,7 +16,7 @@ function Modal(props) {
 
     const escFunction = (e) => {
         if (e.keyCode === ESC_CODE) {
-            return props.closeCallback;
+            return props.closeCallback();
         }
     }
 
@@ -44,3 +45,8 @@ function Modal(props) {
 }
 
 export default Modal;
+
+Modal.propTypes = {
+    closeCallback: PropTypes.func,
+    title: PropTypes.string,
+};

@@ -7,7 +7,7 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 function App() {
     const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
 
-    const [data, setData] = React.useState([]);
+    const [data, setData] = React.useState({});
 
     React.useEffect(
         () => {

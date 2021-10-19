@@ -1,17 +1,19 @@
 import React from "react";
 import style from './modalOverlay.module.css';
+import PropTypes from "prop-types";
 
 function ModalOverlay(props) {
-    const closeOverlay = () => {
-        return props.closeCallback;
-    };
-
     return (
         <section className={style.modalOverlay}
-                 onClick={closeOverlay}>
+                 onClick={props.closeCallback}>
             {props.children}
         </section>
     );
 }
 
 export default ModalOverlay;
+
+ModalOverlay.propTypes = {
+    closeCallback: PropTypes.func,
+    children: PropTypes.object,
+};

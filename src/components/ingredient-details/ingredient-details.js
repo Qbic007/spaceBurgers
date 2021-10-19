@@ -2,6 +2,7 @@ import React from "react";
 import style from './ingredient-details.module.css';
 import PropertyContainer from "./property-container/property-container";
 import Modal from "../modal/modal";
+import PropTypes from "prop-types";
 
 function IngredientDetails(props) {
     return (
@@ -21,3 +22,14 @@ function IngredientDetails(props) {
 }
 
 export default IngredientDetails;
+
+IngredientDetails.propTypes = {
+    closeCallback: PropTypes.func,
+    title: PropTypes.string,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    calories: PropTypes.number,
+    proteins: PropTypes.number,
+    fat: PropTypes.number,
+    carbohydrates: PropTypes.number,
+};

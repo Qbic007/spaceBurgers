@@ -1,5 +1,6 @@
 import style from './section.module.css';
 import Item from "./item/item";
+import PropTypes from "prop-types";
 
 function Section(props) {
     return (
@@ -27,3 +28,8 @@ function Section(props) {
 }
 
 export default Section;
+
+Section.propTypes = {
+    title: PropTypes.string,
+    items: PropTypes.array,
+};

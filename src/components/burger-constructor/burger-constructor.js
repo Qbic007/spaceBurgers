@@ -3,6 +3,7 @@ import Ingredient from "./ingredient/ingredient";
 import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import React from "react";
 import OrderDetails from "../order-details/order-details";
+import PropTypes from 'prop-types';
 
 function BurgerConstructor(props) {
     const [showInfo, setShowInfo] = React.useState(false);
@@ -70,3 +71,7 @@ function BurgerConstructor(props) {
 }
 
 export default BurgerConstructor;
+
+BurgerConstructor.propTypes = {
+    data: PropTypes.object,
+};

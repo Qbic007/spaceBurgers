@@ -2,6 +2,7 @@ import style from './item.module.css';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
 import IngredientDetails from "../../../ingredient-details/ingredient-details";
+import PropTypes from 'prop-types';
 
 function Item(props) {
     const [showInfo, setShowInfo] = React.useState(false);
@@ -41,3 +42,14 @@ function Item(props) {
 }
 
 export default Item;
+
+Item.propTypes = {
+    quantity: PropTypes.number,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    calories: PropTypes.number,
+    proteins: PropTypes.number,
+    fat: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    alt: PropTypes.string,
+};

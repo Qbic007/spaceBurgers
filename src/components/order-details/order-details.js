@@ -2,6 +2,7 @@ import React from "react";
 import style from './order-details.module.css';
 import Modal from "../modal/modal";
 import image from '../../images/accepted.png';
+import PropTypes from "prop-types";
 
 function OrderDetails(props) {
     return (
@@ -18,3 +19,9 @@ function OrderDetails(props) {
 }
 
 export default OrderDetails;
+
+OrderDetails.propTypes = {
+    closeCallback: PropTypes.func,
+    order_id: PropTypes.string,
+    title: PropTypes.string,
+};

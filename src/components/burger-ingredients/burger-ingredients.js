@@ -1,6 +1,7 @@
 import style from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import Section from "./section/section";
+import PropTypes from "prop-types";
 
 function tabs() {
     return (
@@ -39,3 +40,7 @@ function BurgerIngredients(props) {
 }
 
 export default BurgerIngredients;
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.object,
+};

@@ -1,5 +1,6 @@
 import style from './menu-item.module.css';
 import {BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from "prop-types";
 
 function MenuItem(props) {
     return (
@@ -26,3 +27,8 @@ const icon = (icon) => {
 };
 
 export default MenuItem;
+
+MenuItem.propTypes = {
+    icon: PropTypes.string,
+    text: PropTypes.string,
+};
