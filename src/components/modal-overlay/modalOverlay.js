@@ -15,5 +15,4 @@ export default ModalOverlay;
 
 ModalOverlay.propTypes = {
     closeCallback: PropTypes.func,
-    children: PropTypes.object,
 };

@@ -49,4 +49,5 @@ export default Modal;
 Modal.propTypes = {
     closeCallback: PropTypes.func,
     title: PropTypes.string,
+    children: PropTypes.object,
 };
