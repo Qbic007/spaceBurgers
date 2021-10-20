@@ -8,19 +8,20 @@ import PropTypes from 'prop-types';
 function BurgerConstructor(props) {
     const [showInfo, setShowInfo] = React.useState(false);
 
-    const showOrderModal = () => {
+    const showModal = () => {
         setShowInfo(true);
     }
 
-    const closeOrderModal = () => {
+    const closeModal = (e) => {
+        console.log(e);
         setShowInfo(false);
     }
 
     return (
         props.data.success ? <section className={`${style.constructorSection} mt-25`}>
-            {showInfo && <OrderDetails order_id='034536' closeCallback={closeOrderModal}/>}
+            {showInfo && <OrderDetails order_id='034536' closeCallback={closeModal}/>}
             <div className={style.ingredientsContainer}>
-                <div className={style.ingredientsInsideContainer}>
+                <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="top"
                                 isLocked={true}
                                 text={props.data.data[0].name + " (верх)"}
@@ -50,7 +51,7 @@ function BurgerConstructor(props) {
                                 price={props.data.data[5].price}
                                 thumbnail={props.data.data[5].image}/>
                 </div>
-                <div className={style.ingredientsInsideContainer}>
+                <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="bottom"
                                 isLocked={true}
                                 text={props.data.data[0].name + " (низ)"}
@@ -63,7 +64,7 @@ function BurgerConstructor(props) {
                     610
                     <CurrencyIcon type={"primary"}/>
                 </span>
-                <Button type="primary" size="large" onClick={showOrderModal}>
+                <Button type="primary" size="large" onClick={showModal}>
                     Оформить заказ
                 </Button>
             </div>

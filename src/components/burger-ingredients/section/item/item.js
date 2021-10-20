@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
 function Item(props) {
     const [showInfo, setShowInfo] = React.useState(false);
 
-    const showIngredientModal = () => {
+    const showModal = () => {
         setShowInfo(true);
     }
 
-    const closeIngredientModal = () => {
+    const closeModal = (e) => {
         setShowInfo(false);
     }
 
@@ -19,8 +19,8 @@ function Item(props) {
         ? <span className={`${style.quantity} text text_type_digits-default`}>{props.quantity}</span> : "";
 
     return (
-        <section className={style.itemContainer} onClick={showIngredientModal}>
-            {showInfo && <IngredientDetails closeCallback={closeIngredientModal}
+        <section className={style.itemContainer} onClick={showModal}>
+            {showInfo && <IngredientDetails closeCallback={closeModal}
                                             title={'Детали ингредиента'}
                                             image={props.image}
                                             name={props.name}

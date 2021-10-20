@@ -7,7 +7,7 @@ function Section(props) {
         <section className={style.ingredientsBlock}>
             <h3 className={`${style.title} text text_type_main-medium`}>{props.title}</h3>
             <div className={style.container}>
-                {props.items.map((object, index) => {
+                {props.items.map((object) => {
                     return (
                         <Item name={object.name}
                               quantity={Math.floor(Math.random() * 2)}
