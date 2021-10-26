@@ -1,11 +1,12 @@
 import style from './menu-item.module.css';
 import {BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from "prop-types";
 
 function MenuItem(props) {
     return (
         <div className={style.menuItem}>
             {icon(props.icon)}
-            <p className={style.itemText + " text text_type_main-default"}>
+            <p className={`${style.itemText} text text_type_main-default`}>
                 {props.text}
             </p>
         </div>
@@ -20,9 +21,14 @@ const icon = (icon) => {
     };
     return (
         <>
-        {data[icon]}
+            {data[icon]}
         </>
     );
 };
 
 export default MenuItem;
+
+MenuItem.propTypes = {
+    icon: PropTypes.string,
+    text: PropTypes.string,
+};
