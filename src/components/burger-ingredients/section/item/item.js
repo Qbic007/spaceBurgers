@@ -3,16 +3,23 @@ import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
 import IngredientDetails from "../../../ingredient-details/ingredient-details";
 import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from "react-redux";
+import {CLOSE_MODAL, SHOW_MODAL} from "../../../../services/actions/modal";
+import {modalIngredient} from "../../../../services/reducers/modal";
 
 function Item(props) {
-    const [showInfo, setShowInfo] = React.useState(false);
+    const dispatch = useDispatch();
+
+    const {isVisibleIngredient} = useSelector(store => ({
+        isVisibleIngredient: store.modalReducer.isVisibleIngredient
+    }))
 
     const showModal = () => {
-        setShowInfo(true);
+        dispatch({type: SHOW_MODAL, modalType: modalIngredient});
     }
 
-    const closeModal = (e) => {
-        setShowInfo(false);
+    const closeModal = () => {
+        dispatch({type: CLOSE_MODAL, modalType: modalIngredient});
     }
 
     const quantity = props.quantity
@@ -20,14 +27,14 @@ function Item(props) {
 
     return (
         <section className={style.itemContainer} onClick={showModal}>
-            {showInfo && <IngredientDetails closeCallback={closeModal}
-                                            title={'Детали ингредиента'}
-                                            image={props.image}
-                                            name={props.name}
-                                            calories={props.calories}
-                                            proteins={props.proteins}
-                                            fat={props.fat}
-                                            carbohydrates={props.carbohydrates}/>}
+            {isVisibleIngredient && <IngredientDetails closeCallback={closeModal}
+                                             title={'Детали ингредиента'}
+                                             image={props.image}
+                                             name={props.name}
+                                             calories={props.calories}
+                                             proteins={props.proteins}
+                                             fat={props.fat}
+                                             carbohydrates={props.carbohydrates}/>}
             {quantity}
             <img className={style.image} src={props.image} alt={props.alt}/>
             <div className={style.price}>

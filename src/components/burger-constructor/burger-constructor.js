@@ -4,22 +4,28 @@ import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-comp
 import React from "react";
 import OrderDetails from "../order-details/order-details";
 import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
+import {CLOSE_MODAL, SHOW_MODAL} from '../../services/actions/modal';
+import {modalOrder} from "../../services/reducers/modal";
 
 function BurgerConstructor(props) {
-    const [showInfo, setShowInfo] = React.useState(false);
+    const dispatch = useDispatch();
+
+    const {isVisibleOrder} = useSelector(store => ({
+        isVisibleOrder: store.modalReducer.isVisibleOrder
+    }))
 
     const showModal = () => {
-        setShowInfo(true);
+        dispatch({type: SHOW_MODAL, modalType: modalOrder});
     }
 
-    const closeModal = (e) => {
-        console.log(e);
-        setShowInfo(false);
+    const closeModal = () => {
+        dispatch({type: CLOSE_MODAL, modalType: modalOrder});
     }
 
     return (
         props.data.success ? <section className={`${style.constructorSection} mt-25`}>
-            {showInfo && <OrderDetails order_id='034536' closeCallback={closeModal}/>}
+            {isVisibleOrder && <OrderDetails order_id='034536' closeCallback={closeModal}/>}
             <div className={style.ingredientsContainer}>
                 <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="top"
