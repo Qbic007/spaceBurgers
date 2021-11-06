@@ -15,6 +15,10 @@ function BurgerConstructor(props) {
         isVisibleOrder: store.modalReducer.isVisibleOrder
     }))
 
+    const {ingredients} = useSelector(store => ({
+        ingredients: store.ingredientsReducer.ingredients
+    }))
+    
     const showModal = () => {
         dispatch({
             type: SHOW_MODAL,
@@ -26,45 +30,45 @@ function BurgerConstructor(props) {
     }
 
     return (
-        props.data.success ? <section className={`${style.constructorSection} mt-25`}>
+        ingredients.length > 0 ? <section className={`${style.constructorSection} mt-25`}>
             {isVisibleOrder && <OrderDetails/>}
             <div className={style.ingredientsContainer}>
                 <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="top"
                                 isLocked={true}
-                                text={props.data.data[0].name + " (верх)"}
-                                price={props.data.data[0].price}
-                                thumbnail={props.data.data[0].image}/>
+                                text={ingredients[0].name + " (верх)"}
+                                price={ingredients[0].price}
+                                thumbnail={ingredients[0].image}/>
                 </div>
                 <div className={style.ingredientsInsideContainer}>
-                    <Ingredient text={props.data.data[1].name}
-                                price={props.data.data[1].price}
-                                thumbnail={props.data.data[1].image}/>
-                    <Ingredient text={props.data.data[2].name}
-                                price={props.data.data[2].price}
-                                thumbnail={props.data.data[2].image}/>
-                    <Ingredient text={props.data.data[3].name}
-                                price={props.data.data[3].price}
-                                thumbnail={props.data.data[3].image}/>
-                    <Ingredient text={props.data.data[4].name}
-                                price={props.data.data[4].price}
-                                thumbnail={props.data.data[4].image}/>
-                    <Ingredient text={props.data.data[4].name}
-                                price={props.data.data[4].price}
-                                thumbnail={props.data.data[4].image}/>
-                    <Ingredient text={props.data.data[4].name}
-                                price={props.data.data[4].price}
-                                thumbnail={props.data.data[4].image}/>
-                    <Ingredient text={props.data.data[5].name}
-                                price={props.data.data[5].price}
-                                thumbnail={props.data.data[5].image}/>
+                    <Ingredient text={ingredients[1].name}
+                                price={ingredients[1].price}
+                                thumbnail={ingredients[1].image}/>
+                    <Ingredient text={ingredients[2].name}
+                                price={ingredients[2].price}
+                                thumbnail={ingredients[2].image}/>
+                    <Ingredient text={ingredients[3].name}
+                                price={ingredients[3].price}
+                                thumbnail={ingredients[3].image}/>
+                    <Ingredient text={ingredients[4].name}
+                                price={ingredients[4].price}
+                                thumbnail={ingredients[4].image}/>
+                    <Ingredient text={ingredients[4].name}
+                                price={ingredients[4].price}
+                                thumbnail={ingredients[4].image}/>
+                    <Ingredient text={ingredients[4].name}
+                                price={ingredients[4].price}
+                                thumbnail={ingredients[4].image}/>
+                    <Ingredient text={ingredients[5].name}
+                                price={ingredients[5].price}
+                                thumbnail={ingredients[5].image}/>
                 </div>
                 <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="bottom"
                                 isLocked={true}
-                                text={props.data.data[0].name + " (низ)"}
-                                price={props.data.data[0].price}
-                                thumbnail={props.data.data[0].image}/>
+                                text={ingredients[0].name + " (низ)"}
+                                price={ingredients[0].price}
+                                thumbnail={ingredients[0].image}/>
                 </div>
             </div>
             <div className={style.order}>

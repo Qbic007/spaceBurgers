@@ -1,15 +1,8 @@
 import {combineReducers} from 'redux';
 import {modalReducer} from './modal';
-
-// const initialState = {
-//     ingredients: [],
-//     constructorIngredients: [],
-//     constructorBuns: [],
-//     currentIngredient: {},
-//     currentOrder: {},
-//     showModal: false
-// };
+import {ingredientsReducer} from './ingredients';
 
 export const rootReducer = combineReducers({
-    modalReducer
+    modalReducer,
+    ingredientsReducer
 })

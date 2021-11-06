@@ -3,35 +3,23 @@ import AppHeader from "../app-header/app-header";
 import style from './app.module.css';
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
+import {useDispatch} from "react-redux";
+import {getIngredients} from "../../services/actions/ingredients";
 
 function App() {
-    const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
-
-    const [data, setData] = React.useState({});
-
-    React.useEffect(
-        () => {
-            const getData = (url) => {
-                fetch(url)
-                    .then((res) => res.json())
-                    .then((data) =>
-                        setData(data)
-                    )
-                    .catch((e) => {
-                        // TODO обработать ошибки;
-                    });
-            }
-            getData(API_URL);
-        }, []
-    );
+    const dispatch = useDispatch();
+    
+    React.useEffect(() => {
+        dispatch(getIngredients());
+    }, [dispatch]);
 
     return (
         <>
             <AppHeader/>
             <main>
                 <div className={style.wrapper}>
-                    <BurgerIngredients data={data}/>
-                    <BurgerConstructor data={data}/>
+                    <BurgerIngredients/>
+                    <BurgerConstructor/>
                 </div>
             </main>
         </>
