@@ -6,7 +6,6 @@ export const modalOrder = 'modalOrder';
 const initialState = {
     isVisibleOrder: false,
     isVisibleIngredient: false,
-    orderInfo: {},
     ingredientInfo: {}
 };
 
@@ -27,8 +26,7 @@ export const modalReducer = (state = initialState, action) => {
                     return {
                         ...state,
                         isVisibleOrder: true,
-                        isVisibleIngredient: false,
-                        orderInfo: action.orderInfo
+                        isVisibleIngredient: false
                     }
                 default:
                     return this.state;

@@ -59,7 +59,7 @@ const initialState = {
             _id: "60d3b41abdacab0026a733ce"
         }
     ],
-    number: 0,
+    orderNumber: null,
     requestFailed: false,
 };
 
@@ -76,7 +76,7 @@ export const constructorReducer = (state = initialState, action) => {
                 ...state,
                 requestFailed: false,
                 name: action.name,
-                number: action.number
+                orderNumber: action.orderNumber
             };
         }
         case GET_ORDER_FAILED: {

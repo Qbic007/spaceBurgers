@@ -15,10 +15,10 @@ function BurgerConstructor() {
         isVisibleOrder: store.modalReducer.isVisibleOrder
     }))
 
-    const {ingredients, bun, number} = useSelector(store => ({
+    const {ingredients, bun, orderNumber} = useSelector(store => ({
         ingredients: store.constructorReducer.ingredients,
         bun: store.constructorReducer.bun,
-        number: store.constructorReducer.number
+        orderNumber: store.constructorReducer.orderNumber
     }))
 
     const getIngredientIds = (bun, ingredients) => {
@@ -34,10 +34,7 @@ function BurgerConstructor() {
         dispatch(orderConfirmation(getIngredientIds(bun, ingredients)));
         dispatch({
             type: SHOW_MODAL,
-            modalType: modalOrder,
-            orderInfo: {
-                number: number
-            }
+            modalType: modalOrder
         });
     }
 
@@ -47,7 +44,7 @@ function BurgerConstructor() {
 
     return (
         ingredients.length > 0 ? <section className={`${style.constructorSection} mt-25`}>
-            {isVisibleOrder && <OrderDetails/>}
+            {isVisibleOrder && orderNumber && <OrderDetails/>}
             <div className={style.ingredientsContainer}>
                 <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="top"

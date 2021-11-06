@@ -21,7 +21,7 @@ export function orderConfirmation(ingredients = []) {
                 dispatch({
                     type: GET_ORDER_SUCCESS,
                     name: res.name,
-                    number: res.order.number,
+                    orderNumber: res.order.number,
                 });
             } else {
                 dispatch({
