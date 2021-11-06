@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 function Section(props) {
     return (
-        <section className={style.ingredientsBlock}>
+        props.items.length > 0 ? <section className={style.ingredientsBlock}>
             <h3 className={`${style.title} text text_type_main-medium`}>{props.title}</h3>
             <div className={style.container}>
                 {props.items.map((object) => {
@@ -23,7 +23,7 @@ function Section(props) {
                     );
                 })}
             </div>
-        </section>
+        </section> : null
     );
 }
 

@@ -33,8 +33,9 @@ function BurgerIngredients() {
         isVisibleIngredient: store.modalReducer.isVisibleIngredient
     }))
 
-    const {ingredients} = useSelector(store => ({
-        ingredients: store.ingredientsReducer.ingredients
+    const {ingredients, ingredientsFailed} = useSelector(store => ({
+        ingredients: store.ingredientsReducer.ingredients,
+        ingredientsFailed: store.ingredientsReducer.ingredientsFailed,
     }))
 
     return (
@@ -42,11 +43,13 @@ function BurgerIngredients() {
             {isVisibleIngredient && <IngredientDetails/>}
             <h2 className={`${style.title} text text_type_main-large`}>соберите бургер</h2>
             {tabs()}
-            <section className={style.container}>
-                <Section title={'Булки'} items={filterByType(ingredients, typeBun)}/>
-                <Section title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>
-                <Section title={'Начинки'} items={filterByType(ingredients, typeMain)}/>
-            </section>
+            {ingredientsFailed
+                ? <span className={'text text_type_main-default'}>Извините, что-то пошло не так :-(</span>
+                : <section className={style.container}>
+                    <Section title={'Булки'} items={filterByType(ingredients, typeBun)}/>
+                    <Section title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>
+                    <Section title={'Начинки'} items={filterByType(ingredients, typeMain)}/>
+                </section>}
         </section>
     );
 }
