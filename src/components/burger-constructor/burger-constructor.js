@@ -5,7 +5,7 @@ import React from "react";
 import OrderDetails from "../order-details/order-details";
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
-import {CLOSE_MODAL, SHOW_MODAL} from '../../services/actions/modal';
+import {SHOW_MODAL} from '../../services/actions/modal';
 import {modalOrder} from "../../services/reducers/modal";
 
 function BurgerConstructor(props) {
@@ -16,16 +16,18 @@ function BurgerConstructor(props) {
     }))
 
     const showModal = () => {
-        dispatch({type: SHOW_MODAL, modalType: modalOrder});
-    }
-
-    const closeModal = () => {
-        dispatch({type: CLOSE_MODAL, modalType: modalOrder});
+        dispatch({
+            type: SHOW_MODAL,
+            modalType: modalOrder,
+            orderInfo: {
+                order_id: '034536'
+            }
+        });
     }
 
     return (
         props.data.success ? <section className={`${style.constructorSection} mt-25`}>
-            {isVisibleOrder && <OrderDetails order_id='034536' closeCallback={closeModal}/>}
+            {isVisibleOrder && <OrderDetails/>}
             <div className={style.ingredientsContainer}>
                 <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="top"

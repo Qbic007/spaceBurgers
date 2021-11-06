@@ -2,6 +2,9 @@ import style from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import Section from "./section/section";
 import PropTypes from "prop-types";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import React from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 function tabs() {
     return (
@@ -26,8 +29,13 @@ function filterByType(data, type) {
 }
 
 function BurgerIngredients(props) {
+    const {isVisibleIngredient} = useSelector(store => ({
+        isVisibleIngredient: store.modalReducer.isVisibleIngredient
+    }))
+
     return (
         <section className={style.ingredientsSection}>
+            {isVisibleIngredient && <IngredientDetails/>}
             <h2 className={`${style.title} text text_type_main-large`}>соберите бургер</h2>
             {tabs()}
             <section className={style.container}>

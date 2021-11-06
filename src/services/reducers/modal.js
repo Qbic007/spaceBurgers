@@ -1,11 +1,13 @@
-import { CLOSE_MODAL, SHOW_MODAL } from '../actions/modal';
+import {CLOSE_MODAL, SHOW_MODAL} from '../actions/modal';
 
 export const modalIngredient = 'modalIngredient';
 export const modalOrder = 'modalOrder';
 
 const initialState = {
     isVisibleOrder: false,
-    isVisibleIngredient: false
+    isVisibleIngredient: false,
+    orderInfo: {},
+    ingredientInfo: {}
 };
 
 export const modalReducer = (state = initialState, action) => {
@@ -16,13 +18,17 @@ export const modalReducer = (state = initialState, action) => {
             switch (action.modalType) {
                 case modalIngredient:
                     return {
+                        ...state,
                         isVisibleOrder: false,
-                        isVisibleIngredient: true
+                        isVisibleIngredient: true,
+                        ingredientInfo: action.ingredientInfo
                     }
                 case modalOrder:
                     return {
+                        ...state,
                         isVisibleOrder: true,
-                        isVisibleIngredient: false
+                        isVisibleIngredient: false,
+                        orderInfo: action.orderInfo
                     }
                 default:
                     return this.state;
