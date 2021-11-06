@@ -1,4 +1,4 @@
-import {ADD_INGREDIENT} from '../actions/constructor';
+import {ADD_INGREDIENT, GET_ORDER_FAILED, GET_ORDER_SUCCESS} from '../actions/constructor';
 
 const initialState = {
     bun: {
@@ -59,6 +59,8 @@ const initialState = {
             _id: "60d3b41abdacab0026a733ce"
         }
     ],
+    number: 0,
+    requestFailed: false,
 };
 
 export const constructorReducer = (state = initialState, action) => {
@@ -67,6 +69,20 @@ export const constructorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredientsRequest: true
+            };
+        }
+        case GET_ORDER_SUCCESS: {
+            return {
+                ...state,
+                requestFailed: false,
+                name: action.name,
+                number: action.number
+            };
+        }
+        case GET_ORDER_FAILED: {
+            return {
+                ...state,
+                requestFailed: true
             };
         }
         default:

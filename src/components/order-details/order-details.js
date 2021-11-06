@@ -13,7 +13,7 @@ function OrderDetails(props) {
     return (
         <Modal title={props.title}>
             <div className={style.orderDetailsContainer}>
-                <h3 className={'text text_type_digits-large mt-5'}>{orderInfo.order_id}</h3>
+                <h3 className={'text text_type_digits-large mt-5'}>{orderInfo.number}</h3>
                 <span className={'text text_type_main-medium mt-8'}>идентификатор заказа</span>
                 <img src={image} alt={'заказ принят'} className={'mt-15'}/>
                 <span className={'text text_type_main-default mt-15'}>Ваш заказ начали готовить</span>
@@ -26,7 +26,5 @@ function OrderDetails(props) {
 export default OrderDetails;
 
 OrderDetails.propTypes = {
-    closeCallback: PropTypes.func,
-    order_id: PropTypes.string,
     title: PropTypes.string,
 };

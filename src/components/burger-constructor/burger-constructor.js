@@ -6,6 +6,7 @@ import OrderDetails from "../order-details/order-details";
 import {useDispatch, useSelector} from 'react-redux';
 import {SHOW_MODAL} from '../../services/actions/modal';
 import {modalOrder} from "../../services/reducers/modal";
+import {orderConfirmation} from "../../services/actions/constructor";
 
 function BurgerConstructor() {
     const dispatch = useDispatch();
@@ -14,17 +15,28 @@ function BurgerConstructor() {
         isVisibleOrder: store.modalReducer.isVisibleOrder
     }))
 
-    const {ingredients, bun} = useSelector(store => ({
+    const {ingredients, bun, number} = useSelector(store => ({
         ingredients: store.constructorReducer.ingredients,
-        bun: store.constructorReducer.bun
+        bun: store.constructorReducer.bun,
+        number: store.constructorReducer.number
     }))
 
-    const showModal = () => {
+    const getIngredientIds = (bun, ingredients) => {
+        ingredients = ingredients.map(function (ingredient) {
+            return ingredient._id;
+        });
+        ingredients.push(bun._id);
+        ingredients.push(bun._id);
+        return ingredients;
+    }
+
+    const offerConfirmation = () => {
+        dispatch(orderConfirmation(getIngredientIds(bun, ingredients)));
         dispatch({
             type: SHOW_MODAL,
             modalType: modalOrder,
             orderInfo: {
-                order_id: '034536'
+                number: number
             }
         });
     }
@@ -67,7 +79,7 @@ function BurgerConstructor() {
                     {countPrice(bun, ingredients)}
                     <CurrencyIcon type={"primary"}/>
                 </span>
-                <Button type="primary" size="large" onClick={showModal}>
+                <Button type="primary" size="large" onClick={offerConfirmation}>
                     Оформить заказ
                 </Button>
             </div>
