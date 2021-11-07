@@ -71,6 +71,7 @@ function BurgerConstructor() {
                     {ingredients.map((object) => {
                         return (
                             <Ingredient key={object.key}
+                                        id={object.key}
                                         text={object.name}
                                         price={object.price}
                                         thumbnail={object.image}/>

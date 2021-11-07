@@ -1,4 +1,4 @@
-import {ADD_INGREDIENT, GET_ORDER_FAILED, GET_ORDER_SUCCESS} from '../actions/constructor';
+import {ADD_INGREDIENT, DROP_INGREDIENT, GET_ORDER_FAILED, GET_ORDER_SUCCESS} from '../actions/constructor';
 import {typeBun, typeMain, typeSauce} from "./ingredients";
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
 export const constructorReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_INGREDIENT: {
-            const item = action.item;
+            const item = {...action.item};
             item.key = Date.now() + item._id;
             switch (item.type) {
                 case typeBun:
@@ -30,6 +30,14 @@ export const constructorReducer = (state = initialState, action) => {
                     }
                 default:
                     return state
+            }
+        }
+        case DROP_INGREDIENT: {
+            return {
+                ...state,
+                ingredients: [...state.ingredients.filter(function (ingredient) {
+                    return ingredient.key !== action.key;
+                })]
             }
         }
         case GET_ORDER_SUCCESS: {
