@@ -41,10 +41,10 @@ function BurgerIngredients() {
     return (
         <section className={style.ingredientsSection}>
             {isVisibleIngredient && <IngredientDetails/>}
-            <h2 className={`${style.title} text text_type_main-large`}>соберите бургер</h2>
+            <h2 className={`${style.title} text text_typeMain-large`}>соберите бургер</h2>
             {tabs()}
             {ingredientsFailed
-                ? <span className={'text text_type_main-default'}>Извините, что-то пошло не так :-(</span>
+                ? <span className={'text text_typeMain-default'}>Извините, что-то пошло не так :-(</span>
                 : <section className={style.container}>
                     <Section title={'Булки'} items={filterByType(ingredients, typeBun)}/>
                     <Section title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>

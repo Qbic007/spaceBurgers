@@ -42,7 +42,7 @@ function Modal(props) {
             <ModalOverlay closeCallback={closeModal}>
                 <section className={style.modal} onClick={catchEvent}>
                     <div className={style.titleContainer}>
-                        <h2 className={'text text_type_main-large'}>{props.title}</h2>
+                        <h2 className={'text text_typeMain-large'}>{props.title}</h2>
                         <span onClick={closeModal} className={'pointer'}><CloseIcon type={'primary'}/></span>
                     </div>
                     {props.children}

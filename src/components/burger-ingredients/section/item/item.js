@@ -5,8 +5,20 @@ import PropTypes from 'prop-types';
 import {useDispatch} from "react-redux";
 import {SHOW_MODAL} from "../../../../services/actions/modal";
 import {modalIngredient} from "../../../../services/reducers/modal";
+import {useDrag} from "react-dnd";
+import {draggable_type} from "../../../app/app";
 
 function Item(props) {
+    const ingredient= props.ingredient;
+    
+    const [{isDrag}, dragRef] = useDrag({
+        type: draggable_type,
+        item: ingredient,
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+    });
+
     const dispatch = useDispatch();
 
     const showModal = () => {
@@ -15,30 +27,33 @@ function Item(props) {
             modalType: modalIngredient,
             ingredientInfo: {
                 title: 'Детали ингредиента',
-                image: props.image,
-                name: props.name,
-                calories: props.calories,
-                proteins: props.proteins,
-                fat: props.fat,
-                carbohydrates: props.carbohydrates
+                image: ingredient.image,
+                name: ingredient.name,
+                calories: ingredient.calories,
+                proteins: ingredient.proteins,
+                fat: ingredient.fat,
+                carbohydrates: ingredient.carbohydrates
             }
         });
     }
 
-    const quantity = props.quantity
-        ? <span className={`${style.quantity} text text_type_digits-default`}>{props.quantity}</span> : "";
+    const quantity = ingredient.quantity
+        ? <span className={`${style.quantity} text text_type_digits-default`}>{ingredient.quantity}</span> : "";
 
     return (
-        <section className={style.itemContainer} onClick={showModal}>
+        <section
+            ref={dragRef}
+            className={`${style.itemContainer} ${isDrag && style.semiHidden}`}
+            onClick={showModal}>
             {quantity}
-            <img className={style.image} src={props.image} alt={props.alt}/>
+            <img className={style.image} src={ingredient.image} alt={ingredient.alt}/>
             <div className={style.price}>
                         <span className={"text text_type_digits-default mr-2"}>
-                            {props.price}
+                            {ingredient.price}
                         </span>
                 <CurrencyIcon type={'primary'}/>
             </div>
-            <span className={`${style.title} text text_type_main-default mt-1`}>{props.name}</span>
+            <span className={`${style.title} text text_typeMain-default mt-1`}>{ingredient.name}</span>
         </section>
     );
 }
@@ -46,12 +61,5 @@ function Item(props) {
 export default Item;
 
 Item.propTypes = {
-    quantity: PropTypes.number,
-    image: PropTypes.string,
-    name: PropTypes.string,
-    calories: PropTypes.number,
-    proteins: PropTypes.number,
-    fat: PropTypes.number,
-    carbohydrates: PropTypes.number,
-    alt: PropTypes.string,
+    ingredient: PropTypes.object
 };

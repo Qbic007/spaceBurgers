@@ -6,10 +6,22 @@ import OrderDetails from "../order-details/order-details";
 import {useDispatch, useSelector} from 'react-redux';
 import {SHOW_MODAL} from '../../services/actions/modal';
 import {modalOrder} from "../../services/reducers/modal";
-import {orderConfirmation} from "../../services/actions/constructor";
+import {ADD_INGREDIENT, orderConfirmation} from "../../services/actions/constructor";
+import {useDrop} from "react-dnd";
+import {draggable_type} from "../app/app";
 
 function BurgerConstructor() {
     const dispatch = useDispatch();
+
+    const [, dropTarget] = useDrop({
+        accept: draggable_type,
+        drop(item) {
+            dispatch({
+                type: ADD_INGREDIENT,
+                item: item
+            });
+        },
+    });
 
     const {isVisibleOrder} = useSelector(store => ({
         isVisibleOrder: store.modalReducer.isVisibleOrder
@@ -43,9 +55,11 @@ function BurgerConstructor() {
     }
 
     return (
-        ingredients.length > 0 ? <section className={`${style.constructorSection} mt-25`}>
+        <section
+            ref={dropTarget}
+            className={`${style.constructorSection} mt-25`}>
             {isVisibleOrder && orderNumber && <OrderDetails/>}
-            <div className={style.ingredientsContainer}>
+            {bun && <div className={style.ingredientsContainer}>
                 <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="top"
                                 isLocked={true}
@@ -56,7 +70,7 @@ function BurgerConstructor() {
                 <div className={style.ingredientsInsideContainer}>
                     {ingredients.map((object) => {
                         return (
-                            <Ingredient key={object._id}
+                            <Ingredient key={object.key}
                                         text={object.name}
                                         price={object.price}
                                         thumbnail={object.image}/>
@@ -70,17 +84,17 @@ function BurgerConstructor() {
                                 price={bun.price}
                                 thumbnail={bun.image}/>
                 </div>
-            </div>
-            <div className={style.order}>
-                <span className={`${style.price} text text_type_main-large`}>
+            </div>}
+            {bun && <div className={style.order}>
+                <span className={`${style.price} text text_typeMain-large`}>
                     {countPrice(bun, ingredients)}
                     <CurrencyIcon type={"primary"}/>
                 </span>
                 <Button type="primary" size="large" onClick={offerConfirmation}>
                     Оформить заказ
                 </Button>
-            </div>
-        </section> : null);
+            </div>}
+        </section>);
 }
 
 export default BurgerConstructor;

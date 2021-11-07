@@ -6,7 +6,7 @@ function MenuItem(props) {
     return (
         <div className={style.menuItem}>
             {icon(props.icon)}
-            <p className={`${style.itemText} text text_type_main-default`}>
+            <p className={`${style.itemText} text text_typeMain-default`}>
                 {props.text}
             </p>
         </div>

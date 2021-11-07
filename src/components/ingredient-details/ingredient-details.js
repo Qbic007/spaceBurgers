@@ -16,7 +16,7 @@ function IngredientDetails() {
                 <div className={style.imageContainer}>
                     <img src={ingredientInfo.image} alt={ingredientInfo.name}/>
                 </div>
-                <h3 className={'text text_type_main-medium'}>{ingredientInfo.name}</h3>
+                <h3 className={'text text_typeMain-medium'}>{ingredientInfo.name}</h3>
                 <div className={style.propertiesContainer}>
                     <PropertyContainer title={'Калории, ккал'} value={ingredientInfo.calories}/>
                     <PropertyContainer title={'Белки, г'} value={ingredientInfo.proteins}/>

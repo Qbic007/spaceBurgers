@@ -5,10 +5,14 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import {useDispatch} from "react-redux";
 import {getIngredients} from "../../services/actions/ingredients";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
+
+export const draggable_type = 'ingredients';
 
 function App() {
     const dispatch = useDispatch();
-    
+
     React.useEffect(() => {
         dispatch(getIngredients());
     }, [dispatch]);
@@ -18,8 +22,10 @@ function App() {
             <AppHeader/>
             <main>
                 <div className={style.wrapper}>
-                    <BurgerIngredients/>
-                    <BurgerConstructor/>
+                    <DndProvider backend={HTML5Backend}>
+                        <BurgerIngredients/>
+                        <BurgerConstructor/>
+                    </DndProvider>
                 </div>
             </main>
         </>
