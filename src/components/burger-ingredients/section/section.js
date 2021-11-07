@@ -9,7 +9,7 @@ function Section(props) {
             <div className={style.container}>
                 {props.items.map((ingredient) => {
                     return (
-                        <Item ingredient={ingredient}/>
+                        <Item key={ingredient._id} ingredient={ingredient}/>
                     );
                 })}
             </div>

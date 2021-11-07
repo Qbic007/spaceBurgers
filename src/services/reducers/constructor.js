@@ -13,11 +13,10 @@ export const constructorReducer = (state = initialState, action) => {
         case ADD_INGREDIENT: {
             const item = action.item;
             item.key = Date.now() + item._id;
-            console.log(item);
             switch (item.type) {
                 case typeBun:
                     return {
-                        ...initialState,
+                        ...state,
                         bun: item
                     }
                 case typeMain:

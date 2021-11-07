@@ -2,15 +2,15 @@ import style from './item.module.css';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
 import PropTypes from 'prop-types';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {SHOW_MODAL} from "../../../../services/actions/modal";
 import {modalIngredient} from "../../../../services/reducers/modal";
 import {useDrag} from "react-dnd";
 import {draggable_type} from "../../../app/app";
 
 function Item(props) {
-    const ingredient= props.ingredient;
-    
+    const ingredient = props.ingredient;
+
     const [{isDrag}, dragRef] = useDrag({
         type: draggable_type,
         item: ingredient,
@@ -37,15 +37,35 @@ function Item(props) {
         });
     }
 
-    const quantity = ingredient.quantity
-        ? <span className={`${style.quantity} text text_type_digits-default`}>{ingredient.quantity}</span> : "";
+    const {bun, ingredients} = useSelector(store => ({
+        ingredients: store.constructorReducer.ingredients,
+        bun: store.constructorReducer.bun,
+    }))
+
+    const getQuantityByIngredientId = (ingredientId) => {
+        let quantity = null;
+        if (bun && bun._id === ingredientId) {
+            quantity = 1;
+        } else {
+            const filteredIngredients = ingredients.filter(function (ingredient) {
+                return ingredient._id === ingredientId;
+            });
+            quantity = filteredIngredients.length;
+        }
+
+        return quantity;
+    }
+
+    const quantity = getQuantityByIngredientId(ingredient._id);
 
     return (
         <section
             ref={dragRef}
             className={`${style.itemContainer} ${isDrag && style.semiHidden}`}
             onClick={showModal}>
-            {quantity}
+            {quantity ? <span className={`${style.quantity} text text_type_digits-default`}>                
+                {quantity}          
+            </span> : null}
             <img className={style.image} src={ingredient.image} alt={ingredient.alt}/>
             <div className={style.price}>
                         <span className={"text text_type_digits-default mr-2"}>
