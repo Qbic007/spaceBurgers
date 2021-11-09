@@ -8,7 +8,7 @@ import {getIngredients} from "../../services/actions/ingredients";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 
-export const draggable_type = 'ingredients';
+export const draggableTypeIngredients = 'ingredients';
 
 function App() {
     const dispatch = useDispatch();

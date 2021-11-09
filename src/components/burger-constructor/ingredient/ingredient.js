@@ -3,9 +3,21 @@ import style from './ingredient.module.css';
 import PropTypes from 'prop-types';
 import {useDispatch} from "react-redux";
 import {DROP_INGREDIENT} from "../../../services/actions/constructor";
+import {useDrag} from "react-dnd";
+import {draggableTypeIngredients} from "../../app/app";
 
 function Ingredient(props) {
+    const ingredient = props.ingredient;
+
     const dispatch = useDispatch();
+
+    const [{isDrag}, dragRef] = useDrag({
+        type: draggableTypeIngredients,
+        item: ingredient,
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+    });
 
     const drugIcon = !props.type ? <div className={style.drugIcon}><DragIcon type={'primary'}/></div> : "";
 
@@ -17,7 +29,8 @@ function Ingredient(props) {
     }
 
     return (
-        <div className={style.ingredient}>
+        <div ref={!props.isLocked  ? dragRef : null}
+             className={`${style.ingredient} ${isDrag && style.semiHidden}`}>
             {drugIcon}
             <ConstructorElement
                 type={props.type}

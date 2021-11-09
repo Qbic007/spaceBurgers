@@ -8,7 +8,7 @@ import {CLOSE_MODAL, SHOW_MODAL} from '../../services/actions/modal';
 import {modalOrder} from "../../services/reducers/modal";
 import {ADD_INGREDIENT, orderConfirmation} from "../../services/actions/constructor";
 import {useDrop} from "react-dnd";
-import {draggable_type} from "../app/app";
+import {draggableTypeIngredients} from "../app/app";
 import Modal from "../modal/modal";
 
 function BurgerConstructor() {
@@ -19,13 +19,13 @@ function BurgerConstructor() {
     }
 
     const [, dropTarget] = useDrop({
-        accept: draggable_type,
+        accept: draggableTypeIngredients,
         drop(item) {
             dispatch({
                 type: ADD_INGREDIENT,
                 item: item
             });
-        },
+        }
     });
 
     const {isVisibleOrder} = useSelector(store => ({
@@ -68,7 +68,8 @@ function BurgerConstructor() {
             </Modal>}
             <div className={style.ingredientsContainer}>
                 {bun && <div className={style.ingredientsOutsideContainer}>
-                    <Ingredient type="top"
+                    <Ingredient ingredient={bun}
+                                type="top"
                                 isLocked={true}
                                 text={bun.name + " (верх)"}
                                 price={bun.price}
@@ -77,7 +78,8 @@ function BurgerConstructor() {
                 <div className={style.ingredientsInsideContainer}>
                     {ingredients.map((object) => {
                         return (
-                            <Ingredient key={object.key}
+                            <Ingredient ingredient={object}
+                                        key={object.key}
                                         id={object.key}
                                         text={object.name}
                                         price={object.price}
@@ -86,7 +88,8 @@ function BurgerConstructor() {
                     })}
                 </div>
                 {bun ? <div className={style.ingredientsOutsideContainer}>
-                    <Ingredient type="bottom"
+                    <Ingredient ingredient={bun}
+                                type="bottom"
                                 isLocked={true}
                                 text={bun.name + " (низ)"}
                                 price={bun.price}
