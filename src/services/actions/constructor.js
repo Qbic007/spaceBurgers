@@ -1,7 +1,9 @@
 import {API_BASE_URL} from "./root";
 
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const MOVE_INGREDIENT = 'MOVE_INGREDIENT';
 export const DROP_INGREDIENT = 'DROP_INGREDIENT';
+export const CLEAR_ORDER = 'CLEAR_ORDER';
 export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
 
@@ -23,6 +25,11 @@ export function orderConfirmation(ingredients = []) {
             if (res && res.success) {
                 dispatch({
                     type: GET_ORDER_SUCCESS,
+                    name: res.name,
+                    orderNumber: res.order.number,
+                });
+                dispatch({
+                    type: CLEAR_ORDER,
                     name: res.name,
                     orderNumber: res.order.number,
                 });

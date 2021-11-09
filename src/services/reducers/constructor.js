@@ -1,4 +1,10 @@
-import {ADD_INGREDIENT, DROP_INGREDIENT, GET_ORDER_FAILED, GET_ORDER_SUCCESS} from '../actions/constructor';
+import {
+    ADD_INGREDIENT, CLEAR_ORDER,
+    DROP_INGREDIENT,
+    GET_ORDER_FAILED,
+    GET_ORDER_SUCCESS,
+    MOVE_INGREDIENT
+} from '../actions/constructor';
 import {typeBun, typeMain, typeSauce} from "./ingredients";
 
 const initialState = {
@@ -10,6 +16,18 @@ const initialState = {
 
 export const constructorReducer = (state = initialState, action) => {
     switch (action.type) {
+        case MOVE_INGREDIENT: {
+            let ingredients = [...state.ingredients];
+            const indexOfIngredient = ingredients.indexOf(action.ingredient);
+            const indexOfDraggableIngredient = ingredients.indexOf(action.draggableIngredient);
+            let tmp = ingredients[indexOfIngredient];
+            ingredients[indexOfIngredient] = ingredients[indexOfDraggableIngredient];
+            ingredients[indexOfDraggableIngredient] = tmp;
+            return {
+                ...state,
+                ingredients: ingredients
+            }
+        }
         case ADD_INGREDIENT: {
             const item = {...action.item};
             item.key = Date.now() + item._id;
@@ -21,6 +39,7 @@ export const constructorReducer = (state = initialState, action) => {
                     }
                 case typeMain:
                 case typeSauce:
+                    item.index = state.ingredients.length;
                     return {
                         ...state,
                         ingredients: [
@@ -38,6 +57,13 @@ export const constructorReducer = (state = initialState, action) => {
                 ingredients: [...state.ingredients.filter(function (ingredient) {
                     return ingredient.key !== action.key;
                 })]
+            }
+        }
+        case CLEAR_ORDER: {
+            return {
+                ...state,
+                ingredients: [],
+                bun: null
             }
         }
         case GET_ORDER_SUCCESS: {

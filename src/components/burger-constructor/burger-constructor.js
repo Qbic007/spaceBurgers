@@ -8,7 +8,7 @@ import {CLOSE_MODAL, SHOW_MODAL} from '../../services/actions/modal';
 import {modalOrder} from "../../services/reducers/modal";
 import {ADD_INGREDIENT, orderConfirmation} from "../../services/actions/constructor";
 import {useDrop} from "react-dnd";
-import {draggableTypeIngredients} from "../app/app";
+import {draggableTypeAddIngredient} from "../app/app";
 import Modal from "../modal/modal";
 
 function BurgerConstructor() {
@@ -19,7 +19,7 @@ function BurgerConstructor() {
     }
 
     const [, dropTarget] = useDrop({
-        accept: draggableTypeIngredients,
+        accept: draggableTypeAddIngredient,
         drop(item) {
             dispatch({
                 type: ADD_INGREDIENT,
@@ -76,14 +76,15 @@ function BurgerConstructor() {
                                 thumbnail={bun.image}/>
                 </div>}
                 <div className={style.ingredientsInsideContainer}>
-                    {ingredients.map((object) => {
+                    {ingredients.map((object, index) => {
                         return (
                             <Ingredient ingredient={object}
                                         key={object.key}
                                         id={object.key}
                                         text={object.name}
                                         price={object.price}
-                                        thumbnail={object.image}/>
+                                        thumbnail={object.image}
+                            />
                         );
                     })}
                 </div>

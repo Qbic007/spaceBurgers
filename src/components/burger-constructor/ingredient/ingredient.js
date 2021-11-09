@@ -2,22 +2,36 @@ import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger
 import style from './ingredient.module.css';
 import PropTypes from 'prop-types';
 import {useDispatch} from "react-redux";
-import {DROP_INGREDIENT} from "../../../services/actions/constructor";
-import {useDrag} from "react-dnd";
-import {draggableTypeIngredients} from "../../app/app";
+import {DROP_INGREDIENT, MOVE_INGREDIENT} from "../../../services/actions/constructor";
+import {useDrag, useDrop} from "react-dnd";
+import {draggableTypeMoveIngredient} from "../../app/app";
 
 function Ingredient(props) {
     const ingredient = props.ingredient;
 
     const dispatch = useDispatch();
 
-    const [{isDrag}, dragRef] = useDrag({
-        type: draggableTypeIngredients,
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: draggableTypeMoveIngredient,
         item: ingredient,
-        collect: monitor => ({
-            isDrag: monitor.isDragging()
-        })
-    });
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
+    }));
+
+    const [, drop] = useDrop(() => ({
+        accept: draggableTypeMoveIngredient,
+        canDrop: () => false,
+        hover(draggableIngredient) {
+            if (draggableIngredient.key !== ingredient.key) {
+                dispatch({
+                    type: MOVE_INGREDIENT,
+                    ingredient: ingredient,
+                    draggableIngredient: draggableIngredient
+                });
+            }
+        },
+    }));
 
     const drugIcon = !props.type ? <div className={style.drugIcon}><DragIcon type={'primary'}/></div> : "";
 
@@ -27,10 +41,10 @@ function Ingredient(props) {
             key: props.id
         });
     }
-
+    
     return (
-        <div ref={!props.isLocked  ? dragRef : null}
-             className={`${style.ingredient} ${isDrag && style.semiHidden}`}>
+        <div ref={props.isLocked ? null : (node) => drag(drop(node))}
+             className={`${style.ingredient} ${isDragging && style.semiHidden}`}>
             {drugIcon}
             <ConstructorElement
                 type={props.type}
