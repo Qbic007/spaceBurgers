@@ -1,7 +1,6 @@
 import React from "react";
 import style from './ingredient-details.module.css';
 import PropertyContainer from "./property-container/property-container";
-import Modal from "../modal/modal";
 import PropTypes from "prop-types";
 import {useSelector} from "react-redux";
 
@@ -11,7 +10,10 @@ function IngredientDetails() {
     }))
 
     return (
-        <Modal title={ingredientInfo.title}>
+        <>
+            <div className={style.titleContainer}>
+                <h2 className={'text text_typeMain-large'}>{ingredientInfo.title}</h2>
+            </div>
             <div>
                 <div className={style.imageContainer}>
                     <img src={ingredientInfo.image} alt={ingredientInfo.name}/>
@@ -24,7 +26,7 @@ function IngredientDetails() {
                     <PropertyContainer title={'Углеводы, г'} value={ingredientInfo.carbohydrates}/>
                 </div>
             </div>
-        </Modal>
+        </>
     );
 }
 

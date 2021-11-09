@@ -4,14 +4,19 @@ import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-comp
 import React from "react";
 import OrderDetails from "../order-details/order-details";
 import {useDispatch, useSelector} from 'react-redux';
-import {SHOW_MODAL} from '../../services/actions/modal';
+import {CLOSE_MODAL, SHOW_MODAL} from '../../services/actions/modal';
 import {modalOrder} from "../../services/reducers/modal";
 import {ADD_INGREDIENT, orderConfirmation} from "../../services/actions/constructor";
 import {useDrop} from "react-dnd";
 import {draggable_type} from "../app/app";
+import Modal from "../modal/modal";
 
 function BurgerConstructor() {
     const dispatch = useDispatch();
+
+    const closeModal = () => {
+        dispatch({type: CLOSE_MODAL});
+    }
 
     const [, dropTarget] = useDrop({
         accept: draggable_type,
@@ -58,15 +63,17 @@ function BurgerConstructor() {
         <section
             ref={dropTarget}
             className={`${style.constructorSection} mt-25`}>
-            {isVisibleOrder && orderNumber && <OrderDetails/>}
-            {bun && <div className={style.ingredientsContainer}>
-                <div className={style.ingredientsOutsideContainer}>
+            {isVisibleOrder && orderNumber && <Modal closeModal={closeModal}>
+                <OrderDetails/>
+            </Modal>}
+            <div className={style.ingredientsContainer}>
+                {bun && <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="top"
                                 isLocked={true}
                                 text={bun.name + " (верх)"}
                                 price={bun.price}
                                 thumbnail={bun.image}/>
-                </div>
+                </div>}
                 <div className={style.ingredientsInsideContainer}>
                     {ingredients.map((object) => {
                         return (
@@ -78,14 +85,16 @@ function BurgerConstructor() {
                         );
                     })}
                 </div>
-                <div className={style.ingredientsOutsideContainer}>
+                {bun ? <div className={style.ingredientsOutsideContainer}>
                     <Ingredient type="bottom"
                                 isLocked={true}
                                 text={bun.name + " (низ)"}
                                 price={bun.price}
                                 thumbnail={bun.image}/>
-                </div>
-            </div>}
+                </div> : <span className={'text_type_main-default center-content mb-4'}>
+                    Для оформления заказа бургера необходимо выбрать булку
+                    </span>}
+            </div>
             {bun && <div className={style.order}>
                 <span className={`${style.price} text text_typeMain-large`}>
                     {countPrice(bun, ingredients)}

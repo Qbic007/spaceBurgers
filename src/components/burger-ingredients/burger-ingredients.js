@@ -3,8 +3,10 @@ import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import Section from "./section/section";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import React from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {typeBun, typeMain, typeSauce} from "../../services/reducers/ingredients";
+import Modal from "../modal/modal";
+import {CLOSE_MODAL} from "../../services/actions/modal";
 
 function tabs() {
     return (
@@ -29,6 +31,12 @@ function filterByType(ingredients, type) {
 }
 
 function BurgerIngredients() {
+    const dispatch = useDispatch();
+
+    const closeModal = () => {
+        dispatch({type: CLOSE_MODAL});
+    }
+
     const {isVisibleIngredient} = useSelector(store => ({
         isVisibleIngredient: store.modalReducer.isVisibleIngredient
     }))
@@ -40,7 +48,9 @@ function BurgerIngredients() {
 
     return (
         <section className={style.ingredientsSection}>
-            {isVisibleIngredient && <IngredientDetails/>}
+            {isVisibleIngredient && <Modal closeModal={closeModal}>
+                <IngredientDetails/>
+            </Modal>}
             <h2 className={`${style.title} text text_typeMain-large`}>соберите бургер</h2>
             {tabs()}
             {ingredientsFailed

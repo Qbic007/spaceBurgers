@@ -45,7 +45,7 @@ function Item(props) {
     const getQuantityByIngredientId = (ingredientId) => {
         let quantity = null;
         if (bun && bun._id === ingredientId) {
-            quantity = 1;
+            quantity = 2;
         } else {
             const filteredIngredients = ingredients.filter(function (ingredient) {
                 return ingredient._id === ingredientId;

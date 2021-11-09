@@ -1,13 +1,15 @@
+import {API_BASE_URL} from "./root";
+
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const DROP_INGREDIENT = 'DROP_INGREDIENT';
 export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
 
-const API_URL = 'https://norma.nomoreparties.space/api/orders';
+const API_ACTION_URL = API_BASE_URL + 'orders';
 
 export function orderConfirmation(ingredients = []) {
     return function (dispatch) {
-        fetch(API_URL,
+        fetch(API_ACTION_URL,
             {
                 method: "POST",
                 headers: {

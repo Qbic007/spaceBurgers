@@ -4,19 +4,10 @@ import style from './modal.module.css';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from "../modal-overlay/modalOverlay";
 import PropTypes from "prop-types";
-import {useDispatch} from "react-redux";
-import {CLOSE_MODAL} from "../../services/actions/modal";
-import {modalIngredient} from "../../services/reducers/modal";
 
 const modalRoot = document.getElementById("modal");
 
 function Modal(props) {
-    const dispatch = useDispatch();
-
-    const closeModal = () => {
-        dispatch({type: CLOSE_MODAL, modalType: modalIngredient});
-    }
-
     const ESC_CODE = 27;
 
     const catchEvent = (e) => {
@@ -25,7 +16,7 @@ function Modal(props) {
 
     const escFunction = (e) => {
         if (e.keyCode === ESC_CODE) {
-            return closeModal();
+            return props.closeModal();
         }
     }
 
@@ -39,12 +30,9 @@ function Modal(props) {
 
     return ReactDOM.createPortal(
         (
-            <ModalOverlay closeCallback={closeModal}>
+            <ModalOverlay closeCallback={props.closeModal}>
                 <section className={style.modal} onClick={catchEvent}>
-                    <div className={style.titleContainer}>
-                        <h2 className={'text text_typeMain-large'}>{props.title}</h2>
-                        <span onClick={closeModal} className={'pointer'}><CloseIcon type={'primary'}/></span>
-                    </div>
+                    <span onClick={props.closeModal} className={style.closeIcon}><CloseIcon type={'primary'}/></span>
                     {props.children}
                 </section>
             </ModalOverlay>
