@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 function ModalOverlay(props) {
     return (
         <section className={style.modalOverlay}
-                 onClickCapture={props.closeCallback}>
+                 onClick={props.closeCallback}>
             {props.children}
         </section>
     );
