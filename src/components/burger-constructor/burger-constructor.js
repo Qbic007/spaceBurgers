@@ -3,76 +3,112 @@ import Ingredient from "./ingredient/ingredient";
 import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import React from "react";
 import OrderDetails from "../order-details/order-details";
-import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
+import {CLOSE_MODAL, SHOW_MODAL} from '../../services/actions/modal';
+import {modalOrder} from "../../services/reducers/modal";
+import {ADD_INGREDIENT, orderConfirmation} from "../../services/actions/constructor";
+import {useDrop} from "react-dnd";
+import {draggableTypeAddIngredient} from "../app/app";
+import Modal from "../modal/modal";
 
-function BurgerConstructor(props) {
-    const [showInfo, setShowInfo] = React.useState(false);
+function BurgerConstructor() {
+    const dispatch = useDispatch();
 
-    const showModal = () => {
-        setShowInfo(true);
+    const closeModal = () => {
+        dispatch({type: CLOSE_MODAL});
     }
 
-    const closeModal = (e) => {
-        console.log(e);
-        setShowInfo(false);
+    const [, dropTarget] = useDrop({
+        accept: draggableTypeAddIngredient,
+        drop(item) {
+            dispatch({
+                type: ADD_INGREDIENT,
+                item: item
+            });
+        }
+    });
+
+    const {isVisibleOrder} = useSelector(store => ({
+        isVisibleOrder: store.modalReducer.isVisibleOrder
+    }))
+
+    const {ingredients, bun, orderNumber} = useSelector(store => ({
+        ingredients: store.constructorReducer.ingredients,
+        bun: store.constructorReducer.bun,
+        orderNumber: store.constructorReducer.orderNumber
+    }))
+
+    const getIngredientIds = (bun, ingredients) => {
+        ingredients = ingredients.map(function (ingredient) {
+            return ingredient._id;
+        });
+        ingredients.push(bun._id);
+        ingredients.push(bun._id);
+        return ingredients;
+    }
+
+    const offerConfirmation = () => {
+        dispatch(orderConfirmation(getIngredientIds(bun, ingredients)));
+        dispatch({
+            type: SHOW_MODAL,
+            modalType: modalOrder
+        });
+    }
+
+    const countPrice = (bun, ingredients) => {
+        return 2 * bun.price + ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0);
     }
 
     return (
-        props.data.success ? <section className={`${style.constructorSection} mt-25`}>
-            {showInfo && <OrderDetails order_id='034536' closeCallback={closeModal}/>}
+        <section
+            ref={dropTarget}
+            className={`${style.constructorSection} mt-25`}>
+            {isVisibleOrder && orderNumber && <Modal closeModal={closeModal}>
+                <OrderDetails/>
+            </Modal>}
             <div className={style.ingredientsContainer}>
-                <div className={style.ingredientsOutsideContainer}>
-                    <Ingredient type="top"
+                {bun && <div className={style.ingredientsOutsideContainer}>
+                    <Ingredient ingredient={bun}
+                                type="top"
                                 isLocked={true}
-                                text={props.data.data[0].name + " (верх)"}
-                                price={props.data.data[0].price}
-                                thumbnail={props.data.data[0].image}/>
-                </div>
+                                text={bun.name + " (верх)"}
+                                price={bun.price}
+                                thumbnail={bun.image}/>
+                </div>}
                 <div className={style.ingredientsInsideContainer}>
-                    <Ingredient text={props.data.data[1].name}
-                                price={props.data.data[1].price}
-                                thumbnail={props.data.data[1].image}/>
-                    <Ingredient text={props.data.data[2].name}
-                                price={props.data.data[2].price}
-                                thumbnail={props.data.data[2].image}/>
-                    <Ingredient text={props.data.data[3].name}
-                                price={props.data.data[3].price}
-                                thumbnail={props.data.data[3].image}/>
-                    <Ingredient text={props.data.data[4].name}
-                                price={props.data.data[4].price}
-                                thumbnail={props.data.data[4].image}/>
-                    <Ingredient text={props.data.data[4].name}
-                                price={props.data.data[4].price}
-                                thumbnail={props.data.data[4].image}/>
-                    <Ingredient text={props.data.data[4].name}
-                                price={props.data.data[4].price}
-                                thumbnail={props.data.data[4].image}/>
-                    <Ingredient text={props.data.data[5].name}
-                                price={props.data.data[5].price}
-                                thumbnail={props.data.data[5].image}/>
+                    {ingredients.map((object, index) => {
+                        return (
+                            <Ingredient ingredient={object}
+                                        key={object.key}
+                                        id={object.key}
+                                        text={object.name}
+                                        price={object.price}
+                                        thumbnail={object.image}
+                            />
+                        );
+                    })}
                 </div>
-                <div className={style.ingredientsOutsideContainer}>
-                    <Ingredient type="bottom"
+                {bun ? <div className={style.ingredientsOutsideContainer}>
+                    <Ingredient ingredient={bun}
+                                type="bottom"
                                 isLocked={true}
-                                text={props.data.data[0].name + " (низ)"}
-                                price={props.data.data[0].price}
-                                thumbnail={props.data.data[0].image}/>
-                </div>
+                                text={bun.name + " (низ)"}
+                                price={bun.price}
+                                thumbnail={bun.image}/>
+                </div> : <span className={'text_type_main-default center-content mb-4'}>
+                    Для оформления заказа бургера необходимо выбрать булку
+                    </span>}
             </div>
-            <div className={style.order}>
-                <span className={`${style.price} text text_type_main-large`}>
-                    610
+            {bun && <div className={style.order}>
+                <span className={`${style.price} text text_typeMain-large`}>
+                    {countPrice(bun, ingredients)}
                     <CurrencyIcon type={"primary"}/>
                 </span>
-                <Button type="primary" size="large" onClick={showModal}>
+                <Button type="primary" size="large" onClick={offerConfirmation}>
                     Оформить заказ
                 </Button>
-            </div>
-        </section> : null);
+            </div>}
+        </section>);
 }
 
 export default BurgerConstructor;
-
-BurgerConstructor.propTypes = {
-    data: PropTypes.object,
-};

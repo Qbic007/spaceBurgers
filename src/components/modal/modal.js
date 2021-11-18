@@ -16,7 +16,7 @@ function Modal(props) {
 
     const escFunction = (e) => {
         if (e.keyCode === ESC_CODE) {
-            return props.closeCallback();
+            return props.closeModal();
         }
     }
 
@@ -30,12 +30,9 @@ function Modal(props) {
 
     return ReactDOM.createPortal(
         (
-            <ModalOverlay closeCallback={props.closeCallback}>
+            <ModalOverlay closeCallback={props.closeModal}>
                 <section className={style.modal} onClick={catchEvent}>
-                    <div className={style.titleContainer}>
-                        <h2 className={'text text_type_main-large'}>{props.title}</h2>
-                        <span onClick={props.closeCallback} className={'pointer'}><CloseIcon type={'primary'}/></span>
-                    </div>
+                    <span onClick={props.closeModal} className={style.closeIcon}><CloseIcon type={'primary'}/></span>
                     {props.children}
                 </section>
             </ModalOverlay>
@@ -47,7 +44,6 @@ function Modal(props) {
 export default Modal;
 
 Modal.propTypes = {
-    closeCallback: PropTypes.func,
-    title: PropTypes.string,
+    closeModal: PropTypes.func,
     children: PropTypes.object,
 };

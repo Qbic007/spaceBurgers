@@ -10,3 +10,7 @@
     position: absolute;
     left: -32px;
 }
+
+.semiHidden {
+    opacity: 0;
+}
