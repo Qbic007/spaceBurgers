@@ -12,7 +12,7 @@ function IngredientDetails() {
     return (
         <>
             <div className={style.titleContainer}>
-                <h2 className={'text text_typeMain-large'}>{ingredientInfo.title}</h2>
+                <h2 className={'text text_type_main-large'}>{ingredientInfo.title}</h2>
             </div>
             <div>
                 <div className={style.imageContainer}>

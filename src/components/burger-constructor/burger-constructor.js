@@ -100,7 +100,7 @@ function BurgerConstructor() {
                     </span>}
             </div>
             {bun && <div className={style.order}>
-                <span className={`${style.price} text text_typeMain-large`}>
+                <span className={`${style.price} text text_type_main-large`}>
                     {countPrice(bun, ingredients)}
                     <CurrencyIcon type={"primary"}/>
                 </span>
