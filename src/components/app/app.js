@@ -9,8 +9,8 @@ import Register from "../../pages/register/register";
 import ForgotPassword from "../../pages/forgot-password/forgot-password";
 import ResetPassword from "../../pages/reset-password/reset-password";
 import Profile from "../../pages/profile/profile";
-import Ingredient from "../burger-constructor/ingredient/ingredient";
 import Ingredients from "../../pages/ingredients/ingredients";
+import Ingredient from "../../pages/ingredients/ingredient/ingredient";
 
 export const draggableTypeAddIngredient = 'addIngredient';
 export const draggableTypeMoveIngredient = 'moveIngredient';
@@ -31,10 +31,9 @@ function App() {
                 <Route path="forgot-password" element={<ForgotPassword/>}/>
                 <Route path="reset-password" element={<ResetPassword/>}/>
                 <Route path="profile" element={<Profile/>}/>
-                <Route path="ingredients" element={<Ingredients/>}>
-                    <Route path=":id" element={<Ingredient/>}/>
-                </Route>
-                <Route element={<NotFound404/>}/>
+                <Route path="ingredients/:id" element={<Ingredient/>}/>
+                <Route path="ingredients" element={<Ingredients/>}/>
+                <Route path="*" element={<NotFound404/>}/>
             </Routes>
         </BrowserRouter>
     );
