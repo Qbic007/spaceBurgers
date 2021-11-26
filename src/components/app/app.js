@@ -44,8 +44,9 @@ function App() {
                 <Route path={PATH_FORGOT_PASSWORD} element={<ForgotPassword/>}/>
                 <Route path={PATH_RESET_PASSWORD} element={<ResetPassword/>}/>
                 <Route path={PATH_PROFILE} element={<Profile/>}/>
-                <Route path={PATH_INGREDIENTS + '/:id'} element={<Ingredient/>}/>
-                <Route path={PATH_ORDERS} element={<NotFound404/>}/>
+                <Route path={makeLinkUrl([PATH_INGREDIENTS, ':id'])} element={<Ingredient/>}/>
+                <Route path={makeLinkUrl([PATH_PROFILE, PATH_ORDERS])} element={<NotFound404/>}/>
+                <Route path={makeLinkUrl([PATH_PROFILE, PATH_ORDERS, ':id'])} element={<NotFound404/>}/>
                 <Route path={PATH_NOT_FOUND_404} element={<NotFound404/>}/>
             </Routes>
         </BrowserRouter>

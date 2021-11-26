@@ -43,3 +43,7 @@ li {
     justify-content: center;
     align-items: center;
 }
+
+.active {
+    color: #F2F2F3;
+}
