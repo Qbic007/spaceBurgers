@@ -1,11 +1,11 @@
-import {getIngredients} from "../../services/actions/ingredients";
+import {getIngredients} from "../../../services/actions/ingredients";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 
 export const draggableTypeAddIngredient = 'addIngredient';
 export const draggableTypeMoveIngredient = 'moveIngredient';
 
-function ResetPassword() {
+function ForgotPassword() {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,9 +14,9 @@ function ResetPassword() {
 
     return (
         <>
-            ResetPassword
+            ForgotPassword
         </>
     );
 }
 
-export default ResetPassword;
+export default ForgotPassword;

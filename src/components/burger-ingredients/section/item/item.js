@@ -6,13 +6,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {SHOW_MODAL} from "../../../../services/actions/modal";
 import {modalIngredient} from "../../../../services/reducers/modal";
 import {useDrag} from "react-dnd";
-import {draggableTypeAddIngredient} from "../../../app/app";
+import {DRAGGABLE_TYPE_ADD_INGREDIENT} from "../../../app/app";
 
 function Item(props) {
     const ingredient = props.ingredient;
 
     const [{isDrag}, dragRef] = useDrag({
-        type: draggableTypeAddIngredient,
+        type: DRAGGABLE_TYPE_ADD_INGREDIENT,
         item: ingredient,
         collect: monitor => ({
             isDrag: monitor.isDragging()

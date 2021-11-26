@@ -4,19 +4,15 @@ import {getIngredients} from "../../services/actions/ingredients";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {NotFound404} from '../../pages/not-found-404';
 import Constructor from "../../pages/constructor/constructor";
-import Login from "../../pages/login/login";
-import Register from "../../pages/register/register";
-import ForgotPassword from "../../pages/forgot-password/forgot-password";
-import ResetPassword from "../../pages/reset-password/reset-password";
+import Login from "../../pages/profile/login/login";
+import Register from "../../pages/profile/register/register";
+import ForgotPassword from "../../pages/profile/forgot-password/forgot-password";
+import ResetPassword from "../../pages/profile/reset-password/reset-password";
 import Profile from "../../pages/profile/profile";
 import Ingredient from "../../pages/ingredient/ingredient";
 
-export const draggableTypeAddIngredient = 'addIngredient';
-export const draggableTypeMoveIngredient = 'moveIngredient';
-
-export const makeLinkUrl = (pathList) => {
-    return '/' + pathList.join('/');
-}
+export const DRAGGABLE_TYPE_ADD_INGREDIENT = 'addIngredient';
+export const DRAGGABLE_TYPE_MOVE_INGREDIENT = 'moveIngredient';
 
 export const PATH_CONSTRUCTOR = '';
 export const PATH_LOGIN = 'login';
@@ -27,6 +23,10 @@ export const PATH_PROFILE = 'profile';
 export const PATH_INGREDIENTS = 'ingredients';
 export const PATH_ORDERS = 'orders';
 export const PATH_NOT_FOUND_404 = '*';
+
+export const makeLinkUrl = (pathParts) => {
+    return '/' + (pathParts.isArray ? pathParts.join('/') : pathParts);
+}
 
 function App() {
     const dispatch = useDispatch();
