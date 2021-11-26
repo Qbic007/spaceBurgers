@@ -4,7 +4,7 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {Link} from "react-router-dom";
 import {makeLinkUrl, PATH_LOGIN} from "../../../components/app/app";
 
-function ForgotPassword() {
+function ResetPasswordPage() {
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
@@ -49,4 +49,4 @@ function ForgotPassword() {
     );
 }
 
-export default ForgotPassword;
+export default ResetPasswordPage;

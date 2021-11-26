@@ -4,7 +4,7 @@ import {Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {NavLink} from "react-router-dom";
 import {makeLinkUrl, PATH_PROFILE} from "../../components/app/app";
 
-function Profile() {
+function ProfilePage() {
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
@@ -66,4 +66,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default ProfilePage;

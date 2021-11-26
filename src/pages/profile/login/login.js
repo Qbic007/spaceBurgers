@@ -4,7 +4,7 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {Link} from "react-router-dom";
 import {makeLinkUrl, PATH_FORGOT_PASSWORD, PATH_REGISTER} from "../../../components/app/app";
 
-function Login() {
+function LoginPage() {
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
@@ -57,4 +57,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default LoginPage;

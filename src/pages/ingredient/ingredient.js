@@ -1,9 +1,9 @@
-function Ingredient() {
+import IngredientDetails from "../../components/ingredient-details/ingredient-details";
+
+function IngredientPage() {
     return (
-        <>
-            Ingredient
-        </>
+        <IngredientDetails/>
     );
 }
 
-export default Ingredient;
+export default IngredientPage;

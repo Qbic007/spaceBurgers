@@ -11,7 +11,7 @@ import style from "./constructor.module.css";
 export const draggableTypeAddIngredient = 'addIngredient';
 export const draggableTypeMoveIngredient = 'moveIngredient';
 
-function Constructor() {
+function ConstructorPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,4 +33,4 @@ function Constructor() {
     );
 }
 
-export default Constructor;
+export default ConstructorPage;
