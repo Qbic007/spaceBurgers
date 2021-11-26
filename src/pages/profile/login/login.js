@@ -8,7 +8,7 @@ function Login() {
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
-            <main className={'text_type_main-default'}>
+            <main className={'text_type_main-medium'}>
                 <div className={style.wrapper}>
                     <span className={'mt-30'}>Вход</span>
                     <form className={style.formContainer}>
@@ -37,11 +37,11 @@ function Login() {
                             </Button>
                         </div>
                     </form>
-                    <span className={'mt-10'}>
+                    <span className={`${style.additionalText} text_type_main-default mt-20`}>
                         <span className={'mr-2'}>Вы - новый пользователь?</span>
                         <Link to={makeLinkUrl(PATH_REGISTER)}>Зарегистрироваться</Link>
                     </span>
-                    <span className={'mt-6'}>
+                    <span className={`${style.additionalText} text_type_main-default mt-6`}>
                         <span className={'mr-2'}>Забыли пароль?</span>
                         <Link to={makeLinkUrl(PATH_FORGOT_PASSWORD)}>Восстановить пароль</Link>
                     </span>

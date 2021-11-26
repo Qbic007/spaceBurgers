@@ -24,6 +24,10 @@ main {
     justify-content: center;
 }
 
+.additionalText {
+    color: #8585AD;
+}
+
 a {
     color: #4C4CFF;
     text-decoration: none;

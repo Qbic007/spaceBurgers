@@ -8,7 +8,7 @@ function Register() {
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
-            <main className={'text_type_main-default'}>
+            <main className={'text_type_main-medium'}>
                 <div className={style.wrapper}>
                     <span className={'mt-30'}>Регистрация</span>
                     <form className={style.formContainer}>
@@ -46,7 +46,7 @@ function Register() {
                             </Button>
                         </div>
                     </form>
-                    <span className={'mt-6'}>
+                    <span className={`${style.additionalText} text_type_main-default mt-20`}>
                         <span className={'mr-2'}>Уже зарегистрированы?</span>
                         <Link to={makeLinkUrl(PATH_LOGIN)}>Войти</Link>
                     </span>
