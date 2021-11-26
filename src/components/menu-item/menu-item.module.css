@@ -3,6 +3,11 @@
     align-items: center;
     margin-right: 8px;
     padding: 16px 20px;
+    color: #8585AD;
+}
+
+.menuItem:hover {
+    color: #F2F2F3;
 }
 
 .menuItem:hover {
@@ -15,4 +20,12 @@
 
 .itemText::first-letter {
     text-transform: uppercase;
+}
+
+.isActive {
+    color: #F2F2F3;
+}
+
+a {
+    text-decoration: none;
 }

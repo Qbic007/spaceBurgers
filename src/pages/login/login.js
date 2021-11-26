@@ -1,4 +1,4 @@
-import AppHeader from "../../components/app-header/app-header";
+import AppHeader, {MENU_ITEM_PROFILE} from "../../components/app-header/app-header";
 import style from "./login.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
@@ -9,7 +9,7 @@ export const draggableTypeMoveIngredient = 'moveIngredient';
 function Login() {
     return (
         <>
-            <AppHeader/>
+            <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
             <main className={'text_type_main-default'}>
                 <div className={style.wrapper}>
                     <span className={'mt-30'}>Вход</span>
