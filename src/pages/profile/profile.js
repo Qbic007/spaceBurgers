@@ -1,24 +1,40 @@
 import AppHeader, {MENU_ITEM_PROFILE} from "../../components/app-header/app-header";
 import style from "./profile.module.css";
 import {Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {NavLink} from "react-router-dom";
-import {makeLinkUrl, PATH_PROFILE} from "../../components/app/app";
+import {NavLink, useNavigate} from "react-router-dom";
+import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../components/app/app";
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback} from "react";
 import {LOG_OUT} from "../../services/actions/auth";
+import {postLogOut} from "../../services/API/auth/log-out";
+import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
+import {showErrorMessage} from "../../services/API/base-request";
 
 function ProfilePage() {
+    let navigate = useNavigate();
     const {user} = useSelector(store => ({
         user: store.authReducer.user
     }));
-    
+
     const dispatch = useDispatch();
 
     const logOut = useCallback(
         e => {
             e.preventDefault();
-            dispatch({
-                type: LOG_OUT // TODO добавить запрос на сервер для "разлогинивания"
+            let result = false;
+            postLogOut({
+                token: localStorage.getItem(REFRESH_TOKEN_ITEM_KEY)
+            }).then(res => {
+                result = res
+            }).then(() => {
+                if (result.success) {
+                    dispatch({
+                        type: LOG_OUT
+                    });
+                    navigate(makeLinkUrl(PATH_LOGIN));
+                } else {
+                    showErrorMessage(result)
+                }
             });
         },
         [dispatch]

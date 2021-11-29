@@ -7,6 +7,7 @@ import {useCallback, useState} from "react";
 import {postRegistration} from "../../../services/API/auth/registration";
 import {useDispatch, useSelector} from "react-redux";
 import {REGISTER} from "../../../services/actions/auth";
+import {showErrorMessage} from "../../../services/API/base-request";
 
 function RegisterPage() {
     const {user} = useSelector(store => ({
@@ -43,7 +44,7 @@ function RegisterPage() {
                         refreshToken: result["refreshToken"],
                     });
                 } else {
-                    alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже');
+                    showErrorMessage(result);
                 }
             });
         },

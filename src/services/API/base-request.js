@@ -17,3 +17,7 @@ export const baseRequest = async (type, url, form) => {
 
     return result;
 }
+
+export const showErrorMessage = (result) => {
+    alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже')
+}

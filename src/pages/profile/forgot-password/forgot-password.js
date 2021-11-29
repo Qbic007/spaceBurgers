@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_LOGIN, PATH_RESET_PASSWORD} from "../../../components/app/app";
 import {useCallback, useState} from "react";
 import {postPasswordReset} from "../../../services/API/password-reset";
+import {showErrorMessage} from "../../../services/API/base-request";
 
 function ForgotPasswordPage() {
     let navigate = useNavigate();
@@ -28,7 +29,7 @@ function ForgotPasswordPage() {
                     navigate(makeLinkUrl(PATH_RESET_PASSWORD));
                     alert('На указанную почту выслано письмо с инструкциями по восстановлению пароля');
                 } else {
-                    alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже');
+                    showErrorMessage(result);
                 }
             });
         },

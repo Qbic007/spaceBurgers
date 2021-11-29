@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
 import {useCallback, useState} from "react";
 import {postPasswordResetReset} from "../../../services/API/password-reset";
+import {showErrorMessage} from "../../../services/API/base-request";
 
 function ResetPasswordPage() {
     let navigate = useNavigate();
@@ -28,7 +29,7 @@ function ResetPasswordPage() {
                     navigate(makeLinkUrl(PATH_PROFILE));
                     alert('Пароль успешно изменён');
                 } else {
-                    alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже');
+                    showErrorMessage(result);
                 }
             });
         },

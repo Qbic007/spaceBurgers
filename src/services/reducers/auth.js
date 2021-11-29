@@ -8,7 +8,7 @@ const initialState = {
     accessToken: ""
 }
 
-const REFRESH_TOKEN_ITEM_KEY = 'refreshToken';
+export const REFRESH_TOKEN_ITEM_KEY = 'refreshToken';
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
