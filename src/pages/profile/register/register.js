@@ -1,10 +1,60 @@
 import AppHeader, {MENU_ITEM_PROFILE} from "../../../components/app-header/app-header";
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link} from "react-router-dom";
-import {makeLinkUrl, PATH_LOGIN} from "../../../components/app/app";
+import {Link, Navigate} from "react-router-dom";
+import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
+import {useCallback, useState} from "react";
+import {postRegistration} from "../../../services/API/auth/registration";
+import {useDispatch, useSelector} from "react-redux";
+import {REGISTER} from "../../../services/actions/auth";
 
 function RegisterPage() {
+    const {user} = useSelector(store => ({
+        user: store.authReducer.user
+    }));
+
+    const dispatch = useDispatch();
+
+    const [form, setValue] = useState({
+        name: '',
+        email: '',
+        password: ''
+    });
+
+    const onChange = e => {
+        setValue({...form, [e.target.name]: e.target.value});
+    };
+
+    let register = useCallback(
+        e => {
+            e.preventDefault();
+            let result = false;
+            postRegistration(form).then(res => {
+                result = res
+            }).then(() => {
+                if (result.success) {
+                    dispatch({
+                        type: REGISTER,
+                        user: {
+                            email: result["user"]["email"],
+                            name: result["user"]["name"]
+                        },
+                        accessToken: result["accessToken"],
+                    });
+                } else {
+                    alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже');
+                }
+            });
+        },
+        [dispatch, form]
+    );
+
+    if (user.email.length > 0) {
+        return (
+            <Navigate to={makeLinkUrl(PATH_PROFILE)}/>
+        );
+    }
+
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
@@ -17,8 +67,8 @@ function RegisterPage() {
                                 <Input
                                     type={'text'}
                                     placeholder={'Имя'}
-                                    onChange={e => console.log(e.target.value)}
-                                    value={''}
+                                    onChange={onChange}
+                                    value={form.name}
                                     name={'name'}
                                 />
                             </div>
@@ -26,8 +76,8 @@ function RegisterPage() {
                                 <Input
                                     type={'text'}
                                     placeholder={'E-mail'}
-                                    onChange={e => console.log(e.target.value)}
-                                    value={''}
+                                    onChange={onChange}
+                                    value={form.email}
                                     name={'email'}
                                 />
                             </div>
@@ -35,14 +85,14 @@ function RegisterPage() {
                                 <Input
                                     type={'text'}
                                     placeholder={'Пароль'}
-                                    onChange={e => console.log(e.target.value)}
-                                    value={''}
+                                    onChange={onChange}
+                                    value={form.password}
                                     name={'password'}
                                     icon={'HideIcon'}
                                 />
                             </div>
                             <div className={'mt-6'}>
-                                <Button type="primary" size="medium">
+                                <Button type="primary" size="medium" onClick={register}>
                                     Зарегистрироваться
                                 </Button>
                             </div>
