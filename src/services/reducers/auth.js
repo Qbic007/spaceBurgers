@@ -1,4 +1,4 @@
-import {LOG_OUT, REGISTER} from "../actions/auth";
+import {LOG_OUT, LOGIN} from "../actions/auth";
 
 const initialState = {
     user: {
@@ -12,7 +12,7 @@ export const REFRESH_TOKEN_ITEM_KEY = 'refreshToken';
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case REGISTER:
+        case LOGIN:
             localStorage.setItem(REFRESH_TOKEN_ITEM_KEY, action.refreshToken);
             return {
                 user: action.user,

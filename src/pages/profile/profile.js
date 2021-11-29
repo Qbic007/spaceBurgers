@@ -6,7 +6,7 @@ import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../components/app/app";
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback} from "react";
 import {LOG_OUT} from "../../services/actions/auth";
-import {postLogOut} from "../../services/API/auth/log-out";
+import {postLogOut} from "../../services/API/auth/logout";
 import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
 import {showErrorMessage} from "../../services/API/base-request";
 

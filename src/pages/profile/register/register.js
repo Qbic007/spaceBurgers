@@ -6,7 +6,7 @@ import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app
 import {useCallback, useState} from "react";
 import {postRegistration} from "../../../services/API/auth/registration";
 import {useDispatch, useSelector} from "react-redux";
-import {REGISTER} from "../../../services/actions/auth";
+import {LOGIN} from "../../../services/actions/auth";
 import {showErrorMessage} from "../../../services/API/base-request";
 
 function RegisterPage() {
@@ -35,7 +35,7 @@ function RegisterPage() {
             }).then(() => {
                 if (result.success) {
                     dispatch({
-                        type: REGISTER,
+                        type: LOGIN,
                         user: {
                             email: result["user"]["email"],
                             name: result["user"]["name"]
