@@ -35,8 +35,6 @@ export const makeOrderLinkUrl = (id) => makeLinkUrl([makeOrdersLinkUrl(), id]);
 export const makeIngredientLinkUrl = (id) => makeLinkUrl([PATH_INGREDIENTS, id]);
 
 function App() {
-    console.log(makeOrdersLinkUrl());
-    console.log(makeIngredientLinkUrl(PATH_ID));
     return (
         <BrowserRouter>
             <Routes>

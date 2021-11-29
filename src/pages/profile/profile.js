@@ -3,20 +3,47 @@ import style from "./profile.module.css";
 import {Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {NavLink, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../components/app/app";
-import {useDispatch, useSelector} from "react-redux";
-import {useCallback} from "react";
+import {useDispatch} from "react-redux";
+import {useCallback, useEffect, useState} from "react";
 import {LOG_OUT} from "../../services/actions/auth";
 import {postLogOut} from "../../services/API/auth/logout";
 import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
 import {showErrorMessage} from "../../services/API/base-request";
+import {getUser} from "../../services/API/auth/user";
 
 function ProfilePage() {
     let navigate = useNavigate();
-    const {user} = useSelector(store => ({
-        user: store.authReducer.user
-    }));
 
     const dispatch = useDispatch();
+
+    const [form, setValue] = useState({
+        email: "",
+        name: "",
+        password: ""
+    });
+
+    useEffect(
+        () => {
+            let result = false;
+            getUser({token: localStorage.getItem(REFRESH_TOKEN_ITEM_KEY)}).then(res => {
+                result = res
+            }).then(() => {
+                if (result.success) {
+                    setValue({
+                        email: result["user"]["email"],
+                        name: result["user"]["name"],
+                        password: ""
+                    });
+                } else {
+                    showErrorMessage(result);
+                }
+            });
+        }, [setValue]
+    );
+
+    const onChange = e => {
+        setValue({...form, [e.target.name]: e.target.value});
+    };
 
     const logOut = useCallback(
         e => {
@@ -64,8 +91,8 @@ function ProfilePage() {
                                     <Input
                                         type={'text'}
                                         placeholder={'Имя'}
-                                        onChange={e => console.log(e.target.value)}
-                                        value={user.name}
+                                        onChange={onChange}
+                                        value={form.name}
                                         name={'name'}
                                         icon={'EditIcon'}
                                     />
@@ -74,8 +101,8 @@ function ProfilePage() {
                                     <Input
                                         type={'text'}
                                         placeholder={'Логин'}
-                                        onChange={e => console.log(e.target.value)}
-                                        value={user.email}
+                                        onChange={onChange}
+                                        value={form.email}
                                         name={'login'}
                                         icon={'EditIcon'}
                                     />

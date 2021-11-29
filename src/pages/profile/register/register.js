@@ -2,7 +2,7 @@ import AppHeader, {MENU_ITEM_PROFILE} from "../../../components/app-header/app-h
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
-import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
+import {makeLinkUrl, PATH_CONSTRUCTOR, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
 import {useCallback, useState} from "react";
 import {postRegistration} from "../../../services/API/auth/registration";
 import {useDispatch, useSelector} from "react-redux";
@@ -53,7 +53,7 @@ function RegisterPage() {
 
     if (user.email.length > 0) {
         return (
-            <Navigate to={makeLinkUrl(PATH_PROFILE)}/>
+            <Navigate to={makeLinkUrl(PATH_CONSTRUCTOR)}/>
         );
     }
 

@@ -1,7 +1,7 @@
 import {baseRequest} from "./base-request";
 
-const TYPE_POST = 'POST';
+const METHOD_POST = 'POST';
 
 export const postRequest = async (url, form) => {
-    return baseRequest(TYPE_POST, url, form);
+    return baseRequest(METHOD_POST, url, form);
 }

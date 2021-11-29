@@ -1,9 +1,9 @@
-export const baseRequest = async (type, url, form) => {
+export const baseRequest = async (method, url, form) => {
     let result = false;
 
     await fetch(url,
         {
-            method: type,
+            method: method,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
