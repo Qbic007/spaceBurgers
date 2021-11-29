@@ -25,7 +25,7 @@ function RegisterPage() {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
-    let register = useCallback(
+    const register = useCallback(
         e => {
             e.preventDefault();
             let result = false;
@@ -40,6 +40,7 @@ function RegisterPage() {
                             name: result["user"]["name"]
                         },
                         accessToken: result["accessToken"],
+                        refreshToken: result["refreshToken"],
                     });
                 } else {
                     alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже');

@@ -3,8 +3,27 @@ import style from "./profile.module.css";
 import {Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {NavLink} from "react-router-dom";
 import {makeLinkUrl, PATH_PROFILE} from "../../components/app/app";
+import {useDispatch, useSelector} from "react-redux";
+import {useCallback} from "react";
+import {LOG_OUT} from "../../services/actions/auth";
 
 function ProfilePage() {
+    const {user} = useSelector(store => ({
+        user: store.authReducer.user
+    }));
+    
+    const dispatch = useDispatch();
+
+    const logOut = useCallback(
+        e => {
+            e.preventDefault();
+            dispatch({
+                type: LOG_OUT // TODO добавить запрос на сервер для "разлогинивания"
+            });
+        },
+        [dispatch]
+    );
+
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
@@ -17,7 +36,7 @@ function ProfilePage() {
                                     <NavLink to={makeLinkUrl(PATH_PROFILE)}>Профиль</NavLink>
                                 </li>
                                 <li className={style.profileMenuItem}>История заказов</li>
-                                <li className={style.profileMenuItem}>Выход</li>
+                                <li className={style.profileMenuItem} onClick={logOut}>Выход</li>
                             </ul>
                             <span className={'pt-20 text_type_main-default'}>
                                 В этом разделе вы можете изменить свои персональные данные
@@ -30,7 +49,7 @@ function ProfilePage() {
                                         type={'text'}
                                         placeholder={'Имя'}
                                         onChange={e => console.log(e.target.value)}
-                                        value={''}
+                                        value={user.name}
                                         name={'name'}
                                         icon={'EditIcon'}
                                     />
@@ -40,7 +59,7 @@ function ProfilePage() {
                                         type={'text'}
                                         placeholder={'Логин'}
                                         onChange={e => console.log(e.target.value)}
-                                        value={''}
+                                        value={user.email}
                                         name={'login'}
                                         icon={'EditIcon'}
                                     />
