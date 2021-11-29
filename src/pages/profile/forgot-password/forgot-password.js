@@ -1,10 +1,40 @@
 import AppHeader, {MENU_ITEM_PROFILE} from "../../../components/app-header/app-header";
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link} from "react-router-dom";
-import {makeLinkUrl, PATH_LOGIN} from "../../../components/app/app";
+import {Link, useNavigate} from "react-router-dom";
+import {makeLinkUrl, PATH_LOGIN, PATH_RESET_PASSWORD} from "../../../components/app/app";
+import {useCallback, useState} from "react";
+import {postPasswordReset} from "../../../services/API/password-reset";
 
 function ForgotPasswordPage() {
+    let navigate = useNavigate();
+    
+    const [form, setValue] = useState({
+        email: ''
+    });
+
+    const onChange = e => {
+        setValue({...form, [e.target.name]: e.target.value});
+    };
+
+    const resetPassword = useCallback(
+        e => {
+            e.preventDefault();
+            let result = false;
+            postPasswordReset(form).then(res => {
+                result = res
+            }).then(() => {
+                if (result.success) {
+                    navigate(makeLinkUrl(PATH_RESET_PASSWORD));
+                    alert('На указанную почту выслано письмо с инструкциями по восстановлению пароля');
+                } else {
+                    alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже');
+                }
+            });
+        },
+        [navigate, form]
+    );
+
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
@@ -17,13 +47,13 @@ function ForgotPasswordPage() {
                                 <Input
                                     type={'text'}
                                     placeholder={'E-mail'}
-                                    onChange={e => console.log(e.target.value)}
-                                    value={''}
+                                    onChange={onChange}
                                     name={'email'}
+                                    value={form.email}
                                 />
                             </div>
                             <div className={'mt-6'}>
-                                <Button type="primary" size="medium">
+                                <Button type="primary" size="medium" onClick={resetPassword}>
                                     Восстановить
                                 </Button>
                             </div>

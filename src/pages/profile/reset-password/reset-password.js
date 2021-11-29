@@ -1,10 +1,40 @@
 import AppHeader, {MENU_ITEM_PROFILE} from "../../../components/app-header/app-header";
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link} from "react-router-dom";
-import {makeLinkUrl, PATH_LOGIN} from "../../../components/app/app";
+import {Link, useNavigate} from "react-router-dom";
+import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
+import {useCallback, useState} from "react";
+import {postPasswordResetReset} from "../../../services/API/password-reset";
 
 function ResetPasswordPage() {
+    let navigate = useNavigate();
+    const [form, setValue] = useState({
+        password: '',
+        token: ''
+    });
+
+    const onChange = e => {
+        setValue({...form, [e.target.name]: e.target.value});
+    };
+
+    const resetPassword = useCallback(
+        e => {
+            e.preventDefault();
+            let result = false;
+            postPasswordResetReset(form).then(res => {
+                result = res
+            }).then(() => {
+                if (result.success) {
+                    navigate(makeLinkUrl(PATH_PROFILE));
+                    alert('Пароль успешно изменён');
+                } else {
+                    alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже');
+                }
+            });
+        },
+        [navigate, form]
+    );
+
     return (
         <>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
@@ -17,9 +47,9 @@ function ResetPasswordPage() {
                                 <Input
                                     type={'text'}
                                     placeholder={'Введите новый пароль'}
-                                    onChange={e => console.log(e.target.value)}
-                                    value={''}
-                                    name={'newPassword'}
+                                    onChange={onChange}
+                                    value={form.password}
+                                    name={'password'}
                                     icon={'HideIcon'}
                                 />
                             </div>
@@ -27,13 +57,13 @@ function ResetPasswordPage() {
                                 <Input
                                     type={'text'}
                                     placeholder={'Введите код из письма'}
-                                    onChange={e => console.log(e.target.value)}
-                                    value={''}
-                                    name={'code'}
+                                    onChange={onChange}
+                                    value={form.token}
+                                    name={'token'}
                                 />
                             </div>
                             <div className={'mt-6'}>
-                                <Button type="primary" size="medium">
+                                <Button type="primary" size="medium" onClick={resetPassword}>
                                     Сохранить
                                 </Button>
                             </div>
