@@ -31,6 +31,10 @@ function filterByType(ingredients, type) {
 }
 
 function BurgerIngredients() {
+    const {ingredientInfo} = useSelector(store => ({
+        ingredientInfo: store.modalReducer.ingredientInfo
+    }))
+    
     const dispatch = useDispatch();
 
     const closeModal = () => {
@@ -49,7 +53,7 @@ function BurgerIngredients() {
     return (
         <section className={style.ingredientsSection}>
             {isVisibleIngredient && <Modal closeModal={closeModal}>
-                <IngredientDetails/>
+                <IngredientDetails ingredientInfo={ingredientInfo}/>
             </Modal>}
             <h2 className={`${style.title} text_type_main-large`}>соберите бургер</h2>
             {tabs()}

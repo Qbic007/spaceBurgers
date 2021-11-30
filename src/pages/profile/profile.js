@@ -23,11 +23,6 @@ function ProfilePage() {
         password: ""
     });
 
-    const refreshToken = async () => {
-        let result = false;
-
-    }
-
     useEffect(
         () => {
             let result = false;
@@ -56,7 +51,6 @@ function ProfilePage() {
                                 password: ""
                             });
                         } else if (result.message === MESSAGE_TOKEN_EXPIRED) {
-                            refreshToken();
                             getUser(localStorage.getItem(ACCESS_TOKEN_ITEM_KEY)).then(res => {
                                 result = res
                             }).then(() => {

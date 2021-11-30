@@ -28,6 +28,7 @@ function Item(props) {
             ingredientInfo: {
                 title: 'Детали ингредиента',
                 image: ingredient.image,
+                image_large: ingredient.image_large,
                 name: ingredient.name,
                 calories: ingredient.calories,
                 proteins: ingredient.proteins,
