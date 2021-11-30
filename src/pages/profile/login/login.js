@@ -8,7 +8,6 @@ import {useCallback, useState} from "react";
 import {LOGIN} from "../../../services/actions/auth";
 import {showErrorMessage} from "../../../services/API/base-request";
 import {postLogin} from "../../../services/API/auth/login";
-import {REFRESH_TOKEN_ITEM_KEY} from "../../../services/reducers/auth";
 import {ProtectedPageAuth} from "../../protected/protected-page-auth";
 
 function LoginPage() {
@@ -37,17 +36,14 @@ function LoginPage() {
                         accessToken: result["accessToken"],
                         refreshToken: result["refreshToken"],
                     });
+                    navigate(makeLinkUrl(PATH_CONSTRUCTOR));
                 } else {
                     showErrorMessage(result);
                 }
             });
         },
-        [dispatch, form]
+        [navigate, dispatch, form]
     );
-
-    if (localStorage.getItem(REFRESH_TOKEN_ITEM_KEY) !== null) {
-        navigate(makeLinkUrl(PATH_CONSTRUCTOR));
-    }
 
     return (
         <ProtectedPageAuth>

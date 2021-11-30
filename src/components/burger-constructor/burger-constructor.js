@@ -8,10 +8,14 @@ import {CLOSE_MODAL, SHOW_MODAL} from '../../services/actions/modal';
 import {modalOrder} from "../../services/reducers/modal";
 import {ADD_INGREDIENT, orderConfirmation} from "../../services/actions/constructor";
 import {useDrop} from "react-dnd";
-import {DRAGGABLE_TYPE_ADD_INGREDIENT} from "../app/app";
+import {DRAGGABLE_TYPE_ADD_INGREDIENT, makeLinkUrl} from "../app/app";
 import Modal from "../modal/modal";
+import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
+import {useNavigate} from "react-router-dom";
+import {LOGIN} from "../../services/actions/auth";
 
 function BurgerConstructor() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const closeModal = () => {
@@ -48,11 +52,15 @@ function BurgerConstructor() {
     }
 
     const offerConfirmation = () => {
-        dispatch(orderConfirmation(getIngredientIds(bun, ingredients)));
-        dispatch({
-            type: SHOW_MODAL,
-            modalType: modalOrder
-        });
+        if (localStorage.getItem(REFRESH_TOKEN_ITEM_KEY) !== null) {
+            dispatch(orderConfirmation(getIngredientIds(bun, ingredients)));
+            dispatch({
+                type: SHOW_MODAL,
+                modalType: modalOrder
+            });
+        } else {
+            navigate(makeLinkUrl(LOGIN));
+        }
     }
 
     const countPrice = (bun, ingredients) => {
