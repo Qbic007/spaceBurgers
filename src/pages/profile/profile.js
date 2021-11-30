@@ -5,11 +5,12 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../components/app/app";
 import {useDispatch} from "react-redux";
 import {useCallback, useEffect, useState} from "react";
-import {LOG_OUT} from "../../services/actions/auth";
+import {LOG_OUT, LOGIN} from "../../services/actions/auth";
 import {postLogOut} from "../../services/API/auth/logout";
-import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
-import {showErrorMessage} from "../../services/API/base-request";
+import {ACCESS_TOKEN_ITEM_KEY, REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
+import {consoleErrorMessage, showErrorMessage} from "../../services/API/base-request";
 import {getUser} from "../../services/API/auth/user";
+import {MESSAGE_TOKEN_EXPIRED, postToken} from "../../services/API/auth/token";
 
 function ProfilePage() {
     let navigate = useNavigate();
@@ -22,23 +23,60 @@ function ProfilePage() {
         password: ""
     });
 
+    const refreshToken = async () => {
+        let result = false;
+
+    }
+
     useEffect(
         () => {
             let result = false;
-            getUser({token: localStorage.getItem(REFRESH_TOKEN_ITEM_KEY)}).then(res => {
+            postToken().then(res => {
                 result = res
             }).then(() => {
                 if (result.success) {
-                    setValue({
-                        email: result["user"]["email"],
-                        name: result["user"]["name"],
-                        password: ""
+                    dispatch({
+                        type: LOGIN,
+                        accessToken: result["accessToken"],
+                        refreshToken: result["refreshToken"],
                     });
                 } else {
-                    showErrorMessage(result);
+                    consoleErrorMessage(result);
+                    dispatch({type: LOG_OUT});
+                    navigate(makeLinkUrl(PATH_LOGIN));
                 }
-            });
-        }, [setValue]
+            }).then(() => {
+                    getUser(localStorage.getItem(ACCESS_TOKEN_ITEM_KEY)).then(res => {
+                        result = res
+                    }).then(() => {
+                        if (result.success) {
+                            setValue({
+                                email: result["user"]["email"],
+                                name: result["user"]["name"],
+                                password: ""
+                            });
+                        } else if (result.message === MESSAGE_TOKEN_EXPIRED) {
+                            refreshToken();
+                            getUser(localStorage.getItem(ACCESS_TOKEN_ITEM_KEY)).then(res => {
+                                result = res
+                            }).then(() => {
+                                if (result.success) {
+                                    setValue({
+                                        email: result["user"]["email"],
+                                        name: result["user"]["name"],
+                                        password: ""
+                                    });
+                                } else {
+                                    consoleErrorMessage(result);
+                                }
+                            });
+                        } else {
+                            consoleErrorMessage(result);
+                        }
+                    })
+                }
+            );
+        }, [dispatch, navigate, setValue]
     );
 
     const onChange = e => {
@@ -55,16 +93,14 @@ function ProfilePage() {
                 result = res
             }).then(() => {
                 if (result.success) {
-                    dispatch({
-                        type: LOG_OUT
-                    });
+                    dispatch({type: LOG_OUT});
                     navigate(makeLinkUrl(PATH_LOGIN));
                 } else {
                     showErrorMessage(result)
                 }
             });
         },
-        [dispatch]
+        [navigate, dispatch]
     );
 
     return (

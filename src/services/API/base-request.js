@@ -1,3 +1,5 @@
+const ERROR_MESSAGE = 'Произошла ошибка! Попробуйте позже';
+
 export const baseRequest = async (method, url, form) => {
     let result = false;
 
@@ -19,5 +21,13 @@ export const baseRequest = async (method, url, form) => {
 }
 
 export const showErrorMessage = (result) => {
-    alert(result.message ? result.message : 'Произошла ошибка! Попробуйте позже')
+    alert(result.message ? result.message : ERROR_MESSAGE)
+}
+
+export const consoleErrorMessage = (result) => {
+    if (result.message) {
+        console.warn(result.message);
+    } else {
+        console.error(ERROR_MESSAGE);
+    }
 }

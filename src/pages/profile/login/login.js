@@ -3,17 +3,14 @@ import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
 import {makeLinkUrl, PATH_CONSTRUCTOR, PATH_FORGOT_PASSWORD, PATH_REGISTER} from "../../../components/app/app";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useCallback, useState} from "react";
 import {LOGIN} from "../../../services/actions/auth";
 import {showErrorMessage} from "../../../services/API/base-request";
 import {postLogin} from "../../../services/API/auth/login";
+import {REFRESH_TOKEN_ITEM_KEY} from "../../../services/reducers/auth";
 
 function LoginPage() {
-    const {user} = useSelector(store => ({
-        user: store.authReducer.user
-    }));
-
     const dispatch = useDispatch();
 
     const [form, setValue] = useState({
@@ -35,10 +32,6 @@ function LoginPage() {
                 if (result.success) {
                     dispatch({
                         type: LOGIN,
-                        user: {
-                            email: result["user"]["email"],
-                            name: result["user"]["name"]
-                        },
                         accessToken: result["accessToken"],
                         refreshToken: result["refreshToken"],
                     });
@@ -50,7 +43,7 @@ function LoginPage() {
         [dispatch, form]
     );
 
-    if (user.email.length > 0) {
+    if (localStorage.getItem(REFRESH_TOKEN_ITEM_KEY)) {
         return (
             <Navigate to={makeLinkUrl(PATH_CONSTRUCTOR)}/>
         );
