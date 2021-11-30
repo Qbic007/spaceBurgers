@@ -4,7 +4,7 @@ import {useEffect} from "react";
 import {getIngredients} from "../../services/actions/ingredients";
 import {useParams} from "react-router-dom";
 import AppHeader, {MENU_ITEM_CONSTRUCTOR} from "../../components/app-header/app-header";
-import style from "../constructor/constructor.module.css";
+import style from "./ingredient.module.css";
 
 function IngredientPage() {
     const {id} = useParams();

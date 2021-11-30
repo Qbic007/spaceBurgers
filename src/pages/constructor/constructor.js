@@ -19,7 +19,7 @@ function ConstructorPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (ingredients.length !== 0) {
+        if (ingredients.length === 0) {
             dispatch(getIngredients());
         }
     }, [ingredients.length, dispatch]);
