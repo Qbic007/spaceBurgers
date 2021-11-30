@@ -1,7 +1,7 @@
 import AppHeader, {MENU_ITEM_PROFILE} from "../../../components/app-header/app-header";
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_CONSTRUCTOR, PATH_FORGOT_PASSWORD, PATH_REGISTER} from "../../../components/app/app";
 import {useDispatch} from "react-redux";
 import {useCallback, useState} from "react";
@@ -9,8 +9,10 @@ import {LOGIN} from "../../../services/actions/auth";
 import {showErrorMessage} from "../../../services/API/base-request";
 import {postLogin} from "../../../services/API/auth/login";
 import {REFRESH_TOKEN_ITEM_KEY} from "../../../services/reducers/auth";
+import {ProtectedPageAuth} from "../../protected/protected-page-auth";
 
 function LoginPage() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [form, setValue] = useState({
@@ -43,14 +45,12 @@ function LoginPage() {
         [dispatch, form]
     );
 
-    if (localStorage.getItem(REFRESH_TOKEN_ITEM_KEY)) {
-        return (
-            <Navigate to={makeLinkUrl(PATH_CONSTRUCTOR)}/>
-        );
+    if (localStorage.getItem(REFRESH_TOKEN_ITEM_KEY) !== null) {
+        navigate(makeLinkUrl(PATH_CONSTRUCTOR));
     }
 
     return (
-        <>
+        <ProtectedPageAuth>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
             <main className={`${style.formMain} text_type_main-medium`}>
                 <div className={style.wrapper}>
@@ -97,7 +97,7 @@ function LoginPage() {
                     </section>
                 </div>
             </main>
-        </>
+        </ProtectedPageAuth>
     );
 }
 

@@ -6,6 +6,7 @@ import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app
 import {useCallback, useState} from "react";
 import {postPasswordResetReset} from "../../../services/API/password-reset";
 import {showErrorMessage} from "../../../services/API/base-request";
+import {ProtectedPageAuth} from "../../protected/protected-page-auth";
 
 function ResetPasswordPage() {
     let navigate = useNavigate();
@@ -37,7 +38,7 @@ function ResetPasswordPage() {
     );
 
     return (
-        <>
+        <ProtectedPageAuth>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
             <main className={`${style.formMain} text_type_main-medium`}>
                 <div className={style.wrapper}>
@@ -76,7 +77,7 @@ function ResetPasswordPage() {
                     </section>
                 </div>
             </main>
-        </>
+        </ProtectedPageAuth>
     );
 }
 

@@ -11,6 +11,7 @@ import {ACCESS_TOKEN_ITEM_KEY, REFRESH_TOKEN_ITEM_KEY} from "../../services/redu
 import {consoleErrorMessage, showErrorMessage} from "../../services/API/base-request";
 import {getUser} from "../../services/API/auth/user";
 import {MESSAGE_TOKEN_EXPIRED, postToken} from "../../services/API/auth/token";
+import {ProtectedPageNoAuth} from "../protected/protected-page-no-auth";
 
 function ProfilePage() {
     let navigate = useNavigate();
@@ -98,7 +99,7 @@ function ProfilePage() {
     );
 
     return (
-        <>
+        <ProtectedPageNoAuth>
             <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
             <main className={`${style.formMain} text_type_main-medium`}>
                 <div className={style.wrapper}>
@@ -154,7 +155,7 @@ function ProfilePage() {
                     </div>
                 </div>
             </main>
-        </>
+        </ProtectedPageNoAuth>
     );
 }
 

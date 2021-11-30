@@ -8,6 +8,7 @@ import ForgotPasswordPage from "../../pages/profile/forgot-password/forgot-passw
 import ResetPasswordPage from "../../pages/profile/reset-password/reset-password";
 import ProfilePage from "../../pages/profile/profile";
 import IngredientPage from "../../pages/ingredient/ingredient";
+import {ProtectedRoute} from "../../pages/protected/protected-page-no-auth";
 
 export const DRAGGABLE_TYPE_ADD_INGREDIENT = 'addIngredient';
 export const DRAGGABLE_TYPE_MOVE_INGREDIENT = 'moveIngredient';
@@ -39,12 +40,12 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path={PATH_CONSTRUCTOR} element={<ConstructorPage/>}/>
+                <Route path={makeIngredientLinkUrl(PATH_ID)} element={<IngredientPage/>}/>
                 <Route path={PATH_LOGIN} element={<LoginPage/>}/>
                 <Route path={PATH_REGISTER} element={<RegisterPage/>}/>
                 <Route path={PATH_FORGOT_PASSWORD} element={<ForgotPasswordPage/>}/>
                 <Route path={PATH_RESET_PASSWORD} element={<ResetPasswordPage/>}/>
                 <Route path={PATH_PROFILE} element={<ProfilePage/>}/>
-                <Route path={makeIngredientLinkUrl(PATH_ID)} element={<IngredientPage/>}/>
                 <Route path={makeOrdersLinkUrl()} element={<NotFound404Page/>}/>
                 <Route path={makeOrderLinkUrl(PATH_ID)} element={<NotFound404Page/>}/>
                 <Route path={PATH_NOT_FOUND_404} element={<NotFound404Page/>}/>
