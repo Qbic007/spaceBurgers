@@ -1,13 +1,15 @@
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
-import {makeLinkUrl, PATH_CONSTRUCTOR, PATH_FORGOT_PASSWORD, PATH_REGISTER} from "../../../components/app/app";
+import {makeLinkUrl, PATH_FORGOT_PASSWORD, PATH_REGISTER} from "../../../components/app/app";
 import {useDispatch} from "react-redux";
 import {useCallback, useState} from "react";
 import {LOGIN} from "../../../services/actions/auth";
 import {showErrorMessage} from "../../../services/API/base-request";
 import {postLogin} from "../../../services/API/auth/login";
 import {ProtectedPageAuth} from "../../protected/protected-page-auth";
+
+const PREVIOUS_PAGE = -1;
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -35,7 +37,7 @@ function LoginPage() {
                         accessToken: result["accessToken"],
                         refreshToken: result["refreshToken"],
                     });
-                    navigate(makeLinkUrl(PATH_CONSTRUCTOR));
+                    navigate(PREVIOUS_PAGE);
                 } else {
                     showErrorMessage(result);
                 }
