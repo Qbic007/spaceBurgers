@@ -21,7 +21,6 @@ function IngredientPage() {
     }, [ingredients.length, dispatch]);
 
     const ingredient = ingredients.find((element) => {
-        console.log(element);
         return element._id === id
     });
 

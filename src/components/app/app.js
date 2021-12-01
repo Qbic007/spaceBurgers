@@ -9,6 +9,7 @@ import ResetPasswordPage from "../../pages/profile/reset-password/reset-password
 import ProfilePage from "../../pages/profile/profile";
 import IngredientPage from "../../pages/ingredient/ingredient";
 import AppHeader from "../app-header/app-header";
+import {useSelector} from "react-redux";
 
 export const DRAGGABLE_TYPE_ADD_INGREDIENT = 'addIngredient';
 export const DRAGGABLE_TYPE_MOVE_INGREDIENT = 'moveIngredient';
@@ -36,13 +37,18 @@ export const makeOrderLinkUrl = (id) => makeLinkUrl([makeOrdersLinkUrl(), id]);
 export const makeIngredientLinkUrl = (id) => makeLinkUrl([PATH_INGREDIENTS, id]);
 
 function App() {
+    const {isVisibleIngredient} = useSelector(store => ({
+        isVisibleIngredient: store.modalReducer.isVisibleIngredient
+    }))
+    
     return (
         <>
             <BrowserRouter>
                 <AppHeader/>
                 <Routes>
                     <Route path={PATH_CONSTRUCTOR} element={<ConstructorPage/>}/>
-                    <Route path={makeIngredientLinkUrl(PATH_ID)} element={<IngredientPage/>}/>
+                    <Route path={makeIngredientLinkUrl(PATH_ID)}
+                           element={isVisibleIngredient ? <ConstructorPage/> : <IngredientPage/>}/>
                     <Route path={PATH_LOGIN} element={<LoginPage/>}/>
                     <Route path={PATH_REGISTER} element={<RegisterPage/>}/>
                     <Route path={PATH_FORGOT_PASSWORD} element={<ForgotPasswordPage/>}/>

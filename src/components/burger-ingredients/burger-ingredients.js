@@ -7,16 +7,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {typeBun, typeMain, typeSauce} from "../../services/reducers/ingredients";
 import Modal from "../modal/modal";
 import {CLOSE_MODAL} from "../../services/actions/modal";
+import {useNavigate} from "react-router-dom";
+import {makeLinkUrl, PATH_CONSTRUCTOR} from "../app/app";
 
 function BurgerIngredients() {
+    const navigate = useNavigate();
+
     function tabs() {
         return (
             <div className={style.tabs}>
-                <a href={'#3'}>
-                    <Tab value="one" active={0} onClick='one'>
-                        Булки
-                    </Tab>
-                </a>
+                <Tab value="one" active={0} onClick='one'>
+                    Булки
+                </Tab>
                 <Tab value="two" active={0} onClick='two'>
                     Соусы
                 </Tab>
@@ -41,6 +43,7 @@ function BurgerIngredients() {
 
     const closeModal = () => {
         dispatch({type: CLOSE_MODAL});
+        navigate(makeLinkUrl(PATH_CONSTRUCTOR));
     }
 
     const {isVisibleIngredient} = useSelector(store => ({
@@ -62,9 +65,9 @@ function BurgerIngredients() {
             {ingredientsFailed
                 ? <span className={'text text_type_main-default'}>Извините, что-то пошло не так :-(</span>
                 : <section id={'scrollArea'} className={style.container}>
-                    <Section id={1} title={'Булки'} items={filterByType(ingredients, typeBun)}/>
-                    <Section id={2} title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>
-                    <Section id={3} title={'Начинки'} items={filterByType(ingredients, typeMain)}/>
+                    <Section title={'Булки'} items={filterByType(ingredients, typeBun)}/>
+                    <Section title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>
+                    <Section title={'Начинки'} items={filterByType(ingredients, typeMain)}/>
                 </section>}
         </section>
     );

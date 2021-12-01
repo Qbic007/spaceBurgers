@@ -6,7 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {SHOW_MODAL} from "../../../../services/actions/modal";
 import {modalIngredient} from "../../../../services/reducers/modal";
 import {useDrag} from "react-dnd";
-import {DRAGGABLE_TYPE_ADD_INGREDIENT} from "../../../app/app";
+import {DRAGGABLE_TYPE_ADD_INGREDIENT, makeLinkUrl, PATH_INGREDIENTS} from "../../../app/app";
+import {Link} from "react-router-dom";
 
 function Item(props) {
     const ingredient = props.ingredient;
@@ -60,22 +61,25 @@ function Item(props) {
     const quantity = getQuantityByIngredientId(ingredient._id);
 
     return (
-        <section
-            ref={dragRef}
-            className={`${style.itemContainer} ${isDrag && style.semiHidden}`}
-            onClick={showModal}>
-            {quantity ? <span className={`${style.quantity} text text_type_digits-default`}>                
+        <Link className={`${style.itemContainer} ${isDrag && style.semiHidden}`}
+              key={ingredient._id}
+              to={makeLinkUrl([PATH_INGREDIENTS, ingredient._id])}>
+            <section
+                ref={dragRef}
+                onClick={showModal}>
+                {quantity ? <span className={`${style.quantity} text text_type_digits-default`}>                
                 {quantity}          
             </span> : null}
-            <img className={style.image} src={ingredient.image} alt={ingredient.alt}/>
-            <div className={style.price}>
+                <img className={style.image} src={ingredient.image} alt={ingredient.alt}/>
+                <div className={style.price}>
                         <span className={"text text_type_digits-default mr-2"}>
                             {ingredient.price}
                         </span>
-                <CurrencyIcon type={'primary'}/>
-            </div>
-            <span className={`${style.title} text text_typeMain-default mt-1`}>{ingredient.name}</span>
-        </section>
+                    <CurrencyIcon type={'primary'}/>
+                </div>
+                <span className={`${style.title} text text_typeMain-default mt-1`}>{ingredient.name}</span>
+            </section>
+        </Link>
     );
 }
 
