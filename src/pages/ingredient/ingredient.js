@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getIngredients} from "../../services/actions/ingredients";
 import {useParams} from "react-router-dom";
-import AppHeader, {MENU_ITEM_CONSTRUCTOR} from "../../components/app-header/app-header";
 import style from "./ingredient.module.css";
 
 function IngredientPage() {
@@ -34,7 +33,6 @@ function IngredientPage() {
 
     return (
         <>
-            <AppHeader activeMenuItem={MENU_ITEM_CONSTRUCTOR}/>
             <main>
                 <div className={style.wrapper}>
                     <section className={style.ingredientContainer}>

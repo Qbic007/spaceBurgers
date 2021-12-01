@@ -1,7 +1,6 @@
-import AppHeader, {MENU_ITEM_PROFILE} from "../../../components/app-header/app-header";
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_CONSTRUCTOR, PATH_LOGIN} from "../../../components/app/app";
 import {useCallback, useState} from "react";
 import {postRegistration} from "../../../services/API/auth/registration";
@@ -52,7 +51,6 @@ function RegisterPage() {
 
     return (
         <ProtectedPageAuth>
-            <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
             <main className={`${style.formMain} text_type_main-medium`}>
                 <div className={style.wrapper}>
                     <section className={style.profileFormContainer}>

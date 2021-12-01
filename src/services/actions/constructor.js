@@ -35,7 +35,7 @@ export function orderConfirmation(ingredients = []) {
                     type: GET_ORDER_FAILED
                 });
             }
-        }).catch((e) => {
+        }).catch(() => {
             dispatch({
                 type: GET_ORDER_FAILED
             });

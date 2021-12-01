@@ -16,7 +16,6 @@ export const getUser = async token => {
                 'Authorization': token
             }
         }).then((res) => res.json()).then(res => {
-        console.log(result);
         result = res;
     }).catch(() => {
         console.log('brr');

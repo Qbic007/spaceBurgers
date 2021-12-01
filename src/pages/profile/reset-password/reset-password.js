@@ -1,4 +1,3 @@
-import AppHeader, {MENU_ITEM_PROFILE} from "../../../components/app-header/app-header";
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
@@ -39,7 +38,6 @@ function ResetPasswordPage() {
 
     return (
         <ProtectedPageAuth>
-            <AppHeader activeMenuItem={MENU_ITEM_PROFILE}/>
             <main className={`${style.formMain} text_type_main-medium`}>
                 <div className={style.wrapper}>
                     <section className={style.profileFormContainer}>
