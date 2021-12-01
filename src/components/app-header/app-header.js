@@ -12,7 +12,7 @@ import {
     PATH_REGISTER,
     PATH_RESET_PASSWORD
 } from "../app/app";
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 export const MENU_ITEM_CONSTRUCTOR = 0;
 export const MENU_ITEM_ORDERS = 1;
@@ -54,9 +54,9 @@ function AppHeader() {
                         </li>
                     </ul>
                 </div>
-                <div className={style.menuBlockLogo}>
+                <Link to={makeLinkUrl(PATH_CONSTRUCTOR)} className={style.menuBlockLogo}>
                     <Logo/>
-                </div>
+                </Link>
                 <div className={style.menuBlockProfile}>
                     <MenuItem text={'личный кабинет'}
                               icon='profile'
