@@ -1,5 +1,5 @@
 import style from "./profile.module.css";
-import {Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {NavLink, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../components/app/app";
 import {useDispatch} from "react-redux";
@@ -8,11 +8,14 @@ import {LOG_OUT, LOGIN} from "../../services/actions/auth";
 import {postLogOut} from "../../services/API/auth/logout";
 import {ACCESS_TOKEN_ITEM_KEY, REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
 import {consoleErrorMessage, showErrorMessage} from "../../services/API/base-request";
-import {getUser} from "../../services/API/auth/user";
+import {getUser, patchUser} from "../../services/API/auth/user";
 import {MESSAGE_TOKEN_EXPIRED, postToken} from "../../services/API/auth/token";
 import {ProtectedPageNoAuth} from "../protected/protected-page-no-auth";
+import {postLogin} from "../../services/API/auth/login";
 
 function ProfilePage() {
+    const [showEdit, setShowEdit] = useState(false);
+
     let navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -75,6 +78,7 @@ function ProfilePage() {
 
     const onChange = e => {
         setValue({...form, [e.target.name]: e.target.value});
+        setShowEdit(true);
     };
 
     const logOut = useCallback(
@@ -96,6 +100,28 @@ function ProfilePage() {
         },
         [navigate, dispatch]
     );
+    
+    const editProfile = useCallback(
+        e => {
+            e.preventDefault();
+            let result = false;
+            patchUser(form, localStorage.getItem(ACCESS_TOKEN_ITEM_KEY)).then(res => {
+                result = res
+            }).then(() => {
+                if (result.success) {
+                    setValue({
+                        email: result["user"]["email"],
+                        name: result["user"]["name"],
+                        password: ""
+                    });
+                    alert('Данные успешно обновлены');
+                } else {
+                    showErrorMessage(result);
+                }
+            });
+        },
+        [navigate, dispatch, form]
+    );
 
     return (
         <ProtectedPageNoAuth>
@@ -115,7 +141,7 @@ function ProfilePage() {
                             </span>
                         </section>
                         <section className={`${style.profileFormContainer} ${style.fullWidth}`}>
-                            <form className={style.profileForm}>
+                            <form className={style.profileForm} onSubmit={editProfile}>
                                 <div className={'mt-6'}>
                                     <Input
                                         type={'text'}
@@ -140,12 +166,17 @@ function ProfilePage() {
                                     <Input
                                         type={'text'}
                                         placeholder={'Пароль'}
-                                        onChange={e => console.log(e.target.value)}
-                                        value={''}
+                                        onChange={onChange}
+                                        value={form.password}
                                         name={'password'}
                                         icon={'EditIcon'}
                                     />
                                 </div>
+                                {showEdit && <div className={'mt-6 right-content'}>
+                                    <Button type="primary" size="medium">
+                                        Сохранить
+                                    </Button>
+                                </div>}
                             </form>
                         </section>
                         <section className={style.fullWidth}>

@@ -1,5 +1,4 @@
 import {API_BASE_URL} from "../../actions/root";
-import {baseRequest} from "../base-request";
 
 const USER_URL = API_BASE_URL + 'auth/user';
 
@@ -18,13 +17,27 @@ export const getUser = async token => {
         }).then((res) => res.json()).then(res => {
         result = res;
     }).catch(() => {
-        console.log('brr');
         result = false
     });
 
     return result;
 }
 
-export const patchUser = async form => {
-    return baseRequest(METHOD_PATCH, USER_URL, form);
+export const patchUser = async (form, token) => {
+    let result = false;
+
+    await fetch(USER_URL,
+        {
+            method: METHOD_PATCH,
+            headers: {
+                'Authorization': token
+            },
+            body: JSON.stringify(form)
+        }).then((res) => res.json()).then(res => {
+        result = res;
+    }).catch(() => {
+        result = false
+    });
+
+    return result;
 }

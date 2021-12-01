@@ -44,6 +44,13 @@ li {
     align-items: center;
 }
 
+.right-content {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .active {
     color: #F2F2F3;
 }
