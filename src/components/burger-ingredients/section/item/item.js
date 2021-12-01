@@ -82,5 +82,5 @@ function Item(props) {
 export default Item;
 
 Item.propTypes = {
-    ingredient: PropTypes.object
+    ingredient: PropTypes.object.isRequired
 };

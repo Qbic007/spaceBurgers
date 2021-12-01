@@ -30,12 +30,5 @@ function IngredientDetails(props) {
 export default IngredientDetails;
 
 IngredientDetails.propTypes = {
-    closeCallback: PropTypes.func,
-    title: PropTypes.string,
-    image: PropTypes.string,
-    name: PropTypes.string,
-    calories: PropTypes.number,
-    proteins: PropTypes.number,
-    fat: PropTypes.number,
-    carbohydrates: PropTypes.number,
+    ingredientInfo: PropTypes.object.isRequired
 };

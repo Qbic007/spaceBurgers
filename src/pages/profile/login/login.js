@@ -52,7 +52,7 @@ function LoginPage() {
                 <div className={style.wrapper}>
                     <section className={style.profileFormContainer}>
                         <span className={'mt-30'}>Вход</span>
-                        <form className={style.profileForm}>
+                        <form className={style.profileForm} onSubmit={login}>
                             <div className={'mt-6'}>
                                 <Input
                                     type={'text'}
@@ -73,7 +73,7 @@ function LoginPage() {
                                 />
                             </div>
                             <div className={'mt-6'}>
-                                <Button type="primary" size="medium" onClick={login}>
+                                <Button type="primary" size="medium">
                                     Войти
                                 </Button>
                             </div>

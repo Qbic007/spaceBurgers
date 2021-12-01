@@ -8,33 +8,35 @@ import {typeBun, typeMain, typeSauce} from "../../services/reducers/ingredients"
 import Modal from "../modal/modal";
 import {CLOSE_MODAL} from "../../services/actions/modal";
 
-function tabs() {
-    return (
-        <div className={style.tabs}>
-            <Tab value="one" active={0} onClick='one'>
-                Булки
-            </Tab>
-            <Tab value="two" active={0} onClick='two'>
-                Соусы
-            </Tab>
-            <Tab value="three" active={1} onClick='three'>
-                Начинки
-            </Tab>
-        </div>
-    )
-}
-
-function filterByType(ingredients, type) {
-    return ingredients.filter(function (object) {
-        return object.type === type;
-    });
-}
-
 function BurgerIngredients() {
+    function tabs() {
+        return (
+            <div className={style.tabs}>
+                <a href={'#3'}>
+                    <Tab value="one" active={0} onClick='one'>
+                        Булки
+                    </Tab>
+                </a>
+                <Tab value="two" active={0} onClick='two'>
+                    Соусы
+                </Tab>
+                <Tab value="three" active={1} onClick='three'>
+                    Начинки
+                </Tab>
+            </div>
+        )
+    }
+
+    function filterByType(ingredients, type) {
+        return ingredients.filter(function (object) {
+            return object.type === type;
+        });
+    }
+
     const {ingredientInfo} = useSelector(store => ({
         ingredientInfo: store.modalReducer.ingredientInfo
     }))
-    
+
     const dispatch = useDispatch();
 
     const closeModal = () => {
@@ -59,10 +61,10 @@ function BurgerIngredients() {
             {tabs()}
             {ingredientsFailed
                 ? <span className={'text text_type_main-default'}>Извините, что-то пошло не так :-(</span>
-                : <section className={style.container}>
-                    <Section title={'Булки'} items={filterByType(ingredients, typeBun)}/>
-                    <Section title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>
-                    <Section title={'Начинки'} items={filterByType(ingredients, typeMain)}/>
+                : <section id={'scrollArea'} className={style.container}>
+                    <Section id={1} title={'Булки'} items={filterByType(ingredients, typeBun)}/>
+                    <Section id={2} title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>
+                    <Section id={3} title={'Начинки'} items={filterByType(ingredients, typeMain)}/>
                 </section>}
         </section>
     );
