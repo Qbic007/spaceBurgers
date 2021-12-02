@@ -9,8 +9,9 @@ import {ProtectedPageAuth} from "../../protected/protected-page-auth";
 import {useSelector} from "react-redux";
 
 function ResetPasswordPage() {
-    const {prevLocationPath} = useSelector(store => ({
-        prevLocationPath: store.locationReducer.prevLocationPath
+    const {prevLocationPath, currentLocationPath} = useSelector(store => ({
+        prevLocationPath: store.locationReducer.prevLocationPath,
+        currentLocationPath: store.locationReducer.currentLocationPath,
     }));
 
     const navigate = useNavigate();
@@ -44,7 +45,10 @@ function ResetPasswordPage() {
 
     useEffect(
         () => {
-            if (prevLocationPath !== makeLinkUrl(PATH_FORGOT_PASSWORD)) {
+            console.log(prevLocationPath);
+            console.log(makeLinkUrl(PATH_FORGOT_PASSWORD));
+            if (prevLocationPath !== makeLinkUrl(PATH_FORGOT_PASSWORD)
+                && currentLocationPath !== makeLinkUrl(PATH_FORGOT_PASSWORD)) {
                 navigate(makeLinkUrl(PATH_FORGOT_PASSWORD));
             }
         }, [prevLocationPath, navigate]
