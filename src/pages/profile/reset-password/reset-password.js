@@ -2,7 +2,7 @@ import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_FORGOT_PASSWORD, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {postPasswordResetReset} from "../../../services/API/password-reset";
 import {showErrorMessage} from "../../../services/API/base-request";
 import {ProtectedPageAuth} from "../../protected/protected-page-auth";
@@ -12,9 +12,9 @@ function ResetPasswordPage() {
     const {prevLocationPath} = useSelector(store => ({
         prevLocationPath: store.locationReducer.prevLocationPath
     }));
-    
+
     const navigate = useNavigate();
-    
+
     const [form, setValue] = useState({
         password: '',
         token: ''
@@ -41,10 +41,14 @@ function ResetPasswordPage() {
         },
         [navigate, form]
     );
-    
-    if (prevLocationPath !== makeLinkUrl(PATH_FORGOT_PASSWORD)) {
-        navigate(makeLinkUrl(PATH_FORGOT_PASSWORD));
-    }
+
+    useEffect(
+        () => {
+            if (prevLocationPath !== makeLinkUrl(PATH_FORGOT_PASSWORD)) {
+                navigate(makeLinkUrl(PATH_FORGOT_PASSWORD));
+            }
+        }, [prevLocationPath, navigate]
+    );
 
     return (
         <ProtectedPageAuth>
