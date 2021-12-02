@@ -55,7 +55,7 @@ function RegisterPage() {
                 <div className={style.wrapper}>
                     <section className={style.profileFormContainer}>
                         <span className={'mt-30'}>Регистрация</span>
-                        <form className={style.profileForm} onClick={register}>
+                        <form className={style.profileForm} onSubmit={register}>
                             <div className={'mt-6'}>
                                 <Input
                                     type={'text'}

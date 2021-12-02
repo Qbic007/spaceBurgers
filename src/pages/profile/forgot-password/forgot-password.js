@@ -42,7 +42,7 @@ function ForgotPasswordPage() {
                 <div className={style.wrapper}>
                     <section className={style.profileFormContainer}>
                         <span className={'mt-30'}>Восстановление пароля</span>
-                        <form className={style.profileForm} onClick={resetPassword}>
+                        <form className={style.profileForm} onSubmit={resetPassword}>
                             <div className={'mt-6'}>
                                 <Input
                                     type={'text'}

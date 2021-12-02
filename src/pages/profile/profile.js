@@ -11,7 +11,6 @@ import {consoleErrorMessage, showErrorMessage} from "../../services/API/base-req
 import {getUser, patchUser} from "../../services/API/auth/user";
 import {MESSAGE_TOKEN_EXPIRED, postToken} from "../../services/API/auth/token";
 import {ProtectedPageNoAuth} from "../protected/protected-page-no-auth";
-import {postLogin} from "../../services/API/auth/login";
 
 function ProfilePage() {
     const [showEdit, setShowEdit] = useState(false);
@@ -100,7 +99,7 @@ function ProfilePage() {
         },
         [navigate, dispatch]
     );
-    
+
     const editProfile = useCallback(
         e => {
             e.preventDefault();
@@ -120,7 +119,7 @@ function ProfilePage() {
                 }
             });
         },
-        [navigate, dispatch, form]
+        [form]
     );
 
     return (

@@ -1,14 +1,20 @@
 import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
-import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
+import {makeLinkUrl, PATH_FORGOT_PASSWORD, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
 import {useCallback, useState} from "react";
 import {postPasswordResetReset} from "../../../services/API/password-reset";
 import {showErrorMessage} from "../../../services/API/base-request";
 import {ProtectedPageAuth} from "../../protected/protected-page-auth";
+import {useSelector} from "react-redux";
 
 function ResetPasswordPage() {
-    let navigate = useNavigate();
+    const {prevLocationPath} = useSelector(store => ({
+        prevLocationPath: store.locationReducer.prevLocationPath
+    }));
+    
+    const navigate = useNavigate();
+    
     const [form, setValue] = useState({
         password: '',
         token: ''
@@ -35,6 +41,10 @@ function ResetPasswordPage() {
         },
         [navigate, form]
     );
+    
+    if (prevLocationPath !== makeLinkUrl(PATH_FORGOT_PASSWORD)) {
+        navigate(makeLinkUrl(PATH_FORGOT_PASSWORD));
+    }
 
     return (
         <ProtectedPageAuth>
@@ -42,7 +52,7 @@ function ResetPasswordPage() {
                 <div className={style.wrapper}>
                     <section className={style.profileFormContainer}>
                         <span className={'mt-30'}>Восстановление пароля</span>
-                        <form className={style.profileForm} onClick={resetPassword}>
+                        <form className={style.profileForm} onSubmit={resetPassword}>
                             <div className={'mt-6'}>
                                 <Input
                                     type={'text'}

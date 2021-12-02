@@ -13,12 +13,28 @@ import {
     PATH_RESET_PASSWORD
 } from "../app/app";
 import {Link, useLocation} from "react-router-dom";
+import {useEffect} from "react";
+import {UPDATE_LOCATION_PATH} from "../../services/actions/location";
+import {useDispatch} from "react-redux";
 
 export const MENU_ITEM_CONSTRUCTOR = 0;
 export const MENU_ITEM_ORDERS = 1;
 export const MENU_ITEM_PROFILE = 2;
 
 function AppHeader() {
+    const location = useLocation();
+    const dispatch = useDispatch();
+
+    useEffect(
+        () => {
+            dispatch({
+                type: UPDATE_LOCATION_PATH,
+                locationPath: location.pathname
+            });
+        }
+        , [dispatch, location.pathname]
+    );
+
     const PATH_TO_MENU_ITEM_MAPPING = {
         [makeLinkUrl(PATH_CONSTRUCTOR)]: MENU_ITEM_CONSTRUCTOR,
         [makeLinkUrl(PATH_LOGIN)]: MENU_ITEM_PROFILE,
@@ -29,7 +45,7 @@ function AppHeader() {
         [makeLinkUrl(PATH_INGREDIENTS)]: MENU_ITEM_CONSTRUCTOR,
         [makeLinkUrl(PATH_ORDERS)]: MENU_ITEM_ORDERS,
     };
-    
+
     const {pathname} = useLocation();
     const getActiveMenuItem = () => {
         return PATH_TO_MENU_ITEM_MAPPING[pathname] ? PATH_TO_MENU_ITEM_MAPPING[pathname] : MENU_ITEM_CONSTRUCTOR;
