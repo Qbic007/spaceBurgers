@@ -1,0 +1,25 @@
+main {
+    background-color: #131316;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.constructorSection {
+    width: 100%;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1244px;
+    margin: 0;
+}
+
+.ingredientContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 120px;
+}

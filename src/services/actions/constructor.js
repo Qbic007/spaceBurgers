@@ -1,4 +1,5 @@
 import {API_BASE_URL} from "./root";
+import {ACCESS_TOKEN_ITEM_KEY} from "../reducers/auth";
 
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const MOVE_INGREDIENT = 'MOVE_INGREDIENT';
@@ -16,7 +17,8 @@ export function orderConfirmation(ingredients = []) {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem(ACCESS_TOKEN_ITEM_KEY)
                 },
                 body: JSON.stringify({
                     "ingredients": ingredients
@@ -28,17 +30,12 @@ export function orderConfirmation(ingredients = []) {
                     name: res.name,
                     orderNumber: res.order.number,
                 });
-                dispatch({
-                    type: CLEAR_ORDER,
-                    name: res.name,
-                    orderNumber: res.order.number,
-                });
             } else {
                 dispatch({
                     type: GET_ORDER_FAILED
                 });
             }
-        }).catch((e) => {
+        }).catch(() => {
             dispatch({
                 type: GET_ORDER_FAILED
             });

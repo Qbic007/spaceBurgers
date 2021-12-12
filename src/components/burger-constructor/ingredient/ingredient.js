@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {useDispatch} from "react-redux";
 import {DROP_INGREDIENT, MOVE_INGREDIENT} from "../../../services/actions/constructor";
 import {useDrag, useDrop} from "react-dnd";
-import {draggableTypeMoveIngredient} from "../../app/app";
+import {DRAGGABLE_TYPE_MOVE_INGREDIENT} from "../../app/app";
 
 function Ingredient(props) {
     const ingredient = props.ingredient;
@@ -12,7 +12,7 @@ function Ingredient(props) {
     const dispatch = useDispatch();
 
     const [{ isDragging }, drag] = useDrag(() => ({
-        type: draggableTypeMoveIngredient,
+        type: DRAGGABLE_TYPE_MOVE_INGREDIENT,
         item: ingredient,
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
@@ -20,7 +20,7 @@ function Ingredient(props) {
     }));
 
     const [, drop] = useDrop(() => ({
-        accept: draggableTypeMoveIngredient,
+        accept: DRAGGABLE_TYPE_MOVE_INGREDIENT,
         canDrop: () => false,
         hover(draggableIngredient) {
             if (draggableIngredient.key !== ingredient.key) {

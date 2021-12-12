@@ -8,10 +8,14 @@ import {CLOSE_MODAL, SHOW_MODAL} from '../../services/actions/modal';
 import {modalOrder} from "../../services/reducers/modal";
 import {ADD_INGREDIENT, orderConfirmation} from "../../services/actions/constructor";
 import {useDrop} from "react-dnd";
-import {draggableTypeAddIngredient} from "../app/app";
+import {DRAGGABLE_TYPE_ADD_INGREDIENT, makeLinkUrl} from "../app/app";
 import Modal from "../modal/modal";
+import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
+import {useNavigate} from "react-router-dom";
+import {LOGIN} from "../../services/actions/auth";
 
 function BurgerConstructor() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const closeModal = () => {
@@ -19,7 +23,7 @@ function BurgerConstructor() {
     }
 
     const [, dropTarget] = useDrop({
-        accept: draggableTypeAddIngredient,
+        accept: DRAGGABLE_TYPE_ADD_INGREDIENT,
         drop(item) {
             dispatch({
                 type: ADD_INGREDIENT,
@@ -48,11 +52,15 @@ function BurgerConstructor() {
     }
 
     const offerConfirmation = () => {
-        dispatch(orderConfirmation(getIngredientIds(bun, ingredients)));
-        dispatch({
-            type: SHOW_MODAL,
-            modalType: modalOrder
-        });
+        if (localStorage.getItem(REFRESH_TOKEN_ITEM_KEY) !== null) {
+            dispatch(orderConfirmation(getIngredientIds(bun, ingredients)));
+            dispatch({
+                type: SHOW_MODAL,
+                modalType: modalOrder
+            });
+        } else {
+            navigate(makeLinkUrl(LOGIN));
+        }
     }
 
     const countPrice = (bun, ingredients) => {
@@ -100,7 +108,7 @@ function BurgerConstructor() {
                     </span>}
             </div>
             {bun && <div className={style.order}>
-                <span className={`${style.price} text text_typeMain-large`}>
+                <span className={`${style.price} text text_type_main-large`}>
                     {countPrice(bun, ingredients)}
                     <CurrencyIcon type={"primary"}/>
                 </span>

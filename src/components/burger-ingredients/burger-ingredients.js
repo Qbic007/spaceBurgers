@@ -7,34 +7,43 @@ import {useDispatch, useSelector} from "react-redux";
 import {typeBun, typeMain, typeSauce} from "../../services/reducers/ingredients";
 import Modal from "../modal/modal";
 import {CLOSE_MODAL} from "../../services/actions/modal";
-
-function tabs() {
-    return (
-        <div className={style.tabs}>
-            <Tab value="one" active={0} onClick='one'>
-                Булки
-            </Tab>
-            <Tab value="two" active={0} onClick='two'>
-                Соусы
-            </Tab>
-            <Tab value="three" active={1} onClick='three'>
-                Начинки
-            </Tab>
-        </div>
-    )
-}
-
-function filterByType(ingredients, type) {
-    return ingredients.filter(function (object) {
-        return object.type === type;
-    });
-}
+import {useNavigate} from "react-router-dom";
+import {makeLinkUrl, PATH_CONSTRUCTOR} from "../app/app";
 
 function BurgerIngredients() {
+    const navigate = useNavigate();
+
+    function tabs() {
+        return (
+            <div className={style.tabs}>
+                <Tab value="one" active={0} onClick='one'>
+                    Булки
+                </Tab>
+                <Tab value="two" active={0} onClick='two'>
+                    Соусы
+                </Tab>
+                <Tab value="three" active={1} onClick='three'>
+                    Начинки
+                </Tab>
+            </div>
+        )
+    }
+
+    function filterByType(ingredients, type) {
+        return ingredients.filter(function (object) {
+            return object.type === type;
+        });
+    }
+
+    const {ingredientInfo} = useSelector(store => ({
+        ingredientInfo: store.modalReducer.ingredientInfo
+    }))
+
     const dispatch = useDispatch();
 
     const closeModal = () => {
         dispatch({type: CLOSE_MODAL});
+        navigate(makeLinkUrl(PATH_CONSTRUCTOR));
     }
 
     const {isVisibleIngredient} = useSelector(store => ({
@@ -49,13 +58,13 @@ function BurgerIngredients() {
     return (
         <section className={style.ingredientsSection}>
             {isVisibleIngredient && <Modal closeModal={closeModal}>
-                <IngredientDetails/>
+                <IngredientDetails ingredientInfo={ingredientInfo}/>
             </Modal>}
-            <h2 className={`${style.title} text text_typeMain-large`}>соберите бургер</h2>
+            <h2 className={`${style.title} text_type_main-large`}>соберите бургер</h2>
             {tabs()}
             {ingredientsFailed
-                ? <span className={'text text_typeMain-default'}>Извините, что-то пошло не так :-(</span>
-                : <section className={style.container}>
+                ? <span className={'text text_type_main-default'}>Извините, что-то пошло не так :-(</span>
+                : <section id={'scrollArea'} className={style.container}>
                     <Section title={'Булки'} items={filterByType(ingredients, typeBun)}/>
                     <Section title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>
                     <Section title={'Начинки'} items={filterByType(ingredients, typeMain)}/>
