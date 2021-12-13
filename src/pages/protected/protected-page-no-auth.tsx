@@ -4,7 +4,7 @@ import {makeLinkUrl, PATH_LOGIN} from "../../components/app/app";
 import React from "react";
 
 type Props = {
-    children?: JSX.Element | JSX.Element[];
+    children: JSX.Element | null;
 };
 
 export function ProtectedPageNoAuth({children}: Props) {

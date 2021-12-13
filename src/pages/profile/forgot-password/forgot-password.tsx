@@ -21,7 +21,7 @@ function ForgotPasswordPage() {
     const resetPassword = useCallback(
         e => {
             e.preventDefault();
-            let result = false;
+            let result: any = false;
             postPasswordReset(form).then(res => {
                 result = res
             }).then(() => {

@@ -3,7 +3,7 @@ import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
 import {makeLinkUrl, PATH_PROFILE} from "../../components/app/app";
 
 type Props = {
-    children?: JSX.Element | JSX.Element[] | undefined;
+    children: JSX.Element | null;
 };
 
 export function ProtectedPageAuth({children}: Props) {

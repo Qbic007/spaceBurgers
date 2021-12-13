@@ -2,7 +2,7 @@ import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_CONSTRUCTOR, PATH_LOGIN} from "../../../components/app/app";
-import {useCallback, useState} from "react";
+import {ChangeEvent, useCallback, useState} from "react";
 import {postRegistration} from "../../../services/API/auth/registration";
 import {useDispatch} from "react-redux";
 import {LOGIN} from "../../../services/actions/auth";
@@ -20,14 +20,14 @@ function RegisterPage() {
         password: ''
     });
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
     const register = useCallback(
         e => {
             e.preventDefault();
-            let result = false;
+            let result: any = false;
             postRegistration(form).then(res => {
                 result = res
             }).then(() => {
