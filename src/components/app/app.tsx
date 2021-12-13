@@ -26,15 +26,15 @@ export const PATH_NOT_FOUND_404 = '*';
 
 const PATH_ID = ':id';
 
-export const makeLinkUrl = (pathParts) => {
+export const makeLinkUrl = (pathParts: string | string[]) => {
     return '/' + (Array.isArray(pathParts) ? pathParts.join('/') : pathParts);
 }
 
 export const makeOrdersLinkUrl = () => makeLinkUrl([PATH_PROFILE, PATH_ORDERS]);
 
-export const makeOrderLinkUrl = (id) => makeLinkUrl([makeOrdersLinkUrl(), id]);
+export const makeOrderLinkUrl = (id: string) => makeLinkUrl([makeOrdersLinkUrl(), id]);
 
-export const makeIngredientLinkUrl = (id) => makeLinkUrl([PATH_INGREDIENTS, id]);
+export const makeIngredientLinkUrl = (id: string) => makeLinkUrl([PATH_INGREDIENTS, id]);
 
 function App() {
     const {isVisibleIngredient} = useSelector(store => ({

@@ -3,18 +3,22 @@ import React from "react";
 import style from './modal.module.css';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from "../modal-overlay/modalOverlay";
-import PropTypes from "prop-types";
 
-const modalRoot = document.getElementById("modal");
+const modalRoot: HTMLElement | null = document.getElementById("modal");
 
-function Modal(props) {
+type Props = {
+    closeModal: () => void,
+    children?: JSX.Element | JSX.Element[];
+}
+
+function Modal(props: Props) {
     const ESC_CODE = 27;
 
-    const catchEvent = (e) => {
+    const catchEvent: (e: MouseEvent) => void = (e) => {
         e.stopPropagation();
     };
 
-    const escFunction = (e) => {
+    const escFunction = (e: KeyboardEvent) => {
         if (e.keyCode === ESC_CODE) {
             return props.closeModal();
         }
@@ -42,8 +46,3 @@ function Modal(props) {
 }
 
 export default Modal;
-
-Modal.propTypes = {
-    closeModal: PropTypes.func,
-    children: PropTypes.object.isRequired,
-};

@@ -1,15 +1,19 @@
 import style from './item.module.css';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import React from "react";
-import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from "react-redux";
 import {SHOW_MODAL} from "../../../../services/actions/modal";
 import {modalIngredient} from "../../../../services/reducers/modal";
 import {useDrag} from "react-dnd";
 import {DRAGGABLE_TYPE_ADD_INGREDIENT, makeLinkUrl, PATH_INGREDIENTS} from "../../../app/app";
 import {Link} from "react-router-dom";
+import Ingredient from "../../../burger-constructor/ingredient/ingredient";
 
-function Item(props) {
+type Props = {
+    ingredient: Ingredient;
+}
+
+function Item(props: Props) {
     const ingredient = props.ingredient;
 
     const [{isDrag}, dragRef] = useDrag({
@@ -44,12 +48,12 @@ function Item(props) {
         bun: store.constructorReducer.bun,
     }))
 
-    const getQuantityByIngredientId = (ingredientId) => {
+    const getQuantityByIngredientId = (ingredientId: string) => {
         let quantity = null;
         if (bun && bun._id === ingredientId) {
             quantity = 2;
         } else {
-            const filteredIngredients = ingredients.filter(function (ingredient) {
+            const filteredIngredients = ingredients.filter(function (ingredient: Ingredient) {
                 return ingredient._id === ingredientId;
             });
             quantity = filteredIngredients.length;
@@ -84,7 +88,3 @@ function Item(props) {
 }
 
 export default Item;
-
-Item.propTypes = {
-    ingredient: PropTypes.object.isRequired
-};

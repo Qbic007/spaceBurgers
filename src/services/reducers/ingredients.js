@@ -1,8 +1,8 @@
 import {GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS} from '../actions/ingredients';
 
-export const typeBun = 'bun';
-export const typeSauce = 'sauce';
-export const typeMain = 'main';
+export const TYPE_BUN = 'bun';
+export const TYPE_SAUCE = 'sauce';
+export const TYPE_MAIN = 'main';
 
 const initialState = {
     ingredients: [],

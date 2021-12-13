@@ -1,9 +1,22 @@
 import React from "react";
 import style from './ingredient-details.module.css';
 import PropertyContainer from "./property-container/property-container";
-import PropTypes from "prop-types";
 
-function IngredientDetails(props) {
+interface IngredientInfo {
+    title: string;
+    name: string;
+    image_large: string;
+    calories: string | number;
+    proteins: string | number;
+    fat: string | number;
+    carbohydrates: string | number;
+}
+
+type Props = {
+    ingredientInfo: IngredientInfo;
+}
+
+function IngredientDetails(props: Props) {
     const ingredientInfo = props.ingredientInfo;
 
     return (
@@ -28,7 +41,3 @@ function IngredientDetails(props) {
 }
 
 export default IngredientDetails;
-
-IngredientDetails.propTypes = {
-    ingredientInfo: PropTypes.object.isRequired
-};

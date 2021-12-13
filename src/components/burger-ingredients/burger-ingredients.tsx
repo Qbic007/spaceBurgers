@@ -4,11 +4,12 @@ import Section from "./section/section";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {typeBun, typeMain, typeSauce} from "../../services/reducers/ingredients";
+import {TYPE_BUN, TYPE_MAIN, TYPE_SAUCE} from "../../services/reducers/ingredients";
 import Modal from "../modal/modal";
 import {CLOSE_MODAL} from "../../services/actions/modal";
 import {useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_CONSTRUCTOR} from "../app/app";
+import Ingredient, {IngredientType} from "../burger-constructor/ingredient/ingredient";
 
 function BurgerIngredients() {
     const navigate = useNavigate();
@@ -16,21 +17,21 @@ function BurgerIngredients() {
     function tabs() {
         return (
             <div className={style.tabs}>
-                <Tab value="one" active={0} onClick='one'>
+                <Tab value="one" active={false} onClick={() => 'one'}>
                     Булки
                 </Tab>
-                <Tab value="two" active={0} onClick='two'>
+                <Tab value="two" active={false} onClick={() => 'two'}>
                     Соусы
                 </Tab>
-                <Tab value="three" active={1} onClick='three'>
+                <Tab value="three" active={true} onClick={() => 'three'}>
                     Начинки
                 </Tab>
             </div>
         )
     }
 
-    function filterByType(ingredients, type) {
-        return ingredients.filter(function (object) {
+    function filterByType(ingredients: Ingredient[], type: IngredientType) {
+        return ingredients.filter(function (object: Ingredient) {
             return object.type === type;
         });
     }
@@ -65,9 +66,9 @@ function BurgerIngredients() {
             {ingredientsFailed
                 ? <span className={'text text_type_main-default'}>Извините, что-то пошло не так :-(</span>
                 : <section id={'scrollArea'} className={style.container}>
-                    <Section title={'Булки'} items={filterByType(ingredients, typeBun)}/>
-                    <Section title={'Соусы'} items={filterByType(ingredients, typeSauce)}/>
-                    <Section title={'Начинки'} items={filterByType(ingredients, typeMain)}/>
+                    <Section title={'Булки'} items={filterByType(ingredients, TYPE_BUN)}/>
+                    <Section title={'Соусы'} items={filterByType(ingredients, TYPE_SAUCE)}/>
+                    <Section title={'Начинки'} items={filterByType(ingredients, TYPE_MAIN)}/>
                 </section>}
         </section>
     );

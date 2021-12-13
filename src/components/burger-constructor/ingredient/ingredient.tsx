@@ -1,20 +1,46 @@
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient.module.css';
-import PropTypes from 'prop-types';
 import {useDispatch} from "react-redux";
 import {DROP_INGREDIENT, MOVE_INGREDIENT} from "../../../services/actions/constructor";
-import {useDrag, useDrop} from "react-dnd";
+import {DragSourceMonitor, useDrag, useDrop} from "react-dnd";
 import {DRAGGABLE_TYPE_MOVE_INGREDIENT} from "../../app/app";
 
-function Ingredient(props) {
+export type IngredientType = 'bun' | 'sauce' | 'main';
+
+interface Ingredient {
+    _id: string;
+    key: string;
+    name: string;
+    price: number;
+    image: string;
+    image_large: string;
+    calories: string;
+    proteins: string;
+    fat: string;
+    carbohydrates: string;
+    alt: string;
+    type: IngredientType;
+}
+
+type Props = {
+    id?: string;
+    type?: 'top' | 'bottom';
+    isLocked?: boolean;
+    text: string;
+    price: number;
+    thumbnail: string;
+    ingredient: Ingredient;
+}
+
+function Ingredient(props: Props) {
     const ingredient = props.ingredient;
 
     const dispatch = useDispatch();
 
-    const [{ isDragging }, drag] = useDrag(() => ({
+    const [{isDragging}, drag] = useDrag(() => ({
         type: DRAGGABLE_TYPE_MOVE_INGREDIENT,
         item: ingredient,
-        collect: (monitor) => ({
+        collect: (monitor: DragSourceMonitor) => ({
             isDragging: monitor.isDragging(),
         }),
     }));
@@ -22,7 +48,7 @@ function Ingredient(props) {
     const [, drop] = useDrop(() => ({
         accept: DRAGGABLE_TYPE_MOVE_INGREDIENT,
         canDrop: () => false,
-        hover(draggableIngredient) {
+        hover(draggableIngredient: Ingredient) {
             if (draggableIngredient.key !== ingredient.key) {
                 dispatch({
                     type: MOVE_INGREDIENT,
@@ -41,7 +67,7 @@ function Ingredient(props) {
             key: props.id
         });
     }
-    
+
     return (
         <div ref={props.isLocked ? null : (node) => drag(drop(node))}
              className={`${style.ingredient} ${isDragging && style.semiHidden}`}>
@@ -59,11 +85,3 @@ function Ingredient(props) {
 }
 
 export default Ingredient;
-
-Ingredient.propTypes = {
-    type: PropTypes.string,
-    isLocked: PropTypes.bool,
-    text: PropTypes.string,
-    price: PropTypes.number,
-    thumbnail: PropTypes.string,
-};

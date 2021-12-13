@@ -2,7 +2,7 @@ import style from "../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_FORGOT_PASSWORD, PATH_LOGIN, PATH_PROFILE} from "../../../components/app/app";
-import {useCallback, useEffect, useState} from "react";
+import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {postPasswordResetReset} from "../../../services/API/password-reset";
 import {showErrorMessage} from "../../../services/API/base-request";
 import {ProtectedPageAuth} from "../../protected/protected-page-auth";
@@ -21,7 +21,7 @@ function ResetPasswordPage() {
         token: ''
     });
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue({...form, [e.target.name]: e.target.value});
     };
 

@@ -5,7 +5,7 @@ import {
     GET_ORDER_SUCCESS,
     MOVE_INGREDIENT
 } from '../actions/constructor';
-import {typeBun, typeMain, typeSauce} from "./ingredients";
+import {TYPE_BUN, TYPE_MAIN, TYPE_SAUCE} from "./ingredients";
 
 const initialState = {
     bun: null,
@@ -32,13 +32,13 @@ export const constructorReducer = (state = initialState, action) => {
             const item = {...action.item};
             item.key = Date.now() + item._id;
             switch (item.type) {
-                case typeBun:
+                case TYPE_BUN:
                     return {
                         ...state,
                         bun: item
                     }
-                case typeMain:
-                case typeSauce:
+                case TYPE_MAIN:
+                case TYPE_SAUCE:
                     item.index = state.ingredients.length;
                     return {
                         ...state,

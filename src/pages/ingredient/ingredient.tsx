@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import {getIngredients} from "../../services/actions/ingredients";
 import {useParams} from "react-router-dom";
 import style from "./ingredient.module.css";
+import Ingredient from "../../components/burger-constructor/ingredient/ingredient";
 
 function IngredientPage() {
     const {id} = useParams();
@@ -20,7 +21,7 @@ function IngredientPage() {
         }
     }, [ingredients.length, dispatch]);
 
-    const ingredient = ingredients.find((element) => {
+    const ingredient = ingredients.find((element: Ingredient) => {
         return element._id === id
     });
 

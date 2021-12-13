@@ -42,13 +42,13 @@ function BurgerConstructor() {
         orderNumber: store.constructorReducer.orderNumber
     }))
 
-    const getIngredientIds = (bun, ingredients) => {
-        ingredients = ingredients.map(function (ingredient) {
+    const getIngredientIds = (bun: Ingredient, ingredients: Ingredient[]) => {
+        let ingredientIds: string[] = ingredients.map(function (ingredient: Ingredient) {
             return ingredient._id;
         });
-        ingredients.push(bun._id);
-        ingredients.push(bun._id);
-        return ingredients;
+        ingredientIds.push(bun._id);
+        ingredientIds.push(bun._id);
+        return ingredientIds;
     }
 
     const offerConfirmation = () => {
@@ -63,7 +63,7 @@ function BurgerConstructor() {
         }
     }
 
-    const countPrice = (bun, ingredients) => {
+    const countPrice = (bun: Ingredient, ingredients: Ingredient[]) => {
         return 2 * bun.price + ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0);
     }
 
@@ -84,7 +84,7 @@ function BurgerConstructor() {
                                 thumbnail={bun.image}/>
                 </div>}
                 <div className={style.ingredientsInsideContainer}>
-                    {ingredients.map((object, index) => {
+                    {ingredients.map((object: Ingredient) => {
                         return (
                             <Ingredient ingredient={object}
                                         key={object.key}
