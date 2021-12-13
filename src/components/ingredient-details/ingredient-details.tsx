@@ -2,14 +2,14 @@ import React from "react";
 import style from './ingredient-details.module.css';
 import PropertyContainer from "./property-container/property-container";
 
-interface IngredientInfo {
+export interface IngredientInfo {
     title: string;
-    name: string;
-    image_large: string;
-    calories: string | number;
-    proteins: string | number;
-    fat: string | number;
-    carbohydrates: string | number;
+    name?: string | undefined;
+    image_large?: string | undefined;
+    calories?: string | number | undefined;
+    proteins?: string | number | undefined;
+    fat?: string | number | undefined;
+    carbohydrates?: string | number | undefined;
 }
 
 type Props = {

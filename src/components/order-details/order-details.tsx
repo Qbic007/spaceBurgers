@@ -3,9 +3,16 @@ import style from './order-details.module.css';
 import image from '../../images/accepted.png';
 import {useSelector} from "react-redux";
 
-function OrderDetails() {
+interface ConstructorReducer {
+    orderNumber: number;
+}
 
-    const {orderNumber} = useSelector(store => ({
+interface Store {
+    constructorReducer: ConstructorReducer;
+}
+
+function OrderDetails() {
+    const {orderNumber} = useSelector((store: Store) => ({
         orderNumber: store.constructorReducer.orderNumber
     }))
 

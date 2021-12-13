@@ -6,12 +6,19 @@ import {getIngredients} from "../../services/actions/ingredients";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import style from "./constructor.module.css";
+import Ingredient from "../../components/burger-constructor/ingredient/ingredient";
 
-export const draggableTypeAddIngredient = 'addIngredient';
-export const draggableTypeMoveIngredient = 'moveIngredient';
+interface IngredientsReducer {
+    ingredients: Ingredient[];
+    ingredientsFailed: boolean;
+}
+
+interface Store {
+    ingredientsReducer: IngredientsReducer;
+}
 
 function ConstructorPage() {
-    const {ingredients} = useSelector(store => ({
+    const {ingredients} = useSelector((store: Store) => ({
         ingredients: store.ingredientsReducer.ingredients
     }));
 

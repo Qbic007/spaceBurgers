@@ -1,7 +1,7 @@
 import style from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import Section from "./section/section";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import IngredientDetails, {IngredientInfo} from "../ingredient-details/ingredient-details";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TYPE_BUN, TYPE_MAIN, TYPE_SAUCE} from "../../services/reducers/ingredients";
@@ -10,6 +10,21 @@ import {CLOSE_MODAL} from "../../services/actions/modal";
 import {useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_CONSTRUCTOR} from "../app/app";
 import Ingredient, {IngredientType} from "../burger-constructor/ingredient/ingredient";
+
+interface IngredientsReducer {
+    ingredients: Ingredient[];
+    ingredientsFailed: boolean;
+}
+
+interface ModalReducer {
+    isVisibleIngredient: boolean;
+    ingredientInfo: IngredientInfo;
+}
+
+interface Store {
+    modalReducer: ModalReducer;
+    ingredientsReducer: IngredientsReducer;
+}
 
 function BurgerIngredients() {
     const navigate = useNavigate();
@@ -36,7 +51,7 @@ function BurgerIngredients() {
         });
     }
 
-    const {ingredientInfo} = useSelector(store => ({
+    const {ingredientInfo} = useSelector((store: Store) => ({
         ingredientInfo: store.modalReducer.ingredientInfo
     }))
 
@@ -47,11 +62,11 @@ function BurgerIngredients() {
         navigate(makeLinkUrl(PATH_CONSTRUCTOR));
     }
 
-    const {isVisibleIngredient} = useSelector(store => ({
+    const {isVisibleIngredient} = useSelector((store:Store) => ({
         isVisibleIngredient: store.modalReducer.isVisibleIngredient
     }))
 
-    const {ingredients, ingredientsFailed} = useSelector(store => ({
+    const {ingredients, ingredientsFailed} = useSelector((store:Store) => ({
         ingredients: store.ingredientsReducer.ingredients,
         ingredientsFailed: store.ingredientsReducer.ingredientsFailed,
     }))

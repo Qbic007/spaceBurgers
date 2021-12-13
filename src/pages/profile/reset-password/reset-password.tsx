@@ -8,8 +8,17 @@ import {showErrorMessage} from "../../../services/API/base-request";
 import {ProtectedPageAuth} from "../../protected/protected-page-auth";
 import {useSelector} from "react-redux";
 
+interface LocationReducer {
+    prevLocationPath: string,
+    currentLocationPath: string,
+}
+
+interface Store {
+    locationReducer: LocationReducer;
+}
+
 function ResetPasswordPage() {
-    const {prevLocationPath, currentLocationPath} = useSelector(store => ({
+    const {prevLocationPath, currentLocationPath} = useSelector((store: Store) => ({
         prevLocationPath: store.locationReducer.prevLocationPath,
         currentLocationPath: store.locationReducer.currentLocationPath,
     }));

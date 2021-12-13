@@ -3,7 +3,7 @@ import style from './property-container.module.css';
 
 type Props = {
     title: string;
-    value: string | number;
+    value: string | number | undefined;
 }
 
 function PropertyContainer(props: Props) {

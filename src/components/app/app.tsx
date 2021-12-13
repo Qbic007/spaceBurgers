@@ -36,8 +36,16 @@ export const makeOrderLinkUrl = (id: string) => makeLinkUrl([makeOrdersLinkUrl()
 
 export const makeIngredientLinkUrl = (id: string) => makeLinkUrl([PATH_INGREDIENTS, id]);
 
+interface ModalReducer {
+    isVisibleIngredient: boolean;
+}
+
+interface Store {
+    modalReducer: ModalReducer;
+} 
+
 function App() {
-    const {isVisibleIngredient} = useSelector(store => ({
+    const {isVisibleIngredient} = useSelector((store:Store) => ({
         isVisibleIngredient: store.modalReducer.isVisibleIngredient
     }))
     

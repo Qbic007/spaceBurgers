@@ -3,7 +3,7 @@ import {BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-b
 import {Link} from "react-router-dom";
 
 type Props = {
-    icon: string;
+    icon: 'burger' | 'list' | 'profile';
     text: string;
     linkTo: string;
     isActive: boolean;
@@ -12,7 +12,7 @@ type Props = {
 function MenuItem(props: Props) {
     const iconType = () => props.isActive ? 'primary' : 'secondary';
 
-    const icon = (icon: string) => {
+    const icon = (icon: 'burger' | 'list' | 'profile') => {
         const data = {
             burger: <BurgerIcon type={iconType()}/>,
             list: <ListIcon type={iconType()}/>,

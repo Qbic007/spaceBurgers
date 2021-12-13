@@ -14,6 +14,21 @@ import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
 import {useNavigate} from "react-router-dom";
 import {LOGIN} from "../../services/actions/auth";
 
+interface ConstructorReducer {
+    ingredients: Ingredient[];
+    bun: Ingredient;
+    orderNumber: number;
+}
+
+interface ModalReducer {
+    isVisibleOrder: boolean;
+}
+
+interface Store {
+    modalReducer: ModalReducer;
+    constructorReducer: ConstructorReducer;
+}
+
 function BurgerConstructor() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -32,11 +47,11 @@ function BurgerConstructor() {
         }
     });
 
-    const {isVisibleOrder} = useSelector(store => ({
+    const {isVisibleOrder} = useSelector((store:Store) => ({
         isVisibleOrder: store.modalReducer.isVisibleOrder
     }))
 
-    const {ingredients, bun, orderNumber} = useSelector(store => ({
+    const {ingredients, bun, orderNumber} = useSelector((store: Store) => ({
         ingredients: store.constructorReducer.ingredients,
         bun: store.constructorReducer.bun,
         orderNumber: store.constructorReducer.orderNumber

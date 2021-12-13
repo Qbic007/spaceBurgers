@@ -9,6 +9,15 @@ import {DRAGGABLE_TYPE_ADD_INGREDIENT, makeLinkUrl, PATH_INGREDIENTS} from "../.
 import {Link} from "react-router-dom";
 import Ingredient from "../../../burger-constructor/ingredient/ingredient";
 
+interface ConstructorReducer {
+    ingredients: Ingredient[];
+    bun: Ingredient;
+}
+
+interface Store {
+    constructorReducer: ConstructorReducer;
+}
+
 type Props = {
     ingredient: Ingredient;
 }
@@ -43,7 +52,7 @@ function Item(props: Props) {
         });
     }
 
-    const {bun, ingredients} = useSelector(store => ({
+    const {bun, ingredients} = useSelector((store: Store) => ({
         ingredients: store.constructorReducer.ingredients,
         bun: store.constructorReducer.bun,
     }))

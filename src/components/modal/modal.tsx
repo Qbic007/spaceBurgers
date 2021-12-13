@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import React from "react";
+import React, {MouseEventHandler} from "react";
 import style from './modal.module.css';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from "../modal-overlay/modalOverlay";
@@ -14,7 +14,7 @@ type Props = {
 function Modal(props: Props) {
     const ESC_CODE = 27;
 
-    const catchEvent: (e: MouseEvent) => void = (e) => {
+    const catchEvent: MouseEventHandler = (e) => {
         e.stopPropagation();
     };
 
