@@ -1,19 +1,10 @@
 import React from "react";
 import style from './ingredient-details.module.css';
 import PropertyContainer from "./property-container/property-container";
-
-export interface IngredientInfo {
-    title: string;
-    name?: string | undefined;
-    image_large?: string | undefined;
-    calories?: string | number | undefined;
-    proteins?: string | number | undefined;
-    fat?: string | number | undefined;
-    carbohydrates?: string | number | undefined;
-}
+import {IIngredientInfo} from "../../services/types";
 
 type Props = {
-    ingredientInfo: IngredientInfo;
+    ingredientInfo: IIngredientInfo;
 }
 
 function IngredientDetails(props: Props) {

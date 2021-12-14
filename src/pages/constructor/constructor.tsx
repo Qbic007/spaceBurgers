@@ -6,19 +6,10 @@ import {getIngredients} from "../../services/actions/ingredients";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import style from "./constructor.module.css";
-import Ingredient from "../../components/burger-constructor/ingredient/ingredient";
-
-interface IngredientsReducer {
-    ingredients: Ingredient[];
-    ingredientsFailed: boolean;
-}
-
-interface Store {
-    ingredientsReducer: IngredientsReducer;
-}
+import {IStore} from "../../services/types";
 
 function ConstructorPage() {
-    const {ingredients} = useSelector((store: Store) => ({
+    const {ingredients} = useSelector((store: IStore) => ({
         ingredients: store.ingredientsReducer.ingredients
     }));
 

@@ -7,19 +7,10 @@ import {modalIngredient} from "../../../../services/reducers/modal";
 import {useDrag} from "react-dnd";
 import {DRAGGABLE_TYPE_ADD_INGREDIENT, makeLinkUrl, PATH_INGREDIENTS} from "../../../app/app";
 import {Link} from "react-router-dom";
-import Ingredient from "../../../burger-constructor/ingredient/ingredient";
-
-interface ConstructorReducer {
-    ingredients: Ingredient[];
-    bun: Ingredient;
-}
-
-interface Store {
-    constructorReducer: ConstructorReducer;
-}
+import {IIngredient, IStore} from "../../../../services/types";
 
 type Props = {
-    ingredient: Ingredient;
+    ingredient: IIngredient;
 }
 
 function Item(props: Props) {
@@ -52,7 +43,7 @@ function Item(props: Props) {
         });
     }
 
-    const {bun, ingredients} = useSelector((store: Store) => ({
+    const {bun, ingredients} = useSelector((store: IStore) => ({
         ingredients: store.constructorReducer.ingredients,
         bun: store.constructorReducer.bun,
     }))
@@ -62,7 +53,7 @@ function Item(props: Props) {
         if (bun && bun._id === ingredientId) {
             quantity = 2;
         } else {
-            const filteredIngredients = ingredients.filter(function (ingredient: Ingredient) {
+            const filteredIngredients = ingredients.filter(function (ingredient: IIngredient) {
                 return ingredient._id === ingredientId;
             });
             quantity = filteredIngredients.length;

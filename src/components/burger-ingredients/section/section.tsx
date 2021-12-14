@@ -1,10 +1,10 @@
 import style from './section.module.css';
 import Item from "./item/item";
-import Ingredient from "../../burger-constructor/ingredient/ingredient";
+import {IIngredient} from "../../../services/types";
 
 type Props = {
     title: string;
-    items: Ingredient[];
+    items: IIngredient[];
 }
 
 function Section(props: Props) {
@@ -12,7 +12,7 @@ function Section(props: Props) {
         props.items.length > 0 ? <section className={style.ingredientsBlock}>
             <h3 className={`${style.title} text text_typeMain-medium`}>{props.title}</h3>
             <div className={style.container}>
-                {props.items.map((ingredient: Ingredient) => {
+                {props.items.map((ingredient: IIngredient) => {
                     return (
                         <Item key={ingredient._id} ingredient={ingredient}/>
                     );

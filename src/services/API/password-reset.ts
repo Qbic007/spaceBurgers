@@ -4,10 +4,10 @@ import {postRequest} from "./post-request";
 const PASSWORD_RESET_URL = API_BASE_URL + 'password-reset';
 const PASSWORD_RESET_RESET_URL = API_BASE_URL + 'password-reset/reset';
 
-export const postPasswordReset = async form => {
+export const postPasswordReset = async (form: object) => {
     return postRequest(PASSWORD_RESET_URL, form);
 }
 
-export const postPasswordResetReset = async form => {
+export const postPasswordResetReset = async (form: object) => {
     return postRequest(PASSWORD_RESET_RESET_URL, form);
 }

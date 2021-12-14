@@ -1,7 +1,7 @@
 import style from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import Section from "./section/section";
-import IngredientDetails, {IngredientInfo} from "../ingredient-details/ingredient-details";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TYPE_BUN, TYPE_MAIN, TYPE_SAUCE} from "../../services/reducers/ingredients";
@@ -9,22 +9,7 @@ import Modal from "../modal/modal";
 import {CLOSE_MODAL} from "../../services/actions/modal";
 import {useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_CONSTRUCTOR} from "../app/app";
-import Ingredient, {IngredientType} from "../burger-constructor/ingredient/ingredient";
-
-interface IngredientsReducer {
-    ingredients: Ingredient[];
-    ingredientsFailed: boolean;
-}
-
-interface ModalReducer {
-    isVisibleIngredient: boolean;
-    ingredientInfo: IngredientInfo;
-}
-
-interface Store {
-    modalReducer: ModalReducer;
-    ingredientsReducer: IngredientsReducer;
-}
+import {IIngredient, IStore, TIngredientType} from "../../services/types";
 
 function BurgerIngredients() {
     const navigate = useNavigate();
@@ -45,13 +30,13 @@ function BurgerIngredients() {
         )
     }
 
-    function filterByType(ingredients: Ingredient[], type: IngredientType) {
-        return ingredients.filter(function (object: Ingredient) {
+    function filterByType(ingredients: IIngredient[], type: TIngredientType) {
+        return ingredients.filter(function (object: IIngredient) {
             return object.type === type;
         });
     }
 
-    const {ingredientInfo} = useSelector((store: Store) => ({
+    const {ingredientInfo} = useSelector((store: IStore) => ({
         ingredientInfo: store.modalReducer.ingredientInfo
     }))
 
@@ -62,11 +47,11 @@ function BurgerIngredients() {
         navigate(makeLinkUrl(PATH_CONSTRUCTOR));
     }
 
-    const {isVisibleIngredient} = useSelector((store:Store) => ({
+    const {isVisibleIngredient} = useSelector((store:IStore) => ({
         isVisibleIngredient: store.modalReducer.isVisibleIngredient
     }))
 
-    const {ingredients, ingredientsFailed} = useSelector((store:Store) => ({
+    const {ingredients, ingredientsFailed} = useSelector((store:IStore) => ({
         ingredients: store.ingredientsReducer.ingredients,
         ingredientsFailed: store.ingredientsReducer.ingredientsFailed,
     }))

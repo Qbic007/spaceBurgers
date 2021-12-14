@@ -4,23 +4,7 @@ import {useDispatch} from "react-redux";
 import {DROP_INGREDIENT, MOVE_INGREDIENT} from "../../../services/actions/constructor";
 import {DragSourceMonitor, useDrag, useDrop} from "react-dnd";
 import {DRAGGABLE_TYPE_MOVE_INGREDIENT} from "../../app/app";
-
-export type IngredientType = 'bun' | 'sauce' | 'main';
-
-interface Ingredient {
-    _id: string;
-    key: string;
-    name: string;
-    price: number;
-    image: string;
-    image_large: string;
-    calories: string;
-    proteins: string;
-    fat: string;
-    carbohydrates: string;
-    alt: string;
-    type: IngredientType;
-}
+import {IIngredient} from "../../../services/types";
 
 type Props = {
     id?: string;
@@ -29,7 +13,7 @@ type Props = {
     text: string;
     price: number;
     thumbnail: string;
-    ingredient: Ingredient;
+    ingredient: IIngredient;
 }
 
 function Ingredient(props: Props) {
@@ -48,7 +32,7 @@ function Ingredient(props: Props) {
     const [, drop] = useDrop(() => ({
         accept: DRAGGABLE_TYPE_MOVE_INGREDIENT,
         canDrop: () => false,
-        hover(draggableIngredient: Ingredient) {
+        hover(draggableIngredient: IIngredient) {
             if (draggableIngredient.key !== ingredient.key) {
                 dispatch({
                     type: MOVE_INGREDIENT,

@@ -1,6 +1,13 @@
+import {resolve} from "dns";
+
 const ERROR_MESSAGE = 'Произошла ошибка! Попробуйте позже';
 
-export const baseRequest = async (method, url, form) => {
+export interface Result {
+    success: boolean;
+    message?: string
+}
+
+export const baseRequest = async (method: string, url: string, form: object) => {
     let result = false;
 
     await fetch(url,
@@ -20,11 +27,11 @@ export const baseRequest = async (method, url, form) => {
     return result;
 }
 
-export const showErrorMessage = (result) => {
+export const showErrorMessage = (result: Result) => {
     alert(result.message ? result.message : ERROR_MESSAGE)
 }
 
-export const consoleErrorMessage = (result) => {
+export const consoleErrorMessage = (result: Result) => {
     if (result.message) {
         console.warn(result.message);
     } else {

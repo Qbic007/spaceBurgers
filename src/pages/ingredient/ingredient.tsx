@@ -1,13 +1,14 @@
-import IngredientDetails, {IngredientInfo} from "../../components/ingredient-details/ingredient-details";
+import IngredientDetails from "../../components/ingredient-details/ingredient-details";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getIngredients} from "../../services/actions/ingredients";
 import {useParams} from "react-router-dom";
 import style from "./ingredient.module.css";
 import Ingredient from "../../components/burger-constructor/ingredient/ingredient";
+import {IIngredient, IIngredientInfo} from "../../services/types";
 
 interface IngredientsReducer {
-    ingredients: Ingredient[];
+    ingredients: IIngredient[];
     ingredientsFailed: boolean;
 }
 
@@ -30,11 +31,11 @@ function IngredientPage() {
         }
     }, [ingredients.length, dispatch]);
 
-    const ingredient = ingredients.find((element: Ingredient) => {
+    const ingredient = ingredients.find((element: IIngredient) => {
         return element._id === id
     });
 
-    const ingredientInfo: IngredientInfo = {
+    const ingredientInfo: IIngredientInfo = {
         ...ingredient,
         title: 'Детали ингредиента'
     }

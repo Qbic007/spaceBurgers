@@ -3,6 +3,6 @@ import {postRequest} from "../post-request";
 
 const LOGOUT_URL = API_BASE_URL + 'auth/logout';
 
-export const postLogOut = async form => {
+export const postLogOut = async (form: object) => {
     return postRequest(LOGOUT_URL, form);
 }
