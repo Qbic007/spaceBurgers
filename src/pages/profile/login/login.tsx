@@ -3,7 +3,7 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {Link, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_FORGOT_PASSWORD, PATH_REGISTER} from "../../../components/app/app";
 import {useDispatch} from "react-redux";
-import {useCallback, useState} from "react";
+import {ChangeEvent, useCallback, useState} from "react";
 import {LOGIN} from "../../../services/actions/auth";
 import {showErrorMessage} from "../../../services/API/base-request";
 import {postLogin} from "../../../services/API/auth/login";
@@ -20,14 +20,14 @@ function LoginPage() {
         password: ''
     });
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
     const login = useCallback(
         e => {
             e.preventDefault();
-            let result = false;
+            let result: any = false;
             postLogin(form).then(res => {
                 result = res
             }).then(() => {

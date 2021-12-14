@@ -6,12 +6,10 @@ import {getIngredients} from "../../services/actions/ingredients";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import style from "./constructor.module.css";
-
-export const draggableTypeAddIngredient = 'addIngredient';
-export const draggableTypeMoveIngredient = 'moveIngredient';
+import {IStore} from "../../services/types";
 
 function ConstructorPage() {
-    const {ingredients} = useSelector(store => ({
+    const {ingredients} = useSelector((store: IStore) => ({
         ingredients: store.ingredientsReducer.ingredients
     }));
 

@@ -5,14 +5,14 @@ const USER_URL = API_BASE_URL + 'auth/user';
 const METHOD_GET = 'GET';
 const METHOD_PATCH = 'PATCH';
 
-export const getUser = async token => {
+export const getUser = async (token: string | null) => {
     let result = false;
 
     await fetch(USER_URL,
         {
             method: METHOD_GET,
             headers: {
-                'Authorization': token
+                'Authorization': token ?? ''
             }
         }).then((res) => res.json()).then(res => {
         result = res;
@@ -23,14 +23,14 @@ export const getUser = async token => {
     return result;
 }
 
-export const patchUser = async (form, token) => {
+export const patchUser = async (form: object, token: string | null) => {
     let result = false;
 
     await fetch(USER_URL,
         {
             method: METHOD_PATCH,
             headers: {
-                'Authorization': token
+                'Authorization': token ?? ''
             },
             body: JSON.stringify(form)
         }).then((res) => res.json()).then(res => {

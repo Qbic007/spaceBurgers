@@ -13,6 +13,7 @@ import Modal from "../modal/modal";
 import {REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
 import {useNavigate} from "react-router-dom";
 import {LOGIN} from "../../services/actions/auth";
+import {IIngredient, IStore} from "../../services/types";
 
 function BurgerConstructor() {
     const navigate = useNavigate();
@@ -32,23 +33,23 @@ function BurgerConstructor() {
         }
     });
 
-    const {isVisibleOrder} = useSelector(store => ({
+    const {isVisibleOrder} = useSelector((store: IStore) => ({
         isVisibleOrder: store.modalReducer.isVisibleOrder
     }))
 
-    const {ingredients, bun, orderNumber} = useSelector(store => ({
+    const {ingredients, bun, orderNumber} = useSelector((store: IStore) => ({
         ingredients: store.constructorReducer.ingredients,
         bun: store.constructorReducer.bun,
         orderNumber: store.constructorReducer.orderNumber
     }))
 
-    const getIngredientIds = (bun, ingredients) => {
-        ingredients = ingredients.map(function (ingredient) {
+    const getIngredientIds = (bun: IIngredient, ingredients: IIngredient[]) => {
+        let ingredientIds: string[] = ingredients.map(function (ingredient: IIngredient) {
             return ingredient._id;
         });
-        ingredients.push(bun._id);
-        ingredients.push(bun._id);
-        return ingredients;
+        ingredientIds.push(bun._id);
+        ingredientIds.push(bun._id);
+        return ingredientIds;
     }
 
     const offerConfirmation = () => {
@@ -63,7 +64,7 @@ function BurgerConstructor() {
         }
     }
 
-    const countPrice = (bun, ingredients) => {
+    const countPrice = (bun: IIngredient, ingredients: IIngredient[]) => {
         return 2 * bun.price + ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0);
     }
 
@@ -84,7 +85,7 @@ function BurgerConstructor() {
                                 thumbnail={bun.image}/>
                 </div>}
                 <div className={style.ingredientsInsideContainer}>
-                    {ingredients.map((object, index) => {
+                    {ingredients.map((object: IIngredient) => {
                         return (
                             <Ingredient ingredient={object}
                                         key={object.key}

@@ -1,9 +1,13 @@
 import React from "react";
 import style from './ingredient-details.module.css';
 import PropertyContainer from "./property-container/property-container";
-import PropTypes from "prop-types";
+import {IIngredientInfo} from "../../services/types";
 
-function IngredientDetails(props) {
+type Props = {
+    ingredientInfo: IIngredientInfo;
+}
+
+function IngredientDetails(props: Props) {
     const ingredientInfo = props.ingredientInfo;
 
     return (
@@ -28,7 +32,3 @@ function IngredientDetails(props) {
 }
 
 export default IngredientDetails;
-
-IngredientDetails.propTypes = {
-    ingredientInfo: PropTypes.object.isRequired
-};

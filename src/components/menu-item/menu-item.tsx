@@ -1,12 +1,18 @@
 import style from './menu-item.module.css';
 import {BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-function MenuItem(props) {
+type Props = {
+    icon: 'burger' | 'list' | 'profile';
+    text: string;
+    linkTo: string;
+    isActive: boolean;
+}
+
+function MenuItem(props: Props) {
     const iconType = () => props.isActive ? 'primary' : 'secondary';
 
-    const icon = (icon) => {
+    const icon = (icon: 'burger' | 'list' | 'profile') => {
         const data = {
             burger: <BurgerIcon type={iconType()}/>,
             list: <ListIcon type={iconType()}/>,
@@ -32,8 +38,3 @@ function MenuItem(props) {
 }
 
 export default MenuItem;
-
-MenuItem.propTypes = {
-    icon: PropTypes.string,
-    text: PropTypes.string,
-};

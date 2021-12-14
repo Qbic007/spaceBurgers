@@ -3,7 +3,7 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {NavLink, useNavigate} from "react-router-dom";
 import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../components/app/app";
 import {useDispatch} from "react-redux";
-import {useCallback, useEffect, useState} from "react";
+import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {LOG_OUT, LOGIN} from "../../services/actions/auth";
 import {postLogOut} from "../../services/API/auth/logout";
 import {ACCESS_TOKEN_ITEM_KEY, REFRESH_TOKEN_ITEM_KEY} from "../../services/reducers/auth";
@@ -27,7 +27,7 @@ function ProfilePage() {
 
     useEffect(
         () => {
-            let result = false;
+            let result: any = false;
             postToken().then(res => {
                 result = res
             }).then(() => {
@@ -75,7 +75,7 @@ function ProfilePage() {
         }, [dispatch, navigate, setValue]
     );
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue({...form, [e.target.name]: e.target.value});
         setShowEdit(true);
     };
@@ -83,7 +83,7 @@ function ProfilePage() {
     const logOut = useCallback(
         e => {
             e.preventDefault();
-            let result = false;
+            let result: any = false;
             postLogOut({
                 token: localStorage.getItem(REFRESH_TOKEN_ITEM_KEY)
             }).then(res => {
@@ -103,7 +103,7 @@ function ProfilePage() {
     const editProfile = useCallback(
         e => {
             e.preventDefault();
-            let result = false;
+            let result: any = false;
             patchUser(form, localStorage.getItem(ACCESS_TOKEN_ITEM_KEY)).then(res => {
                 result = res
             }).then(() => {

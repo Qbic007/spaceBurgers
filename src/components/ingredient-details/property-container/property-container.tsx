@@ -1,8 +1,12 @@
 import React from "react";
 import style from './property-container.module.css';
-import PropTypes from "prop-types";
 
-function PropertyContainer(props) {
+type Props = {
+    title: string;
+    value: string | number | undefined;
+}
+
+function PropertyContainer(props: Props) {
     return (
         <div className={style.propertyContainer}>
             <span className={'text text_typeMain-default'}>{props.title}</span>
@@ -12,8 +16,3 @@ function PropertyContainer(props) {
 }
 
 export default PropertyContainer;
-
-PropertyContainer.propTypes = {
-    title: PropTypes.string,
-    value: PropTypes.number,
-};

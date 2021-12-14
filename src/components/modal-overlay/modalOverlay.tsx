@@ -1,8 +1,12 @@
 import React from "react";
 import style from './modalOverlay.module.css';
-import PropTypes from "prop-types";
 
-function ModalOverlay(props) {
+type Props = {
+    closeCallback: () => void;
+    children?: JSX.Element | JSX.Element[]
+}
+
+function ModalOverlay(props: Props) {
     return (
         <section className={style.modalOverlay}
                  onClick={props.closeCallback}>
@@ -12,7 +16,3 @@ function ModalOverlay(props) {
 }
 
 export default ModalOverlay;
-
-ModalOverlay.propTypes = {
-    closeCallback: PropTypes.func,
-};
