@@ -53,7 +53,7 @@ function RegisterPage() {
         <ProtectedPageAuth>
             <main className={`${style.formMain} text_type_main-medium`}>
                 <div className={style.wrapper}>
-                    <section className={style.profileFormContainer}>
+                    <section className={style.orderContainer}>
                         <span className={'mt-30'}>Регистрация</span>
                         <form className={style.profileForm} onSubmit={register}>
                             <div className={'mt-6'}>

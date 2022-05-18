@@ -2,6 +2,7 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import NotFound404Page from '../../pages/not-found404-page';
 import ConstructorPage from "../../pages/constructor/constructor";
+import OrdersPage from "../../pages/profile/orders/orders";
 import LoginPage from "../../pages/profile/login/login";
 import RegisterPage from "../../pages/profile/register/register";
 import ForgotPasswordPage from "../../pages/profile/forgot-password/forgot-password";
@@ -42,13 +43,13 @@ interface ModalReducer {
 
 interface Store {
     modalReducer: ModalReducer;
-} 
+}
 
 function App() {
     const {isVisibleIngredient} = useSelector((store:Store) => ({
         isVisibleIngredient: store.modalReducer.isVisibleIngredient
     }))
-    
+
     return (
         <>
             <BrowserRouter>
@@ -62,7 +63,7 @@ function App() {
                     <Route path={PATH_FORGOT_PASSWORD} element={<ForgotPasswordPage/>}/>
                     <Route path={PATH_RESET_PASSWORD} element={<ResetPasswordPage/>}/>
                     <Route path={PATH_PROFILE} element={<ProfilePage/>}/>
-                    <Route path={makeOrdersLinkUrl()} element={<NotFound404Page/>}/>
+                    <Route path={makeOrdersLinkUrl()} element={<OrdersPage/>}/>
                     <Route path={makeOrderLinkUrl(PATH_ID)} element={<NotFound404Page/>}/>
                     <Route path={PATH_NOT_FOUND_404} element={<NotFound404Page/>}/>
                 </Routes>

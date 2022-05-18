@@ -50,7 +50,7 @@ function LoginPage() {
         <ProtectedPageAuth>
             <main className={`${style.formMain} text_type_main-medium`}>
                 <div className={style.wrapper}>
-                    <section className={style.profileFormContainer}>
+                    <section className={style.orderContainer}>
                         <span className={'mt-30'}>Вход</span>
                         <form className={style.profileForm} onSubmit={login}>
                             <div className={'mt-6'}>

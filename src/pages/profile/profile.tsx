@@ -1,7 +1,7 @@
 import style from "./profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {NavLink, useNavigate} from "react-router-dom";
-import {makeLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../components/app/app";
+import {makeLinkUrl, makeOrdersLinkUrl, PATH_LOGIN, PATH_PROFILE} from "../../components/app/app";
 import {useDispatch} from "react-redux";
 import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {LOG_OUT, LOGIN} from "../../services/actions/auth";
@@ -132,14 +132,18 @@ function ProfilePage() {
                                 <li className={`${style.profileMenuItem} ${style.isActive}`}>
                                     <NavLink to={makeLinkUrl(PATH_PROFILE)}>Профиль</NavLink>
                                 </li>
-                                <li className={style.profileMenuItem}>История заказов</li>
+                                <li className={style.profileMenuItem}>
+                                    <NavLink to={makeOrdersLinkUrl()}>
+                                        История заказов
+                                    </NavLink>
+                                </li>
                                 <li className={style.profileMenuItem} onClick={logOut}>Выход</li>
                             </ul>
                             <span className={'pt-20 text_type_main-default'}>
                                 В этом разделе вы можете изменить свои персональные данные
                             </span>
                         </section>
-                        <section className={`${style.profileFormContainer} ${style.fullWidth}`}>
+                        <section className={`${style.orderContainer} ${style.fullWidth}`}>
                             <form className={style.profileForm} onSubmit={editProfile}>
                                 <div className={'mt-6'}>
                                     <Input

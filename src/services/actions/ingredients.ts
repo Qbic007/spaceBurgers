@@ -6,7 +6,7 @@ export const GET_INGREDIENTS_FAILED: 'GET_INGREDIENTS_FAILED' = 'GET_INGREDIENTS
 const API_ACTION_URL = API_BASE_URL + 'ingredients';
 
 export function getIngredients() {
-    return function (dispatch) {
+    return function (dispatch: any) {
         fetch(API_ACTION_URL).then((res) => res.json()).then(res => {
             if (res && res.success) {
                 dispatch({

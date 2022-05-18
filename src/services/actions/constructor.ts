@@ -10,15 +10,17 @@ export const GET_ORDER_FAILED: 'GET_ORDER_FAILED' = 'GET_ORDER_FAILED';
 
 const API_ACTION_URL = API_BASE_URL + 'orders';
 
-export function orderConfirmation(ingredients = []) {
-    return function (dispatch) {
+export function orderConfirmation(ingredients: any[] = []) {
+    return function (dispatch:any) {
+        const authToken = String(localStorage.getItem(ACCESS_TOKEN_ITEM_KEY));
+
         fetch(API_ACTION_URL,
             {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem(ACCESS_TOKEN_ITEM_KEY)
+                    'Authorization': authToken
                 },
                 body: JSON.stringify({
                     "ingredients": ingredients
