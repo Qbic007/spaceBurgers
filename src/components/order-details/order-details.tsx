@@ -1,29 +1,42 @@
 import React from "react";
 import style from './order-details.module.css';
-import image from '../../images/accepted.png';
-import {useSelector} from "react-redux";
-
-interface ConstructorReducer {
-    orderNumber: number;
-}
-
-interface Store {
-    constructorReducer: ConstructorReducer;
-}
+import OrderStructureItem from "../order-structure-item";
+import PriceWithIcon from "../price-with-icon";
 
 function OrderDetails() {
-    const {orderNumber} = useSelector((store: Store) => ({
-        orderNumber: store.constructorReducer.orderNumber
-    }))
-
     return (
-        <div className={style.orderDetailsContainer}>
-            <h3 className={'text text_type_digits-large mt-5'}>{orderNumber}</h3>
-            <span className={'text text_type_main-medium mt-8'}>идентификатор заказа</span>
-            <img src={image} alt={'заказ принят'} className={'mt-15'}/>
-            <span className={'text text_typeMain-default mt-15'}>Ваш заказ начали готовить</span>
-            <span className={'text text_typeMain-default mt-2 mb-15 dark-text'}>Дождитесь готовности на орбитальной станции</span>
-        </div>
+        <section className={style.orderContainer}>
+            <h2 className={'text text_type_digits-default center-content'}>#034533</h2>
+            <h2 className={'text text_type_main-medium mt-10'}>Black Hole Singularity острый бургер</h2>
+            <div className={'text text_type_main-default mt-3 text_color_success'}>Выполнен</div>
+            <h2 className={'text text_type_main-medium mt-15'}>Состав:</h2>
+            <div className={style.orderStructureContainer}>
+                <OrderStructureItem
+                    image={"../../../images/accepted.png"}
+                    title={'Флюоресцентная булка R2-D3'}
+                    price={'1 x 20'}/>
+                <OrderStructureItem
+                    image={"../../../images/accepted.png"}
+                    title={'Филе Люминесцентного тетраодонтимформа'}
+                    price={'1 x 300'}/>
+                <OrderStructureItem
+                    image={"../../../images/accepted.png"}
+                    title={'Филе Люминесцентного тетраодонтимформа'}
+                    price={'1 x 300'}/>
+                <OrderStructureItem
+                    image={"../../../images/accepted.png"}
+                    title={'Филе Люминесцентного тетраодонтимформа'}
+                    price={'1 x 300'}/>
+                <OrderStructureItem
+                    image={"../../../images/accepted.png"}
+                    title={'Филе Люминесцентного тетраодонтимформа'}
+                    price={'1 x 300'}/>
+            </div>
+            <div className={style.orderFooterContainer}>
+                <div className={'text text_type_main-small text_color_inactive'}>Вчера, 13:50 i-GMT+3</div>
+                <PriceWithIcon price={'510'}/>
+            </div>
+        </section>
     );
 }
 

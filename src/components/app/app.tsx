@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import NotFound404Page from '../../pages/not-found404-page';
 import ConstructorPage from "../../pages/constructor/constructor";
 import OrdersPage from "../../pages/profile/orders/orders";
+import FeedPage from "../../pages/feed/feed";
 import LoginPage from "../../pages/profile/login/login";
 import RegisterPage from "../../pages/profile/register/register";
 import ForgotPasswordPage from "../../pages/profile/forgot-password/forgot-password";
@@ -23,6 +24,7 @@ export const PATH_RESET_PASSWORD = 'reset-password';
 export const PATH_PROFILE = 'profile';
 export const PATH_INGREDIENTS = 'ingredients';
 export const PATH_ORDERS = 'orders';
+export const PATH_FEED = 'feed';
 export const PATH_NOT_FOUND_404 = '*';
 
 const PATH_ID = ':id';
@@ -63,6 +65,7 @@ function App() {
                     <Route path={PATH_FORGOT_PASSWORD} element={<ForgotPasswordPage/>}/>
                     <Route path={PATH_RESET_PASSWORD} element={<ResetPasswordPage/>}/>
                     <Route path={PATH_PROFILE} element={<ProfilePage/>}/>
+                    <Route path={PATH_FEED} element={<FeedPage/>}/>
                     <Route path={makeOrdersLinkUrl()} element={<OrdersPage/>}/>
                     <Route path={makeOrderLinkUrl(PATH_ID)} element={<NotFound404Page/>}/>
                     <Route path={PATH_NOT_FOUND_404} element={<NotFound404Page/>}/>

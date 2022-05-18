@@ -1,8 +1,8 @@
-import style from "../profile.module.css";
+import style from "./feed.module.css";
 import React from "react";
-import OrderDetails from "../../../components/order-details/order-details";
+import OrderDetails from "../../components/order-details/order-details";
 
-function OrdersPage() {
+function FeedPage() {
     return (
         <main className={`${style.formMain} text_type_main-medium`}>
             <div className={style.wrapper}>
@@ -12,4 +12,4 @@ function OrdersPage() {
     );
 }
 
-export default OrdersPage;
+export default FeedPage;
