@@ -2,16 +2,17 @@ import React from "react";
 import style from './order-details.module.css';
 import OrderStructureItem from "../order-structure-item";
 import PriceWithIcon from "../price-with-icon";
-import Section from "../burger-ingredients/section/section";
-import {TYPE_BUN, TYPE_MAIN, TYPE_SAUCE} from "../../services/reducers/ingredients";
+import OrderId from "../order-id/order-id";
+import OrderTime from "../order-time/order-time";
+import SectionTitle from "../section-title/section-title";
 
 function OrderDetails() {
     return (
         <section className={style.orderContainer}>
-            <h2 className={'text text_type_digits-default center-content'}>#034533</h2>
+            <OrderId id={'034533'} />
             <h2 className={'text text_type_main-medium mt-10'}>Black Hole Singularity острый бургер</h2>
             <div className={'text text_type_main-default mt-3 text_color_success'}>Выполнен</div>
-            <h2 className={'text text_type_main-medium mt-15'}>Состав:</h2>
+            <SectionTitle>Состав:</SectionTitle>
             <div className={style.orderStructureContainer}>
                 <OrderStructureItem
                     image={"../../../images/accepted.png"}
@@ -35,7 +36,7 @@ function OrderDetails() {
                     price={'1 x 300'}/>
             </div>
             <div className={style.orderFooterContainer}>
-                <div className={'text text_type_main-small text_color_inactive'}>Вчера, 13:50 i-GMT+3</div>
+                <OrderTime time={'Вчера, 13:50 i-GMT+3'} />
                 <PriceWithIcon price={'510'}/>
             </div>
         </section>
