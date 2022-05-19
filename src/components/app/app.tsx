@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import NotFound404Page from '../../pages/not-found404-page';
 import ConstructorPage from "../../pages/constructor/constructor";
 import OrdersPage from "../../pages/profile/orders/orders";
-import FeedPage from "../../pages/feed/feed";
+import FeedItemPage from "../../pages/feed/feed-item";
 import LoginPage from "../../pages/profile/login/login";
 import RegisterPage from "../../pages/profile/register/register";
 import ForgotPasswordPage from "../../pages/profile/forgot-password/forgot-password";
@@ -12,6 +12,7 @@ import ProfilePage from "../../pages/profile/profile";
 import IngredientPage from "../../pages/ingredient/ingredient";
 import AppHeader from "../app-header/app-header";
 import {useSelector} from "react-redux";
+import FeedPage from "../../pages/feed/feed";
 
 export const DRAGGABLE_TYPE_ADD_INGREDIENT = 'addIngredient';
 export const DRAGGABLE_TYPE_MOVE_INGREDIENT = 'moveIngredient';
@@ -38,6 +39,8 @@ export const makeOrdersLinkUrl = () => makeLinkUrl([PATH_PROFILE, PATH_ORDERS]);
 export const makeOrderLinkUrl = (id: string) => makeLinkUrl([makeOrdersLinkUrl(), id]);
 
 export const makeIngredientLinkUrl = (id: string) => makeLinkUrl([PATH_INGREDIENTS, id]);
+
+export const makeFeedLinkUrl = (id: string) => makeLinkUrl([PATH_FEED, id]);
 
 interface ModalReducer {
     isVisibleIngredient: boolean;
@@ -66,6 +69,7 @@ function App() {
                     <Route path={PATH_RESET_PASSWORD} element={<ResetPasswordPage/>}/>
                     <Route path={PATH_PROFILE} element={<ProfilePage/>}/>
                     <Route path={PATH_FEED} element={<FeedPage/>}/>
+                    <Route path={makeFeedLinkUrl(PATH_ID)} element={<FeedItemPage/>}/>
                     <Route path={makeOrdersLinkUrl()} element={<OrdersPage/>}/>
                     <Route path={makeOrderLinkUrl(PATH_ID)} element={<NotFound404Page/>}/>
                     <Route path={PATH_NOT_FOUND_404} element={<NotFound404Page/>}/>

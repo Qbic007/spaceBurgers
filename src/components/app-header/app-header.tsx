@@ -3,7 +3,7 @@ import {Logo} from '@ya.praktikum/react-developer-burger-ui-components'
 import MenuItem from "../menu-item/menu-item";
 import {
     makeLinkUrl,
-    PATH_CONSTRUCTOR,
+    PATH_CONSTRUCTOR, PATH_FEED,
     PATH_FORGOT_PASSWORD,
     PATH_INGREDIENTS,
     PATH_LOGIN,
@@ -65,7 +65,7 @@ function AppHeader() {
                         <li>
                             <MenuItem text={'лента заказов'}
                                       icon='list'
-                                      linkTo={makeLinkUrl([PATH_ORDERS])}
+                                      linkTo={makeLinkUrl([PATH_FEED])}
                                       isActive={activeMenuItem === MENU_ITEM_ORDERS}/>
                         </li>
                     </ul>

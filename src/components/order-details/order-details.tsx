@@ -2,6 +2,8 @@ import React from "react";
 import style from './order-details.module.css';
 import OrderStructureItem from "../order-structure-item";
 import PriceWithIcon from "../price-with-icon";
+import Section from "../burger-ingredients/section/section";
+import {TYPE_BUN, TYPE_MAIN, TYPE_SAUCE} from "../../services/reducers/ingredients";
 
 function OrderDetails() {
     return (
