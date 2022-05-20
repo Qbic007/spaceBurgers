@@ -6,7 +6,7 @@ type Props = {
 
 function OrderId(props: Props) {
     return (
-            <h2 className={'text text_type_digits-default center-content'}>#{props.id}</h2>
+            <h2 className={'text text_type_digits-default'}>#{props.id}</h2>
     );
 }
 

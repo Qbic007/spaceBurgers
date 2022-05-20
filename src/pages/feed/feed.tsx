@@ -1,6 +1,18 @@
 import style from "./feed.module.css";
+import listStyle from "./list.module.css";
 import React from "react";
 import SectionTitle from "../../components/section-title/section-title";
+import OrderId from "../../components/order-id/order-id";
+import OrderTime from "../../components/order-time/order-time";
+import PriceWithIcon from "../../components/price-with-icon";
+
+const ingredients = [
+    "",
+    "",
+    "",
+    "",
+    "",
+]
 
 function FeedPage() {
     return (
@@ -8,7 +20,54 @@ function FeedPage() {
             <div className={style.wrapper}>
                 <div className={style.feedContainer}>
                     <h2 className={`style.title text_type_main-large`}>Лента заказов</h2>
-                    <div className={style.orderListContainer}>1</div>
+                    <div className={style.orderListContainer}>
+                        <div className={listStyle.listContainer}>
+                            <div className={listStyle.listItemContainer}>
+                                <div className={listStyle.listItemOrderId}>
+                                    <OrderId id={'034535'} />
+                                </div>
+                                <div className={listStyle.listItemOrderTime}>
+                                    <OrderTime time={'Сегодня, 16:20 i-GMT+3'} />
+                                </div>
+                                <div className={listStyle.listItemTitle}>
+                                    <SectionTitle>Death Star Starship Main бургер</SectionTitle>
+                                </div>
+                                <div className={listStyle.listItemComponentsContainer}>
+                                    {ingredients.map((topping, index) => {
+                                        return <img 
+                                            className={listStyle.listItemImage} 
+                                            src={'https://code.s3.yandex.net/react/code/bun-02.png'}
+                                        />
+                                    })}
+                                </div>
+                                <div className={listStyle.listItemPrice}>
+                                    <PriceWithIcon price={'480'} />
+                                </div>
+                            </div>
+                            <div className={listStyle.listItemContainer}>
+                                <div className={listStyle.listItemOrderId}>
+                                    <OrderId id={'034535'} />
+                                </div>
+                                <div className={listStyle.listItemOrderTime}>
+                                    <OrderTime time={'Сегодня, 16:20 i-GMT+3'} />
+                                </div>
+                                <div className={listStyle.listItemTitle}>
+                                    <SectionTitle>Death Star Starship Main бургер</SectionTitle>
+                                </div>
+                                <div className={listStyle.listItemComponentsContainer}>
+                                    {ingredients.map((topping, index) => {
+                                        return <img 
+                                            className={listStyle.listItemImage} 
+                                            src={'https://code.s3.yandex.net/react/code/bun-02.png'}
+                                        />
+                                    })}
+                                </div>
+                                <div className={listStyle.listItemPrice}>
+                                    <PriceWithIcon price={'480'} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className={style.orderInfoContainer}>
                         <div className={style.orderScreen}>
                             <div className={style.readyTitle}>

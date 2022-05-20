@@ -1,0 +1,68 @@
+.listContainer {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    padding-right: 8px;
+}
+
+.listContainer::-webkit-scrollbar {
+    width: 8px;
+    background: #2F2F37;
+}
+
+.listContainer::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+}
+
+.listItemContainer {
+    padding: 24px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-row-gap: 24px;
+    grid-template-areas: 
+            "listItemOrderId listItemOrderTime"
+            "listItemTitle listItemTitle"
+            "listItemComponentsContainer listItemPrice";
+    background-color: rgba(28, 28, 33, 1);
+    border-radius: 40px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+.listItemOrderId {
+    align-self: start;
+    grid-area: listItemOrderId;
+}
+
+.listItemOrderTime {
+    grid-area: listItemOrderTime;
+}
+
+.listItemTitle {
+    grid-area: listItemTitle;
+}
+
+.listItemComponentsContainer {
+    grid-area: listItemComponentsContainer;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+}
+
+.listItemImage{
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    border: solid 2px rgba(128, 26, 210, 1) ;
+    margin-left: -15px;
+    background-color: #131316;
+    object-fit: cover;
+}
+
+.listItemPrice{
+    grid-area: listItemPrice;
+    justify-self: end;
+    align-self: center;
+}
