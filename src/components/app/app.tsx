@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import NotFound404Page from '../../pages/not-found404-page';
 import ConstructorPage from "../../pages/constructor/constructor";
 import OrdersPage from "../../pages/profile/orders/orders";
+import OrderPage from "../../pages/profile/orders/order";
 import FeedItemPage from "../../pages/feed/feed-item";
 import LoginPage from "../../pages/profile/login/login";
 import RegisterPage from "../../pages/profile/register/register";
@@ -71,7 +72,7 @@ function App() {
                     <Route path={PATH_FEED} element={<FeedPage/>}/>
                     <Route path={makeFeedLinkUrl(PATH_ID)} element={<FeedItemPage/>}/>
                     <Route path={makeOrdersLinkUrl()} element={<OrdersPage/>}/>
-                    <Route path={makeOrderLinkUrl(PATH_ID)} element={<NotFound404Page/>}/>
+                    <Route path={makeOrderLinkUrl(PATH_ID)} element={<OrderPage/>}/>
                     <Route path={PATH_NOT_FOUND_404} element={<NotFound404Page/>}/>
                 </Routes>
             </BrowserRouter>
